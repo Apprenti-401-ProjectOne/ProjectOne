@@ -1,10 +1,9 @@
-# Group Name: Renaissance_devs
+# Group Name: TBD
 
 **Group Members**
-- Holly David - https://github.com/hollydavis541
 - Lindsay Peltier -https://github.com/LindsayPeltier
 - Travis Skyles - https://github.com/tskyles
-- David Vloedman - https://github.com/david-vloedman
+- Natalie Alway - https://github.com/natalielyn
 
 *All* team members will substantively contribute to coding features using all three languages.
 
@@ -32,9 +31,9 @@ Because our team consists of 4 members, it is possible that a majority consensus
 For any conflict that cannot be resolved according to these guidelines, we will involve an instructor to mediate as a method of last resort. 
 
 **Workflow:** 
- - We will maintain a single repo through GitHub: github.com/Renaissance-devs/pocket_gallery
+ - We will maintain a single repo through GitHub: 
  - All team members act as equal contributors, and will clone the initial master branch with approved scaffolding to their individual local repositories.
- - We will all work on our own branches, push to our branch in GitHub and then PR to the Dev branch https://github.com/Renaissance-devs/pocket_gallery/tree/dev
+ - We will all work on our own branches, push to our branch in GitHub and then PR to the Dev branch 
  - The Dev branch requires two other team members to to approve PRs
  - As a group, we will PR from Dev to the Master for major features
  - MVPS will be decomposed into coding and project oriented tasks, which will be individually assigned through Trello. 
