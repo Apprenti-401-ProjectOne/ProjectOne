@@ -55,5 +55,5 @@ We will conclude with a reflection meeting and a final update of our Trello boar
 We will participate in daily standups with Instructors. 
 
 **Technology and Tools:**
-The Github repository will be initialized by David, with Holly, Travis and Lindsay added as collaborators.
+The Github repository will be initialized by Travis, with Natalie and Lindsay added as collaborators.
 We will deploy our web app through Heroku
