@@ -21,6 +21,19 @@ for a set amount of time without having to login again
 * Implement graphql 
 * Inter-user messaging
 
+## Non-functional
+
+* Our project will be as modularized as possible to allow for testing of each module.
+* We hope to create a secure application with authorization through bearer tokens and basic auth and roles to define clear lines between ownership of data.
+
+### User flow
+
+* User creates an account with their username, email and a password.
+* User signs into their accoutn with their username and password.
+* User can browse available jobs
+* User can select a job and place a bid to do the job
+* User can create a job themselves 
+
 ### Trello Board
 
 * [Trello](https://trello.com/b/dom2QnVY/projectone)
