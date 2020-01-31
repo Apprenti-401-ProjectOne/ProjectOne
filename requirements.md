@@ -3,17 +3,17 @@
 ## Job management and bidding system
 
 Our project aims to allow users to be able to post jobs. Other users can then post a bid to do the job.
-The creator can accept bids and then close the job.The user has privledges over their own jobs. Admin users 
-also exist and have privledges to all jobs.
+The creator can accept bids and then close the job.The user has privileges over their own jobs. Admin users 
+also exist and have privileges to all jobs.
 
 ### MVPs
 
 * Have users be able to make accounts and have accounts persist
-* Have users be able to login with their creditentials and have authorization to their privledge set
+* Have users be able to login with their credentials and have authorization to their privilege set
 for a set amount of time without having to login again
 * Have users be able to create, update, delete and accept bids for a job
 * Have users be able to bid on other users jobs
-* Have a superuser role that can have privledges over all jobs
+* Have a superuser role that can have privileges over all jobs
 
 #### Stretch
 
@@ -29,7 +29,7 @@ for a set amount of time without having to login again
 ### User flow
 
 * User creates an account with their username, email and a password.
-* User signs into their accoutn with their username and password.
+* User signs into their account with their username and password.
 * User can browse available jobs
 * User can select a job and place a bid to do the job
 * User can create a job themselves 
@@ -44,10 +44,10 @@ for a set amount of time without having to login again
 ## Users 
 
 - Given a username and password, a user should be able to create an account via a route
-- Given a username and password, a user should be able to login and be granted specific privledges which persist for a set amount of time without having to login again
+- Given a username and password, a user should be able to login and be granted specific privileges which persist for a set amount of time without having to login again
 - Given a logged in user, they should be able to create a job and job details
 - Given a logged in user, they should be able to change and update details of their job after it has been created
--  A admin should be able to create a superuser account with all the authorization of a regular user, but with elevated privledges to alter any job in the system
+-  A admin should be able to create a superuser account with all the authorization of a regular user, but with elevated privileges to alter any job in the system
 
 ## Storage 
 
