@@ -29,6 +29,10 @@ for a set amount of time without having to login again
 * Implement graphql 
 * Inter-user messaging
 
+### Deployment
+
+* [Heroku](https://git.heroku.com/kan-u.git)
+
 ### Trello Board
 
 * [Trello](https://trello.com/b/dom2QnVY/projectone)
@@ -37,6 +41,10 @@ for a set amount of time without having to login again
 
 * [User Stores](./requirements.md)
 
-### Diagram
+### Diagrams
 
+#### Data flow
 ![](./jobApp.svg)
+
+#### Domain 
+![](./domain.jpg)
