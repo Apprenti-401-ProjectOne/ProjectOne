@@ -1,5 +1,10 @@
 # Software Requirements 
 
+## Job management and bidding system
+
+Our project aims to allow users to be able to post jobs. Other users can then post a bid to do the job.
+The creator can accept bids and then close the job.The user has privledges over their own jobs. Admin users 
+also exist and have privledges to all jobs.
 
 ### MVPs
 
