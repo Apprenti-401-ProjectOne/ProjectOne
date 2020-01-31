@@ -4,6 +4,8 @@
 - Lindsay Peltier -https://github.com/LindsayPeltier
 - Travis Skyles - https://github.com/tskyles
 - Natalie Alway - https://github.com/natalielyn
+- David Vloedman - https://github.com/david-vloedman
+- Trevor Thompson - https://github.com/TrevorThomp
 
 *All* team members will substantively contribute to coding features.
 
@@ -42,7 +44,9 @@ For any conflict that cannot be resolved according to these guidelines, we will 
  - Multiple team members are not to work separately on any one branch, task, or feature. 
  - No team member should work on a task, branch, or feature that is not one of their direct assigns.  
  - Deadlines are 7:59am the next day, unless otherwise specified within Trello or altered by group agreement. 
- - After Hours: We agree to each put in a minimum of 2 hours after class to further the project.
+ 
+**After Hours:**
+ - We will assign, through mutual discussion, at the end of each day, any necessary 'after hours' projects, with the understanding that all members will commit to whatever after-hour time is needed to complete these tasks. 
  - We will all pull from the master branch each morning, as a group, and after all outstanding pull requests have been assimilated.  
 
 **Communication:**
@@ -53,5 +57,7 @@ We will conclude with a reflection meeting and a final update of our Trello boar
 We will participate in daily standups with Instructors. 
 
 **Technology and Tools:**
-The Github repository will be initialized by Travis, with Natalie and Lindsay added as collaborators.
-We will deploy our web app through Heroku
+The Organization will be created by Lindsay, with all other members added as admin users. 
+The Github repository will be initialized by Travis, with all other members added as collaborators.
+The Trello board will be created by Lindsay, with all other members added as admin users. 
+We will deploy our web app through Heroku. 
