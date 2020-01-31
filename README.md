@@ -32,3 +32,7 @@ for a set amount of time without having to login again
 ### Trello Board
 
 * https://trello.com/b/dom2QnVY/projectone
+
+### Diagram
+
+![](./jobApp.svg)
