@@ -33,9 +33,9 @@ for a set amount of time without having to login again
 
 * [Trello](https://trello.com/b/dom2QnVY/projectone)
 
-### User Stories
+### Requirements
 
-* [User Stores](./userStories.md)
+* [User Stores](./requirements.md)
 
 ### Diagram
 
