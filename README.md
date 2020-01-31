@@ -31,7 +31,11 @@ for a set amount of time without having to login again
 
 ### Trello Board
 
-* https://trello.com/b/dom2QnVY/projectone
+* [Trello](https://trello.com/b/dom2QnVY/projectone)
+
+### User Stories
+
+* [User Stores](./userStories.md)
 
 ### Diagram
 
