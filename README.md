@@ -28,3 +28,7 @@ for a set amount of time without having to login again
 * Have users be notified of activity through email or sms on their jobs and jobs they have bid.
 * Implement graphql 
 * Inter-user messaging
+
+### Trello Board
+
+* https://trello.com/b/dom2QnVY/projectone
