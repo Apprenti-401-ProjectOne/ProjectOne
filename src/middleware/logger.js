@@ -11,5 +11,3 @@ module.exports = (request, response, next) => {
   console.log(request.method, request.path, request.requestTime);
   next();
 };
-
-module.exports('logger', logger);

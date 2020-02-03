@@ -3,14 +3,14 @@
 require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
-const app = new express();
+const app = express();
 const router = require('./routes/routes');
 const authRouter = require('./routes/authroutes');
 const errorHandler = require('./middleware/500.js');
 const notFound = require('./middleware/404.js');
 const jobrouter = require('./routes/jobRoutes.js');
-const logger = require('../middleware/logger.js');
-const timestamp = require('../middleware/timestamp');
+const logger = require('./middleware/logger');
+const timestamp = require('./middleware/timestamp');
 
 //Middleware
 app.use(logger);
