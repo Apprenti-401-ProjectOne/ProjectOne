@@ -48,5 +48,14 @@ userSchema.methods.generateToken = function(type) {
   return jwt.sign(token, process.env.SECRET, {expiresIn: '15min'});
 };
 
+userSchema.statics.authenticateBasic = function(auth) {
+  let query = { username: auth.username };
+  return this.findOne(query)
+    .then(user => user && user.comparePassword(auth.password))
+    .catch(error => {
+      throw error;
+    });
+};
+
 
 module.exports = mongoose.model('users', userSchema);
