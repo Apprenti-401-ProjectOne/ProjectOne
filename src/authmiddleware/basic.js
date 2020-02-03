@@ -1,28 +1,6 @@
 'use strict';
 
-const user = require('../../model/user');
-
-module.exports = (req, res, next) => {
-  try {
-    let [authType, authString] = req.headers.authorization.split(/\s+/);
-
-    switch (authType.toLowerCase()) {
-      case 'basic':
-        return _authBasic(authString);
-      default:
-        return _authError();
-    }
-  } catch (e) {
-    next(e);
-  }
-
-  function _authBasic(str) {
-    
-    let base64Buffer = Buffer.from(str, 'base64');
-    let bufferString = base64Buffer.toString();
-    let [username, password] = bufferString.split(':');'use strict';
-
-const User = require('../../models/user');
+const user = require('../model/user');
 
 module.exports = (req, res, next) => {
   try {
@@ -39,31 +17,53 @@ module.exports = (req, res, next) => {
   }
 
   function _authBasic(str) {
-    // str: am9objpqb2hubnk=
+    
     let base64Buffer = Buffer.from(str, 'base64');
-    let bufferString = base64Buffer.toString(); 
-    let [username, password] = bufferString.split(':'); 
-    let auth = { username, password };
+    let bufferString = base64Buffer.toString();
+    let [username, password] = bufferString.split(':');'use strict';
 
-    return User.authenticateBasic(auth)
-      .then(user => _authenticate(user))
-      .catch(next);
-  }
+    const User = require('../../models/user');
 
-  function _authenticate(user) {
-    if (user) {
-      req.user = user;
-      req.token = user.generateToken();
-      next();
-    } else {
-      _authError();
-    }
-  }
+    module.exports = (req, res, next) => {
+      try {
+        let [authType, authString] = req.headers.authorization.split(/\s+/);
 
-  function _authError() {
-    next('Invalid User ID/Password');
-  }
-}; // john='john'; mysecret='mysecret']
+        switch (authType.toLowerCase()) {
+        case 'basic':
+          return _authBasic(authString);
+        default:
+          return _authError();
+        }
+      } catch (e) {
+        next(e);
+      }
+
+      function _authBasic(str) {
+        // str: am9objpqb2hubnk=
+        let base64Buffer = Buffer.from(str, 'base64');
+        let bufferString = base64Buffer.toString(); 
+        let [username, password] = bufferString.split(':'); 
+        let auth = { username, password };
+
+        return User.authenticateBasic(auth)
+          .then(user => _authenticate(user))
+          .catch(next);
+      }
+
+      function _authenticate(user) {
+        if (user) {
+          req.user = user;
+          req.token = user.generateToken();
+          next();
+        } else {
+          _authError();
+        }
+      }
+
+      function _authError() {
+        next('Invalid User ID/Password');
+      }
+    }; // john='john'; mysecret='mysecret']
     let auth = { username, password }; // { username:'john', password:'mysecret' }
 
     return User.authenticateBasic(auth)

@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const bearer = require('../authmiddleware/bearer');
-const basic = require('../authmiddleware/basic')
+const basic = require('../authmiddleware/basic');
 const User = require('../model/user');
 
 
