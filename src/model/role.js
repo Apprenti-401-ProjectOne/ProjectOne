@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const bycrpt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const SECRET = 'SECRET';
+
 const capabilities = {
   admin: ['create','read','update','delete', 'superuser'],
   user: ['read'],
@@ -25,3 +27,17 @@ userSchema.pre('save', async (next) => {
   }
 });
 
+
+userSchema.methods.generateToken = function(type) {
+
+  let token = {
+    id: this._id,
+    username: this.username,
+    email: this.email,
+    capabilities: capabilities[this.role],
+  };
+
+  return jwt.sign(token, SECRET, {expiresIn: '15min'});
+};
+
+module.exports = mongoose.model('users', userSchema);
