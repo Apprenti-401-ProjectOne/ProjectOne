@@ -50,7 +50,7 @@ for a set amount of time without having to login again
 - Given a logged in user, they should be able to change and update details of their job after it has been created
 - An admin should be able to create a superuser account with all the authorization of a regular user, but with elevated privileges to alter any job in the system
 - Given a google or github account, the user should be able to login via OAuth using one of those accounts.
-- Given an event on a job related to a user, by either owning the job or having placed bids on the a job.
+- Given an event on a job related to a user, by either owning the job or having placed bids on the a job, they will be notified by email.
 
 
 ## Storage 
