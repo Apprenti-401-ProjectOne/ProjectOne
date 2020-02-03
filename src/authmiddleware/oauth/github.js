@@ -27,8 +27,13 @@ module.exports = function authorize(req){
         .then(response => {
           let user = response.body;
           user.access_token = token;
-          console.log('3. GITHUBUSER', user);
-          return user;
+          return superagent.get('https://api.github.com/user/emails')
+            .set('Authorization', `Bearer ${token}`)
+            .then(response => {
+              user.email = response.body[0].email;
+              console.log('3. GITHUBUSER', user);
+              return user;
+            });
         });
     })
     .then(oauthUser => {
