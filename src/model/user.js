@@ -2,7 +2,7 @@
 
 require('dotenv').config();
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('./role');
 
@@ -16,6 +16,14 @@ const userSchema = new mongoose.Schema({
   password: {type: String, required: true},
   email: {type: String, required: true},
   role: {type: String, default:'user', enum: ['admin','editor','user']},
+  jobs: {type: mongoose.Schema.Types.ObjectId, ref: 'jobs'},
+});
+
+userSchema.virtual('userRoles', {
+  ref: 'roles',
+  localField: 'role',
+  foreignField: 'type',
+  justOne: true,
 });
 
 /**
@@ -48,6 +56,9 @@ userSchema.methods.generateToken = function(type) {
   return jwt.sign(token, process.env.SECRET, {expiresIn: '15min'});
 };
 
+/**
+ * Authenticates and compares signing in user password to database password
+ */
 userSchema.statics.authenticateBasic = function(auth) {
   let query = { username: auth.username };
   return this.findOne(query)
@@ -57,5 +68,27 @@ userSchema.statics.authenticateBasic = function(auth) {
     });
 };
 
+/** 
+ * takes Oauth user info and checks for existing user, if none exists creates a new one
+ * @param oauthUser
+ * @returns user
+*/
+userSchema.statics.createFromOauth = function(oauthUser){
+  if(!oauthUser){return Promise.reject('Validation Error');}
+  console.log(oauthUser);
+  return this.findOne({ username: `${oauthUser.email}` })
+    .then(user => {
+      if(!user){ throw new Error('User not found'); }
+      console.log('Welcome Back', user.username);
+      return user;
+    })
+    .catch(error => {
+      console.log('Creating new user from oauth');
+      let username = oauthUser.email;
+      let password = 'oauthpassword';
+      let email = oauthUser.email;
+      return this.create({username, password, email});
+    });
+};
 
 module.exports = mongoose.model('users', userSchema);

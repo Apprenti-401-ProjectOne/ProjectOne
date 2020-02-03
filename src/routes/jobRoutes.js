@@ -3,14 +3,12 @@
 const express = require('express');
 const router = express.Router();
 
-const jobs = require('../model/schema/jobschema.js');
-
-function getJobs(req, res, next){
+function getJobs(req, res, next) {
   let model = req.params.model;
   req.model = jobs;
   next();
 }
-  
+
 router.param('model', getJobs);
 
 
@@ -80,7 +78,7 @@ function handlePost(req, res, next) {
  * @param {*} res
  * @param {*} next
  */
-function handlePut(req, res ,next) {
+function handlePut(req, res, next) {
   let id = req.params.id;
   req.model.put(id, req.body)
     .then(result => res.status(200).json(result))
@@ -95,7 +93,7 @@ function handlePut(req, res ,next) {
  * @param {*} res
  * @param {*} next
  */
-function handleDelete(req,res ,next) {
+function handleDelete(req, res, next) {
   let id = req.params.id;
   req.model.delete(id)
     .then(result => res.status(200).json(result))
