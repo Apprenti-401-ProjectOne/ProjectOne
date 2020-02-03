@@ -4,7 +4,7 @@ require('dotenv').config();
 const superagent = require('superagent');
 const User = require('../../model/user');
 
-module.exports = (req) => {
+module.exports = function authorize(req){
   let code = req.query.code;
   console.log('1. CODE: ', code);
 
@@ -13,7 +13,7 @@ module.exports = (req) => {
     .send({
       code: code,
       client_id: process.env.GG_CLIENT_ID,
-      client_secret: process.env.CLIENT_SECRET,
+      client_secret: process.env.GG_CLIENT_SECRET,
       redirect_uri: process.env.GG_REDIRECT,
       grant_type:'authorization_code',
     })
