@@ -7,20 +7,20 @@ const Jobs = require('../model/job');
 /**
  *  Routes
  */
-router.get('/jobs', handleGetAll);
+router.get('/jobs', getAllJobs);
 router.post('/jobs', handlePost);
 router.get('/jobs/:id', handleGetOne);
 router.put('/jobs/:id', handlePut);
 router.delete('/jobs/:id', handleDelete);
 
 /**
- * handles all requests 
+ * 
  * @function handleGetAll
  * @param {*} req
  * @param {*} res
  * @param {*} next
  */
-function handleGetAll(req, res, next) {
+function getAllJobs(req, res, next) {
   Jobs.find({})
     .then(records => {
       const output = {
