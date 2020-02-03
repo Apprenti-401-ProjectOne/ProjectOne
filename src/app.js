@@ -17,7 +17,7 @@ app.use(errorHandler);
 // app.use(authRouter);
 
 app.get('/', (req, res) => {
-  res.send('hello world, I hate you');
+  res.send('hello world, it is a beautiful day');
 });
 
 app.listen(process.env.PORT), () => {
