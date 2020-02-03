@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const morgan  = require('morgan')
 const app = new express();
 
 const router = require('./routes/routes');
@@ -11,6 +12,8 @@ const errorHandler = require('./middleware/500.js');
 const notFound = require('./middleware/404.js');
 
 app.use(express.json());
+app.use(morgan())
+
 
 app.use(router);
 app.use(notFound);
