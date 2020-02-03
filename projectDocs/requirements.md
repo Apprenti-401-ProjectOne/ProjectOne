@@ -47,7 +47,9 @@ for a set amount of time without having to login again
 - Given a username and password, a user should be able to login and be granted specific privileges which persist for a set amount of time without having to login again
 - Given a logged in user, they should be able to create a job and job details
 - Given a logged in user, they should be able to change and update details of their job after it has been created
--  A admin should be able to create a superuser account with all the authorization of a regular user, but with elevated privileges to alter any job in the system
+- An admin should be able to create a superuser account with all the authorization of a regular user, but with elevated privileges to alter any job in the system
+- Given a google or github account, the user should be able to login via OAuth using one of those accounts.
+
 
 ## Storage 
 
