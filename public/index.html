@@ -29,6 +29,13 @@
       state: 'canustatedependancy',
     }
 
+    let fbOptions = {
+      client_id: '3281566335237524',
+      redirect_uri: 'http://localhost:3000/fboauth',
+      scope: 'read:user',
+      state: 'canustatedependancy',
+    }
+
     function oauth(linkId){
       let url;
       let options;
@@ -40,6 +47,10 @@
         url = 'https://github.com/login/oauth/authorize';
         options = ghOptions;
       };
+      if(linkId === 'fbOauth'){
+        url = 'https://www.facebook.com/v6.0/dialog/oauth',
+        options = fbOptions;
+      }
 
       let queryString = Object.keys(options).map(key => {
       return `${key}=` + encodeURIComponent(options[key]);
