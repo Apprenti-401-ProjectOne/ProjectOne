@@ -75,7 +75,7 @@ function handlePost(req, res, next) {
  */
 function handlePut(req, res, next) {
   let id = req.params.id;
-  Jobs.put(id, req.body)
+  Jobs.findByIdAndUpdate(id, req.body, {new: true})
     .then(result => res.status(200).json(result))
     .catch(next);
 }
@@ -90,7 +90,7 @@ function handlePut(req, res, next) {
  */
 function handleDelete(req, res, next) {
   let id = req.params.id;
-  Jobs.deleteOne({_id: id})
+  Jobs.findByIdAndDelete(id)
     .then(result => res.status(200).json(result))
     .catch(next);
 }
