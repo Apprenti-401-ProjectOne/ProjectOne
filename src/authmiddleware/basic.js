@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
 
   try {
     let [authType, authString] = req.headers.authorization.split(/\s+/);
-    console.log(authType, authString);
+    
     switch (authType.toLowerCase()) {
     case 'basic':
       return _authBasic(authString);
@@ -16,19 +16,26 @@ module.exports = (req, res, next) => {
   } catch (e) {
     next(e);
   }
-
+  /**
+   * 
+   * @param  str 
+   * @return promise
+   */
   function _authBasic(str) {
     
     let base64Buffer = Buffer.from(str, 'base64');
     let bufferString = base64Buffer.toString(); 
     let [username, password] = bufferString.split(':'); 
     let auth = { username, password };
-
+    console.log(auth);
     return User.authenticateBasic(auth)
       .then(user => _authenticate(user))
       .catch(next);
   }
-
+  /**
+   * 
+   * @param {*} user 
+   */
   function _authenticate(user) {
     if (user) {
       req.user = user;
