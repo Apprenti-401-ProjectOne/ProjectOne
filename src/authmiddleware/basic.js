@@ -2,25 +2,7 @@
 
 const user = require('../../model/user');
 
-module.exports = (req, res, next) => {
-  try {
-    let [authType, authString] = req.headers.authorization.split(/\s+/);
 
-    switch (authType.toLowerCase()) {
-      case 'basic':
-        return _authBasic(authString);
-      default:
-        return _authError();
-    }
-  } catch (e) {
-    next(e);
-  }
-
-  function _authBasic(str) {
-    
-    let base64Buffer = Buffer.from(str, 'base64');
-    let bufferString = base64Buffer.toString();
-    let [username, password] = bufferString.split(':');'use strict';
 
 const User = require('../../models/user');
 
@@ -39,7 +21,7 @@ module.exports = (req, res, next) => {
   }
 
   function _authBasic(str) {
-    // str: am9objpqb2hubnk=
+    
     let base64Buffer = Buffer.from(str, 'base64');
     let bufferString = base64Buffer.toString(); 
     let [username, password] = bufferString.split(':'); 
@@ -63,8 +45,8 @@ module.exports = (req, res, next) => {
   function _authError() {
     next('Invalid User ID/Password');
   }
-}; // john='john'; mysecret='mysecret']
-    let auth = { username, password }; // { username:'john', password:'mysecret' }
+}; 
+    let auth = { username, password }; 
 
     return User.authenticateBasic(auth)
       .then(user => _authenticate(user))
