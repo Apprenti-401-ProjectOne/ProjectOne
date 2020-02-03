@@ -39,12 +39,12 @@ for a set amount of time without having to login again
 
 ### Requirements
 
-* [User Stores](./requirements.md)
+* [User Stores](./projectDocs/requirements.md)
 
 ### Diagrams
 
 #### Data flow
-![](./jobApp.svg)
+![](./projectDocs/jobApp.svg)
 
 #### Domain 
-![](./domain.jpg)
+![](./projectDocs/domain.jpg)
