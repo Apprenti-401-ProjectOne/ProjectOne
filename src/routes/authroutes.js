@@ -5,6 +5,7 @@ const authRouter = express.Router();
 
 const ggOauth = require('../authmiddleware/oauth/google');
 const ghOauth = require('../authmiddleware/oauth/github');
+const fbOauth = require('../authmiddleware/oauth/facebook');
 
 authRouter.get('/ghoauth', (req, res, next) => {
   ghOauth(req)

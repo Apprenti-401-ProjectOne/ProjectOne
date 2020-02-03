@@ -10,6 +10,7 @@
   <main>
     <a id="ghOauth" onClick="oauth(this.id);" href="#">Login with Github</a>
     <a id="ggOauth" onClick="oauth(this.id);" href="#">Login with Google</a>
+    <a id="fbOauth" onClick="oauth(this.id);" href="#">Login with Facebook</a>
   </main>
   
   <script>
@@ -25,14 +26,7 @@
     let ghOptions = {
       client_id: 'ade28f9f9d0f770066cb',
       redirect_uri: 'http://localhost:3000/ghoauth',
-      scope: 'read:user',
-      state: 'canustatedependancy',
-    }
-
-    let fbOptions = {
-      client_id: '3281566335237524',
-      redirect_uri: 'http://localhost:3000/fboauth',
-      scope: 'public_profile,email',
+      scope: 'read:user,user:email',
       state: 'canustatedependancy',
     }
 
@@ -47,10 +41,6 @@
         url = 'https://github.com/login/oauth/authorize';
         options = ghOptions;
       };
-      if(linkId === 'fbOauth'){
-        url = 'https://www.facebook.com/v6.0/dialog/oauth',
-        options = fbOptions;
-      }
 
       let queryString = Object.keys(options).map(key => {
       return `${key}=` + encodeURIComponent(options[key]);
