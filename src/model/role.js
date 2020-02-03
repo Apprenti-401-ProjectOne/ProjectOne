@@ -17,3 +17,11 @@ const userSchema = new mongoose.Schema({
   email: {type: String, required: true},
   role: {type: String, default:'user', enum: ['admin','editor','user']},
 });
+
+
+userSchema.pre('save', async (next) => {
+  if (this.isModified('password')) {
+    this.password = await bycrpt.hash(this.password, 10);
+  }
+});
+
