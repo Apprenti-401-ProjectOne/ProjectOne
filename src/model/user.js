@@ -53,8 +53,15 @@ userSchema.statics.authenticateBasic = function(auth) {
   return this.findOne(query)
     .then(user => user && user.comparePassword(auth.password))
     .catch(error => {
-      throw error;
+      console.log(error);
     });
+};
+
+
+userSchema.methods.comparePassword = function(password) {
+  return bcrypt
+    .compare(password, this.password)
+    .then(valid => (valid ? this : null));
 };
 
 
