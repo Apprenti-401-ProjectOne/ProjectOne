@@ -1,18 +1,18 @@
 'use strict';
 
+require('dotenv').config();
 const express = require('express');
-const morgan  = require('morgan')
+const morgan  = require('morgan');
 const app = new express();
 
 const router = require('./routes/routes');
 const authRouter = require('./routes/authroutes');
-require('dotenv').config();
 
 const errorHandler = require('./middleware/500.js');
 const notFound = require('./middleware/404.js');
 
 app.use(express.json());
-app.use(morgan())
+app.use(morgan('dev'));
 
 
 app.use(router);

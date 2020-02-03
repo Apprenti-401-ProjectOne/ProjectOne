@@ -11,12 +11,12 @@ module.exports = (req, res, next) => {
   let token = req.headers.authorization.split(' ').pop();
 
   User.authenicateToken(token)
-  .then(validUser => {
-    req.user = validUser;
-    next();
-  })
-  .catch(err => {
-    console.log(err);
-    next('Invalid Login');
-  });
+    .then(validUser => {
+      req.user = validUser;
+      next();
+    })
+    .catch(err => {
+      console.log(err);
+      next('Invalid Login');
+    });
 }
