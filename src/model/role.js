@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const app = express();
 const router = express.Router();
 const mongoose = require('mongoose');
 const bycrpt = require('bcrypt');
@@ -39,5 +40,3 @@ userSchema.methods.generateToken = function(type) {
 
   return jwt.sign(token, SECRET, {expiresIn: '15min'});
 };
-
-module.exports = mongoose.model('users', userSchema);
