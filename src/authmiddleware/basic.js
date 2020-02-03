@@ -1,9 +1,5 @@
 'use strict';
 
-const user = require('../../model/user');
-
-
-
 const User = require('../../models/user');
 
 module.exports = (req, res, next) => {
@@ -46,24 +42,4 @@ module.exports = (req, res, next) => {
     next('Invalid User ID/Password');
   }
 }; 
-    let auth = { username, password }; 
 
-    return User.authenticateBasic(auth)
-      .then(user => _authenticate(user))
-      .catch(next);
-  }
-
-  function _authenticate(user) {
-    if (user) {
-      req.user = user;
-      req.token = user.generateToken();
-      next();
-    } else {
-      _authError();
-    }
-  }
-
-  function _authError() {
-    next('Invalid User ID/Password');
-  }
-};
