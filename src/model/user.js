@@ -2,7 +2,7 @@
 
 require('dotenv').config();
 const mongoose = require('mongoose');
-const bycrpt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const capabilities = {
@@ -20,11 +20,15 @@ const userSchema = new mongoose.Schema({
 /**
  * Schema hashes the user's password with salt(10) before saving to the database
  */
-userSchema.pre('save', async (next) => {
-  if (this.isModified('password')) {
-    this.password = await bycrpt.hash(this.password, 10);
-  }
-  next();
+userSchema.pre('save', function(next) {
+  const user = this;
+  bcrypt.hash(user.password, 10, function(err,hash) {
+    if (err) {
+      return next(err);
+    }
+    user.password = hash;
+    next();
+  });
 });
 
 /**
