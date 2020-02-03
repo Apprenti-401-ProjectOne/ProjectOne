@@ -16,6 +16,14 @@ const userSchema = new mongoose.Schema({
   password: {type: String, required: true},
   email: {type: String, required: true},
   role: {type: String, default:'user', enum: ['admin','editor','user']},
+  jobs: {type: mongoose.Schema.Types.ObjectId, ref: 'jobs'},
+});
+
+userSchema.virtual('userRoles', {
+  ref: 'roles',
+  localField: 'role',
+  foreignField: 'type',
+  justOne: true,
 });
 
 /**
@@ -48,6 +56,9 @@ userSchema.methods.generateToken = function(type) {
   return jwt.sign(token, process.env.SECRET, {expiresIn: '15min'});
 };
 
+/**
+ * Authenticates and compares signing in user password to database password
+ */
 userSchema.statics.authenticateBasic = function(auth) {
   let query = { username: auth.username };
   return this.findOne(query)
