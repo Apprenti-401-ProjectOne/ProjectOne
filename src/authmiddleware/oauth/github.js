@@ -12,7 +12,7 @@ module.exports = function authorize(req){
     .send({
       code: code,
       client_id: process.env.GH_CLIENT_ID,
-      client_secret: process.env.GHCLIENT_SECRET,
+      client_secret: process.env.GH_CLIENT_SECRET,
       redirect_uri: process.env.GH_REDIRECT,
       grant_type:'authorization_code',
     })
