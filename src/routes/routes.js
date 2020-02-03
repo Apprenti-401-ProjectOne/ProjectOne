@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const bearer = require('../authmiddleware/bearer');
+const basic = require('../authmiddleware/basic')
 const User = require('../model/user');
 
 
@@ -15,11 +16,11 @@ router.post('/signup', (req, res) => {
       res.send(req.token);
     })
     .catch(error => console.error(error))
-
 });
 
-router.post('/signin', (req, res) => {
-
+router.post('/signin', basic, (req, res) => {
+  res.cookie('auth', req.token);
+  res.send(req.token);
 });
 
 module.exports = router;
