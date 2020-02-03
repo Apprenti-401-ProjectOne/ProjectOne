@@ -1,8 +1,5 @@
 'use strict';
 
-const express = require('express');
-const app = express();
-const router = express.Router();
 const mongoose = require('mongoose');
 const bycrpt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -18,7 +15,7 @@ const userSchema = new mongoose.Schema({
   username: {type: String, required:true, unique:true},
   password: {type: String, required: true},
   email: {type: String, required: true},
-  role: {type: String, default:'user', enum: ['admin','editor','user']},
+  role: {type: String, default:'user', enum: ['admin','editor','user']}
 });
 
 
@@ -40,3 +37,6 @@ userSchema.methods.generateToken = function(type) {
 
   return jwt.sign(token, SECRET, {expiresIn: '15min'});
 };
+
+
+module.exports = mongoose.model('users', userSchema);
