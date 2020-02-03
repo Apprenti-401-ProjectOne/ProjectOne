@@ -18,6 +18,13 @@ const userSchema = new mongoose.Schema({
   role: {type: String, default:'user', enum: ['admin','editor','user']},
 });
 
+userSchema.virtual('userRoles', {
+  ref: 'roles',
+  localField: 'role',
+  foreignField: 'type',
+  justOne: true,
+});
+
 /**
  * Schema hashes the user's password with salt(10) before saving to the database
  */
