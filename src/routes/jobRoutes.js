@@ -4,7 +4,6 @@ const express = require('express');
 const router = express.Router();
 const Jobs = require('../model/job');
 
-
 /**
  *  Routes
  */
@@ -14,7 +13,6 @@ router.get('/jobs/:id', handleGetOne);
 router.put('/jobs/:id', handlePut);
 router.delete('/jobs/:id', handleDelete);
 
-
 /**
  * handles all requests 
  * @function handleGetAll
@@ -23,7 +21,6 @@ router.delete('/jobs/:id', handleDelete);
  * @param {*} next
  */
 function handleGetAll(req, res, next) {
-  // let jobs = new Jobs();
   Jobs.find({})
     .then(records => {
       const output = {
