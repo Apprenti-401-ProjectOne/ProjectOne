@@ -13,8 +13,6 @@ const capabilities = {
   user: ['read'],
 };
 
-
-
 router.post('/signup', (req, res) => {
   let user = new User(req.body);
   user.save()
@@ -25,7 +23,7 @@ router.post('/signup', (req, res) => {
       res.cookie('auth', req.token);
       res.send(req.token);
     })
-    .catch(error => console.error(error))
+    .catch(error => console.error(error));
 });
 
 router.post('/signin', basic, (req, res) => {

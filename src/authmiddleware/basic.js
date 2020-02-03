@@ -3,9 +3,10 @@
 const User = require('../model/user');
 
 module.exports = (req, res, next) => {
+
   try {
     let [authType, authString] = req.headers.authorization.split(/\s+/);
-
+    console.log(authType, authString);
     switch (authType.toLowerCase()) {
     case 'basic':
       return _authBasic(authString);
