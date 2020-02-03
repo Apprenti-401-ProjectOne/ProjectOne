@@ -14,10 +14,11 @@ for a set amount of time without having to login again
 * Have users be able to create, update, delete and accept bids for a job
 * Have users be able to bid on other users jobs
 * Have a superuser role that can have privileges over all jobs
+* Have users be notified of activity through email or sms on their jobs and jobs they have bid.
 
 #### Stretch
 
-* Have users be notified of activity through email or sms on their jobs and jobs they have bid.
+
 * Implement graphql 
 * Inter-user messaging
 
@@ -49,6 +50,7 @@ for a set amount of time without having to login again
 - Given a logged in user, they should be able to change and update details of their job after it has been created
 - An admin should be able to create a superuser account with all the authorization of a regular user, but with elevated privileges to alter any job in the system
 - Given a google or github account, the user should be able to login via OAuth using one of those accounts.
+- Given an event on a job related to a user, by either owning the job or having placed bids on the a job, they will be notified by email.
 
 
 ## Storage 
