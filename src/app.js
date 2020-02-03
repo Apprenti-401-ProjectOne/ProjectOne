@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(jobrouter);
-app.use(authRouter);
+//app.use(authRouter);
 app.use(router);
 app.use(notFound);
 app.use(errorHandler);
