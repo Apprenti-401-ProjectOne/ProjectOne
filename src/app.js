@@ -5,12 +5,11 @@ const app = new express();
 
 const router = require('./routes/routes');
 const authRouter = require('./routes/authroutes');
-
-
-
 require('dotenv').config();
-app.use(router);
-app.use(authRouter);
+
+
+// app.use(router);
+// app.use(authRouter);
 
 app.get('/', (req, res) => {
   res.send('hello world, I hate you');
