@@ -31,6 +31,9 @@ router.post('/signin', basic, (req, res) => {
   res.send(req.token);
 });
 
+router.get('/test', bearer, (res, req) => {
+  req.send('stuffffff');
+});
 
 
 router.post('/roles', (req, res, next) => {
