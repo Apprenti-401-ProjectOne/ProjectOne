@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 
-
+app.use(express.static('public'));
 app.use(router);
 app.use(notFound);
 app.use(errorHandler);
