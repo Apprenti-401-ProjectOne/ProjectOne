@@ -3,8 +3,6 @@
 const express = require('express');
 const router = express.Router();
 
-const jobs = require('../model/schema/jobschema.js');
-
 function getJobs(req, res, next) {
   let model = req.params.model;
   req.model = jobs;
