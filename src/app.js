@@ -18,13 +18,11 @@ app.use(timestamp);
 app.use(express.json());
 app.use(morgan('dev'));
 
-app.get('/', (req, res) => {
-  res.send('hello world, it is a beautiful day');
-});
-
+app.use(express.static('public'));
 app.use(jobrouter);
-//app.use(authRouter);
+app.use(authRouter);
 app.use(router);
+app.use(authRouter);
 app.use(notFound);
 app.use(errorHandler);
 

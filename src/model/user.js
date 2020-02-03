@@ -68,5 +68,27 @@ userSchema.statics.authenticateBasic = function(auth) {
     });
 };
 
+/** 
+ * takes Oauth user info and checks for existing user, if none exists creates a new one
+ * @param oauthUser
+ * @returns user
+*/
+userSchema.statics.createFromOauth = function(oauthUser){
+  if(!oauthUser){return Promise.reject('Validation Error');}
+  console.log(oauthUser);
+  return this.findOne({ username: `${oauthUser.email}` })
+    .then(user => {
+      if(!user){ throw new Error('User not found'); }
+      console.log('Welcome Back', user.username);
+      return user;
+    })
+    .catch(error => {
+      console.log('Creating new user from oauth');
+      let username = oauthUser.email;
+      let password = 'oauthpassword';
+      let email = oauthUser.email;
+      return this.create({username, password, email});
+    });
+};
 
 module.exports = mongoose.model('users', userSchema);
