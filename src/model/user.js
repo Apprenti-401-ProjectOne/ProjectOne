@@ -68,6 +68,16 @@ userSchema.statics.authenticateBasic = function(auth) {
     });
 };
 
+userSchema.statics.authenticateToken = function(token) {
+  try {
+    let parsedTokenObject = jwt.verify(token, process.env.SECRET);
+    let query = { _id: parsedTokenObject.id };
+    return this.find(query);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 /** 
  * takes Oauth user info and checks for existing user, if none exists creates a new one
  * @param oauthUser
@@ -96,6 +106,9 @@ userSchema.methods.comparePassword = function(password) {
     .compare(password, this.password)
     .then(valid => (valid ? this : null));
 };
+
+
+
 
 
 module.exports = mongoose.model('users', userSchema);
