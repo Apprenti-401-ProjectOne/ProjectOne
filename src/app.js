@@ -18,10 +18,10 @@ app.use(morgan('dev'));
 
 app.use(express.static('public'));
 app.use(router);
+app.use(authRouter);
 app.use(notFound);
 app.use(errorHandler);
 
-// app.use(authRouter);
 
 app.get('/', (req, res) => {
   res.send('hello world, it is a beautiful day');

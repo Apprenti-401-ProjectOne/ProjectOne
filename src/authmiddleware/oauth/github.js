@@ -5,6 +5,7 @@ const superagent = require('superagent');
 const User = require('../../model/user');
 
 module.exports = function authorize(req){
+  console.log('alive');
   let code = req.query.code;
   console.log('1. CODE: ', code);
 
