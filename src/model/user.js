@@ -17,7 +17,9 @@ const userSchema = new mongoose.Schema({
   role: {type: String, default:'user', enum: ['admin','editor','user']},
 });
 
-
+/**
+ * Schema hashes the user's password with salt(10) before saving to the database
+ */
 userSchema.pre('save', async (next) => {
   if (this.isModified('password')) {
     this.password = await bycrpt.hash(this.password, 10);
@@ -25,7 +27,10 @@ userSchema.pre('save', async (next) => {
   next();
 });
 
-
+/**
+ * Generates and signs token with associated user information
+ * @returns Signed token that expires in 15 minutes
+ */
 userSchema.methods.generateToken = function(type) {
 
   let token = {
