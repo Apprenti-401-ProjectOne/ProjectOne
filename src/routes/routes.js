@@ -1,6 +1,9 @@
 const router = require('express').Router();
 
 const bearer = require('../authmiddleware/bearer');
+
+
+
 const basic = require('../authmiddleware/basic');
 const User = require('../model/user');
 const Role = require('../model/role');
@@ -9,6 +12,7 @@ const capabilities = {
   admin: ['create','read','update','delete', 'superuser'],
   user: ['read'],
 };
+
 
 
 router.post('/signup', (req, res) => {
@@ -30,6 +34,7 @@ router.post('/signin', basic, (req, res) => {
 });
 
 
+
 router.post('/roles', (req, res, next) => {
   let saved = [];
   Object.keys(capabilities).map(role => {
@@ -39,5 +44,6 @@ router.post('/roles', (req, res, next) => {
   Promise.all(saved);
   res.send('Roles Created');
 });
+
 
 module.exports = router;

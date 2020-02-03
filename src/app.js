@@ -12,7 +12,9 @@ const errorHandler = require('./middleware/500.js');
 const notFound = require('./middleware/404.js');
 
 app.use(express.json());
+
 app.use(morgan('dev'));
+
 
 
 app.use(router);
