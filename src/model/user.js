@@ -71,6 +71,7 @@ userSchema.statics.authenticateBasic = function(auth) {
 userSchema.statics.authenticateToken = function(token) {
   try {
     let parsedTokenObject = jwt.verify(token, process.env.SECRET);
+    console.log(parsedTokenObject)
     let query = { _id: parsedTokenObject.id };
     return this.find(query);
   } catch (error) {

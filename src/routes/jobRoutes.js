@@ -8,10 +8,10 @@ const Jobs = require('../model/job');
  *  Routes
  */
 router.get('/jobs', getAllJobs);
-router.post('/jobs', handlePost);
-router.get('/jobs/:id', handleGetOne);
-router.put('/jobs/:id', handlePut);
-router.delete('/jobs/:id', handleDelete);
+router.post('/jobs', jobPost);
+router.get('/jobs/:id', getOneJob);
+router.put('/jobs/:id', jobUpdate);
+router.delete('/jobs/:id', jobDelete);
 
 /**
  * 
@@ -40,7 +40,7 @@ function getAllJobs(req, res, next) {
  * @param {*} res
  * @param {*} next
  */
-function handleGetOne(req, res, next) {
+function getOneJob(req, res, next) {
   let id = req.params.id;
   req.model.get(id)
     .then(record => res.json(record))
@@ -55,7 +55,7 @@ function handleGetOne(req, res, next) {
  * @param {*} res
  * @param {*} next
  */
-function handlePost(req, res, next) {
+function jobPost(req, res, next) {
   let jobs = new Jobs(req.body);
   jobs.save(req.body)
     .then(result => res.status(200).json(result))
@@ -70,7 +70,7 @@ function handlePost(req, res, next) {
  * @param {*} res
  * @param {*} next
  */
-function handlePut(req, res, next) {
+function jobUpdate(req, res, next) {
   let id = req.params.id;
   Jobs.findByIdAndUpdate(id, req.body, {new: true})
     .then(result => res.status(200).json(result))
@@ -85,7 +85,7 @@ function handlePut(req, res, next) {
  * @param {*} res
  * @param {*} next
  */
-function handleDelete(req, res, next) {
+function jobDelete(req, res, next) {
   let id = req.params.id;
   Jobs.findByIdAndDelete(id)
     .then(result => res.status(200).json(result))

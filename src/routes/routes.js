@@ -32,7 +32,7 @@ router.post('/signin', basic, (req, res) => {
 });
 
 router.get('/test', bearer, (res, req) => {
-  req.send('stuffffff');
+  req.json(req.user);
 });
 
 
