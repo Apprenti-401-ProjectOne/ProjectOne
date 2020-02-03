@@ -18,19 +18,13 @@
   "license": "ISC",
   "dependencies": {
     "@code-fellows/supergoose": "^1.0.1",
-<<<<<<< HEAD
     "bcrypt": "^3.0.7",
-=======
->>>>>>> f2eb90237bfb37b003f33a0699aab7057b9c25d8
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "eslint": "^6.8.0",
     "express": "^4.17.1",
     "jest": "^24.8.0",
-<<<<<<< HEAD
     "jsonwebtoken": "^8.5.1",
-=======
->>>>>>> f2eb90237bfb37b003f33a0699aab7057b9c25d8
     "mongodb-memory-server": "^5.1.5",
     "mongoose": "^5.6.1",
     "mongoose-schema-jsonschema": "^1.2.1",

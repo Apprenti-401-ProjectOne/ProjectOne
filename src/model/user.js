@@ -1,10 +1,9 @@
 'use strict';
 
+require('dotenv').config();
 const mongoose = require('mongoose');
 const bycrpt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
-const SECRET = 'SECRET';
 
 const capabilities = {
   admin: ['create','read','update','delete', 'superuser'],
@@ -15,7 +14,7 @@ const userSchema = new mongoose.Schema({
   username: {type: String, required:true, unique:true},
   password: {type: String, required: true},
   email: {type: String, required: true},
-  role: {type: String, default:'user', enum: ['admin','editor','user']}
+  role: {type: String, default:'user', enum: ['admin','editor','user']},
 });
 
 
@@ -23,6 +22,7 @@ userSchema.pre('save', async (next) => {
   if (this.isModified('password')) {
     this.password = await bycrpt.hash(this.password, 10);
   }
+  next();
 });
 
 
@@ -35,7 +35,7 @@ userSchema.methods.generateToken = function(type) {
     capabilities: capabilities[this.role],
   };
 
-  return jwt.sign(token, SECRET, {expiresIn: '15min'});
+  return jwt.sign(token, process.env.SECRET, {expiresIn: '15min'});
 };
 
 
