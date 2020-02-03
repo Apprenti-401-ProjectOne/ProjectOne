@@ -5,12 +5,14 @@ const User = require('../model/user');
 
 
 router.post('/signup', (req, res) => {
-  console.log(req.body)
   let user = new User(req.body);
-  user.save(req.body)
+  user.save()
     .then(results => {
+      req.token = user.generateToken();
       res.status(200);
-      res.send('User Created');
+      res.set('token', req.token);
+      res.cookie('auth', req.token);
+      res.send(req.token);
     })
     .catch(error => console.error(error))
 

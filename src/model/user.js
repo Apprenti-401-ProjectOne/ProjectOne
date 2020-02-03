@@ -28,8 +28,8 @@ userSchema.pre('save', function(next) {
     }
     user.password = hash;
     next();
-  })
-})
+  });
+});
 
 /**
  * Generates and signs token with associated user information
