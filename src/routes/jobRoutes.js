@@ -2,24 +2,17 @@
 
 const express = require('express');
 const router = express.Router();
-
-function getJobs(req, res, next) {
-  let model = req.params.model;
-  req.model = jobs;
-  next();
-}
-
-router.param('model', getJobs);
+const Jobs = require('../model/job');
 
 
 /**
  *  Routes
  */
-router.get('/api/v1/model', handleGetAll);
-router.post('/api/v1/model', handlePost);
-router.get('/api/v1/model/:id', handleGetOne);
-router.put('/api/v1/model/:id', handlePut);
-router.delete('/api/v1/model/:id', handleDelete);
+router.get('/jobs', handleGetAll);
+router.post('/jobs', handlePost);
+router.get('/jobs/:id', handleGetOne);
+router.put('/jobs/:id', handlePut);
+router.delete('/jobs/:id', handleDelete);
 
 
 /**
@@ -30,7 +23,8 @@ router.delete('/api/v1/model/:id', handleDelete);
  * @param {*} next
  */
 function handleGetAll(req, res, next) {
-  req.model.get()
+  // let jobs = new Jobs();
+  Jobs.find({})
     .then(records => {
       const output = {
         count: records.length,
@@ -65,7 +59,8 @@ function handleGetOne(req, res, next) {
  * @param {*} next
  */
 function handlePost(req, res, next) {
-  req.model.post(req.body)
+  let jobs = new Jobs(req.body);
+  jobs.save(req.body)
     .then(result => res.status(200).json(result))
     .catch(next);
 }
