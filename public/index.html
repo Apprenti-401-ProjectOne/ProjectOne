@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Oauth Landing Page</title>
+</head>
+<body>
+  <main>
+    <a id="ghOauth" onClick="oauth(this.id);" href="#">Login with Github</a>
+    <a id="ggOauth" onClick="oauth(this.id);" href="#">Login with Google</a>
+  </main>
+  
+  <script>
+    
+    let ggOptions = {
+      client_id: '154981464003-vgkuis0iceafd8qrthumgi4dspihmhhq.apps.googleusercontent.com',
+      redirect_uri: 'http://localhost:3000/oauth',
+      response_type: 'code',
+      scope: 'openid profile email',
+      state: 'canustatedependancy',
+    };
+
+    let ghOptions = {
+      client_id: 'ade28f9f9d0f770066cb',
+      redirect_uri: 'http://localhost:3000/oauth',
+      scope: 'read:user',
+      state: 'canustatedependancy',
+    }
+
+    function oauth(linkId){
+      let url;
+      let options;
+      if(linkId === 'ggOauth'){
+        url = 'https://accounts.google.com/o/oauth2/v2/auth';
+        options = ggOptions;
+      };
+      if(linkId === 'ghOauth'){
+        url = 'https://github.com/login/oauth/authorize';
+        options = ghOptions;
+      };
+
+      let queryString = Object.keys(options).map(key => {
+      return `${key}=` + encodeURIComponent(options[key]);
+    }).join('&');
+
+    let authURL = `${url}?${queryString}`;
+    
+    let link = document.getElementById(linkId);
+    
+    link.setAttribute('href', authURL);
+    }
+
+    
+
+
+  </script>
+</body>
+</html>

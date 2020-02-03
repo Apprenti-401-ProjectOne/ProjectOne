@@ -1,6 +1,9 @@
 const router = require('express').Router();
 
 const bearer = require('../authmiddleware/bearer');
+
+
+
 const basic = require('../authmiddleware/basic');
 const User = require('../model/user');
 const Role = require('../model/role');
@@ -9,7 +12,6 @@ const capabilities = {
   admin: ['create','read','update','delete', 'superuser'],
   user: ['read'],
 };
-
 
 router.post('/signup', (req, res) => {
   let user = new User(req.body);
@@ -21,13 +23,14 @@ router.post('/signup', (req, res) => {
       res.cookie('auth', req.token);
       res.send(req.token);
     })
-    .catch(error => console.error(error))
+    .catch(error => console.error(error));
 });
 
 router.post('/signin', basic, (req, res) => {
   res.cookie('auth', req.token);
   res.send(req.token);
 });
+
 
 
 router.post('/roles', (req, res, next) => {
@@ -39,5 +42,6 @@ router.post('/roles', (req, res, next) => {
   Promise.all(saved);
   res.send('Roles Created');
 });
+
 
 module.exports = router;
