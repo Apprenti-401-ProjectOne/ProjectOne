@@ -25,7 +25,9 @@ userSchema.virtual('userRoles', {
   foreignField: 'type',
   justOne: true,
 });
-
+/**
+ *  Prehook to populate roles
+ */
 userSchema.pre('findOne', async function(){
   try{
     this.populate('userRoles');
