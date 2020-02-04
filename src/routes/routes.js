@@ -32,7 +32,7 @@ router.post('/signin', basic, (req, res) => {
   res.send(req.token);
 });
 
-router.post('/roles', acl('superuser'), (req, res, next) => {
+router.post('/roles', (req, res, next) => {
   let saved = [];
   Object.keys(capabilities).map(role => {
     let newRecord = new Role({type: role, capabilities: capabilities[role]});
