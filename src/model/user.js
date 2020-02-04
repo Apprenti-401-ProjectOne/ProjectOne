@@ -115,6 +115,14 @@ userSchema.methods.comparePassword = function(password) {
     .then(valid => (valid ? this : null));
 };
 
+userSchema.statics.destroyUser = function(username){
+  return this.findOneAndDelete({username: username})
+    .then(result => {
+      if(!result) return 'No User';
+      return result;
+    }).catch(err => console.log(err));    
+};
+
 
 
 

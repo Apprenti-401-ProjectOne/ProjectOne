@@ -43,4 +43,14 @@ router.post('/roles', (req, res, next) => {
 });
 
 
+router.post('/deleteUser', acl('superuser'), bearer, (req, res) => {
+  User.destroyUser(req.body.userName)
+    .then(result => {
+      res.send(result);
+    })
+    .catch(error => console.log(error));
+});
+
+
+
 module.exports = router;
