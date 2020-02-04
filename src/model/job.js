@@ -8,7 +8,13 @@ const jobSchema = mongoose.Schema({
   price: { type: Number, required: true },
   jobType: { type: String },
   postedBy: {type: mongoose.Schema.Types.ObjectId, ref: 'users'},
+  isOpen: { type: Boolean, default: true},  
 });
+
+
+
+
+
 
 
 
