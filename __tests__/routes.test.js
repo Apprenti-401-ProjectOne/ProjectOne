@@ -28,6 +28,12 @@ describe('Jobs route API testing', () => {
         expect(data.body.count).toEqual(1);
       });
   });
+
+  it('can get() ONE job', () => {
+  return mockRequest.get('/jobs')
+  .send( {name: 'Gardening', price: 50, jobType: 'labor'} )
+      });
+  });
   
 
   it('can update() a job', () => {
