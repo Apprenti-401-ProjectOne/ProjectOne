@@ -17,13 +17,22 @@ const userSchema = new mongoose.Schema({
   email: {type: String, required: true},
   role: {type: String, default:'user', enum: ['admin','editor','user']},
   jobs: {type: mongoose.Schema.Types.ObjectId, ref: 'jobs'},
-});
+}, {toObject: {virtuals: true}, toJSON: {virtuals: true}});
 
 userSchema.virtual('userRoles', {
   ref: 'roles',
   localField: 'role',
   foreignField: 'type',
   justOne: true,
+});
+
+userSchema.pre('findOne', async function(){
+  try{
+    this.populate('userRoles');
+  }
+  catch(error){
+    console.error('find error', error);
+  }
 });
 
 /**
@@ -104,6 +113,14 @@ userSchema.methods.comparePassword = function(password) {
   return bcrypt
     .compare(password, this.password)
     .then(valid => (valid ? this : null));
+};
+
+userSchema.statics.destroyUser = function(username){
+  return this.findOneAndDelete({username: username})
+    .then(result => {
+      if(!result) return 'No User';
+      return result;
+    }).catch(err => console.log(err));    
 };
 
 
