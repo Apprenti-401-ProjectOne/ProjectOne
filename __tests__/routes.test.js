@@ -33,7 +33,7 @@ describe('Jobs route API testing', () => {
 
   it('can get() ONE job', () => {
     return mockRequest.get('/jobs')
-      .send( {name: 'Gardening', price: 50, jobType: 'labor'} );
+      .expect(200);
   });
   
 
