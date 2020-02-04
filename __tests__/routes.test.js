@@ -19,8 +19,13 @@ describe('Jobs route API testing', () => {
       });
   });
 
+
   it('can get() a job', () => {
-    let obj =  {name: 'Gardening', price: 50, jobType: 'labor' };
+    let obj =  { 
+      name: 'Kitchen organizing', 
+      price: 75, 
+      jobType: 'Organization', 
+    };
     return mockRequest
       .get('/jobs')
       .send(obj)
@@ -30,10 +35,13 @@ describe('Jobs route API testing', () => {
   });
 
   it('can get() ONE job', () => {
-  return mockRequest.get('/jobs')
-  .send( {name: 'Gardening', price: 50, jobType: 'labor'} )
+    return mockRequest.get('/jobs')
+      .send( {name: 'Walk my dogs', price: 20, jobType: 'Dog Walking'} )
+      .then(data => {
+        expect(data.body.count).toEqual(1);
       });
   });
+
   
 
   it('can update() a job', () => {
@@ -69,4 +77,22 @@ describe('Jobs route API testing', () => {
       });
   });
 
+  it('can get a list of jobs', () => {
+    return mockRequest
+      .get('/jobs')
+      .send()
+      .then(data => {
+        expect(data.body.count).toEqual(2);
+      });
+  });
+
+  it('should return status 500', ()=>{
+    return mockRequest
+      .post('/jobs')
+      .send()
+      .then(res => {
+        expect(res.status).toBe(500);
+      });
+  });
 });
+
