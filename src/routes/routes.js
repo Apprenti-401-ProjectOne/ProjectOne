@@ -7,6 +7,7 @@ const bearer = require('../authmiddleware/bearer');
 const basic = require('../authmiddleware/basic');
 const User = require('../model/user');
 const Role = require('../model/role');
+const acl = require('../authmiddleware/access-control');
 
 const capabilities = {
   admin: ['create','read','update','delete', 'superuser'],
@@ -31,12 +32,7 @@ router.post('/signin', basic, (req, res) => {
   res.send(req.token);
 });
 
-router.get('/test', bearer, (res, req) => {
-  req.send('stuffffff');
-});
-
-
-router.post('/roles', (req, res, next) => {
+router.post('/roles', acl('superuser'), (req, res, next) => {
   let saved = [];
   Object.keys(capabilities).map(role => {
     let newRecord = new Role({type: role, capabilities: capabilities[role]});
