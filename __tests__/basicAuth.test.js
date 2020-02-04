@@ -15,7 +15,6 @@ let users = {
 beforeAll(async (done) => {
   await supergoose.startDB();
   const adminUser = await new User(users.admin).save();
-  const editorUser = await new User(users.editor).save();
   const userUser = await new User(users.user).save();
   done();
 });
@@ -30,7 +29,7 @@ describe('Auth Middleware', () => {
   let errorObject = 'Invalid User ID/Password';
 
 
-  it('fails a login for a user (admin) with the incorrect basic credentials', () => {
+  it('fails a login for an admin with the incorrect basic credentials', () => {
     let req = {
       headers: {
         authorization: 'Basic YWRtaW46Zm9v',
@@ -42,6 +41,20 @@ describe('Auth Middleware', () => {
     return basic(req, res, next)
       .then(() => {
         expect(next).toHaveBeenCalledWith(errorObject);
+      });
+  });
+  it('logs in an admin with the right credentials', () => {
+    let req = {
+      headers: {
+        authorization: 'Basic YWRtaW46cGFzc3dvcmQ=',
+      },
+    };
+    let res = {};
+    let next = jest.fn();
+
+    return basic(req, res, next)
+      .then(() => {
+        expect(next).toHaveBeenCalledWith();
       });
   });
 });
