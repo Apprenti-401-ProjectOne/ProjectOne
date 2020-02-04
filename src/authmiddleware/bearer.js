@@ -9,9 +9,7 @@ module.exports = (req, res, next) => {
     return;
   }
 
-  let token = req.headers.authorization.split(' ').pop();
-
-  console.log(token)
+  let token = req.headers.authorization.split(' ').pop(); 
   
   User.authenticateToken(token)
     .then(validUser => {
