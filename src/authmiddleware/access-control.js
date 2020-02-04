@@ -5,8 +5,10 @@
  * @module access-control
 */
 module.exports = (capability) => {
+ 
   return (req, res, next) => {
     try {
+      console.log(req.user)
       if(req.user.userRoles.capabilities.includes(capability)){
         next();
       }

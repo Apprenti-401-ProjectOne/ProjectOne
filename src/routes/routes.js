@@ -32,7 +32,7 @@ router.post('/signin', basic, (req, res) => {
   res.send(req.token);
 });
 
-router.post('/roles', acl('superuser'), (req, res, next) => {
+router.post('/roles', (req, res, next) => {
   let saved = [];
   Object.keys(capabilities).map(role => {
     let newRecord = new Role({type: role, capabilities: capabilities[role]});
@@ -42,10 +42,11 @@ router.post('/roles', acl('superuser'), (req, res, next) => {
   res.send('Roles Created');
 });
 
-router.get('/users', acl('superuser'), bearer, (req, res, next) => {
+router.get('/users',bearer, (req, res, next) => {
   User.find({})
     .then(results => res.json(results));
 });
+
 router.put('/bid', bearer, (req, res) => {
 
 });
