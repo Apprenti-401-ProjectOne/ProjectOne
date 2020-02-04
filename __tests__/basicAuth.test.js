@@ -8,7 +8,6 @@ const User = require('../src/model/user');
 
 let users = {
   admin: {username: 'admin', password: 'password', email: 'admin@admin.com', role: 'admin'},
-  editor: {username: 'editor', password: 'password', email: 'editor@editor.com', role: 'editor'},
   user: {username: 'user', password: 'password', email: 'user@user.com', role: 'user'},
 };
 
