@@ -16,7 +16,7 @@ const timestamp = require('./middleware/timestamp');
 //Middleware
 app.use(logger);
 app.use(timestamp);
-//app.use(sendEmail);
+// app.use(sendEmail);
 app.use(express.json());
 app.use(morgan('dev'));
 
