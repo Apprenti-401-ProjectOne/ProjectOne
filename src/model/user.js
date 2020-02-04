@@ -26,6 +26,15 @@ userSchema.virtual('userRoles', {
   justOne: true,
 });
 
+userSchema.pre('findOne', async function(){
+  try{
+    this.populate('userRoles');
+  }
+  catch(error){
+    console.error('find error', error);
+  }
+});
+
 /**
  * Schema hashes the user's password with salt(10) before saving to the database
  */
@@ -85,7 +94,6 @@ userSchema.statics.authenticateToken = function(token) {
 */
 userSchema.statics.createFromOauth = function(oauthUser){
   if(!oauthUser){return Promise.reject('Validation Error');}
-  console.log(oauthUser);
   return this.findOne({ username: `${oauthUser.email}` })
     .then(user => {
       if(!user){ throw new Error('User not found'); }
@@ -105,6 +113,14 @@ userSchema.methods.comparePassword = function(password) {
   return bcrypt
     .compare(password, this.password)
     .then(valid => (valid ? this : null));
+};
+
+userSchema.statics.destroyUser = function(username){
+  return this.findOneAndDelete({username: username})
+    .then(result => {
+      if(!result) return 'No User';
+      return result;
+    }).catch(err => console.log(err));    
 };
 
 

@@ -23,12 +23,14 @@ module.exports = function authorize(req){
     })
     .then(token => {
       return superagent.get(process.env.GH_API_SERVER)
-        .set('Authorization', `Bearer ${token}`)
+        .set('Authorization', `Bearer ${token}`)        
         .then(response => {
           let user = response.body;
           user.access_token = token;
-          return superagent.get('https://api.github.com/user/emails')
+          return superagent
+            .get('https://api.github.com/user/emails')
             .set('Authorization', `Bearer ${token}`)
+            .set('User-Agent', 'ProjectOne')
             .then(response => {
               user.email = response.body[0].email;
               console.log('3. GITHUBUSER', user);
