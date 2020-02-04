@@ -11,10 +11,12 @@ const notFound = require('./middleware/404.js');
 const jobrouter = require('./routes/jobRoutes.js');
 const logger = require('./middleware/logger');
 const timestamp = require('./middleware/timestamp');
+const nodemailer = require('nodemailer');
 
 //Middleware
 app.use(logger);
 app.use(timestamp);
+app.use(nodemailer);
 app.use(express.json());
 app.use(morgan('dev'));
 
