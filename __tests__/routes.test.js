@@ -10,7 +10,7 @@ afterAll(supergoose.stopDB);
 
 //__________________ JOB ROUTES TESTING ______________________
 describe('Jobs route API testing', () => {
-  it('can post() a new job', () => {
+xit('can post() a new job', () => {
     let obj = { name: 'Gardening', price: 50 };
     return mockRequest.post('/jobs')
       .send(obj)
@@ -21,13 +21,11 @@ describe('Jobs route API testing', () => {
       });
   });
 
-  xit('can get() a job', () => {
-    let obj =  {name: 'Gardening', price: 50, jobType: 'labor' };
+  it('Returns 0 when no jobs posted in database', () => {
     return mockRequest
       .get('/jobs')
-      .send(obj)
       .then(data => {        
-        expect(data.body.count).toEqual(1);
+        expect(data.body.count).toEqual(0);
       });
   });
 
@@ -69,4 +67,19 @@ describe('Jobs route API testing', () => {
           });
       });
   });
+});
+
+describe('OAuth Routes', () => {
+
+  it('Github OAuth Route', () => {
+    return mockRequest.get('/ghoauth')
+      .expect(200);
+  });
+
+  it('Google OAuth Route', () => {
+    return mockRequest.get('/ggoauth')
+      .expect(200);
+  });
+
+
 });
