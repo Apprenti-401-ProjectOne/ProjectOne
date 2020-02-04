@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const Jobs = require('../model/job');
+// const join = require('../authmiddleware/join');
 
 /**
  *  Routes
