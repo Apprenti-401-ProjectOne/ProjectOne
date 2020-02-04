@@ -32,7 +32,7 @@ router.post('/signin', basic, (req, res) => {
   res.send(req.token);
 });
 
-router.post('/roles', (req, res, next) => {
+router.post('/roles', acl('superuser'), (req, res, next) => {
   let saved = [];
   Object.keys(capabilities).map(role => {
     let newRecord = new Role({type: role, capabilities: capabilities[role]});
@@ -46,6 +46,10 @@ router.get('/users', acl('superuser'), bearer, (req, res, next) => {
   User.find({})
     .then(results => res.json(results));
 });
+router.put('/bid', bearer, (req, res) => {
+
+});
+
 
 router.post('/deleteUser', acl('superuser'), bearer, (req, res) => {
   User.destroyUser(req.body.userName)

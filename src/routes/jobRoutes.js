@@ -5,7 +5,7 @@ const router = express.Router();
 const Jobs = require('../model/job');
 const jwt = require('jsonwebtoken');
 const User = require('../model/user');
-// const join = require('../authmiddleware/join');
+
 
 /**
  *  Routes
@@ -15,6 +15,38 @@ router.post('/jobs', jobPost);
 router.get('/jobs/:id', getOneJob);
 router.put('/jobs/:id', jobUpdate);
 router.delete('/jobs/:id', jobDelete);
+router.put('/jobs/bid/:id', bidOnJob);
+router.put('/jobs/close/:id', closeJob);
+
+/**
+ * Place a bid on a job
+ * @param {*} req 
+ * @param {*} res 
+ */
+function bidOnJob(req, res){
+  const id = req.params.id;
+  const price = req.body.price;
+  Jobs.findByIdAndUpdate(id, {price: price})
+    .then(record => {
+      res.send(record);
+    })
+    .catch(error => {
+      res.send(error);
+    });    
+}
+
+/**
+ *  Close a job from bidding
+ * @param {*} req 
+ * @param {*} res 
+ */
+function closeJob(req, res){
+  const id = req.params.id;
+  Jobs.findByIdAndUpdate(id, {isOpen: false})
+    .then(result => res.send(result))
+    .catch(error => res.send(error));
+}
+
 
 /**
  * 
