@@ -2,6 +2,7 @@
 
 const User = require('../model/user');
 
+
 module.exports = (req, res, next) => {
   if(!req.headers.authorization){
     next('Invalid Login');
@@ -10,7 +11,9 @@ module.exports = (req, res, next) => {
 
   let token = req.headers.authorization.split(' ').pop();
 
-  User.authenicateToken(token)
+  console.log(token)
+  
+  User.authenticateToken(token)
     .then(validUser => {
       req.user = validUser;
       next();
@@ -19,4 +22,4 @@ module.exports = (req, res, next) => {
       console.log(err);
       next('Invalid Login');
     });
-}
+};

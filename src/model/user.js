@@ -64,8 +64,18 @@ userSchema.statics.authenticateBasic = function(auth) {
   return this.findOne(query)
     .then(user => user && user.comparePassword(auth.password))
     .catch(error => {
-      throw error;
+      console.log(error);
     });
+};
+
+userSchema.statics.authenticateToken = function(token) {
+  try {
+    let parsedTokenObject = jwt.verify(token, process.env.SECRET);
+    let query = { _id: parsedTokenObject.id };
+    return this.find(query);
+  } catch (error) {
+    return Promise.reject(error);
+  }
 };
 
 /** 
@@ -75,7 +85,6 @@ userSchema.statics.authenticateBasic = function(auth) {
 */
 userSchema.statics.createFromOauth = function(oauthUser){
   if(!oauthUser){return Promise.reject('Validation Error');}
-  console.log(oauthUser);
   return this.findOne({ username: `${oauthUser.email}` })
     .then(user => {
       if(!user){ throw new Error('User not found'); }
@@ -90,5 +99,15 @@ userSchema.statics.createFromOauth = function(oauthUser){
       return this.create({username, password, email});
     });
 };
+
+userSchema.methods.comparePassword = function(password) {
+  return bcrypt
+    .compare(password, this.password)
+    .then(valid => (valid ? this : null));
+};
+
+
+
+
 
 module.exports = mongoose.model('users', userSchema);
