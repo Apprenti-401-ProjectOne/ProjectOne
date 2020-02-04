@@ -12,7 +12,7 @@ const mockRequest = supergoose(server);
 
 //__________________ JOB ROUTES TESTING ______________________
 describe('Jobs route API testing', () => {
-  xit('can post() a new job', () => {
+  it('can post() a new job', () => {
     let obj = { name: 'Gardening', price: 50, jobType: 'labor' };
     return mockRequest.post('/jobs')
       .send(obj)
