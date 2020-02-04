@@ -24,6 +24,7 @@ module.exports = function authorize(req){
     .then(token => {
       return superagent.get(process.env.GH_API_SERVER)
         .set('Authorization', `Bearer ${token}`)
+        .set('user-agent', 'canU-app')
         .then(response => {
           let user = response.body;
           user.access_token = token;

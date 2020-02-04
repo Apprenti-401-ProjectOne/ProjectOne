@@ -85,7 +85,6 @@ userSchema.statics.authenticateToken = function(token) {
 */
 userSchema.statics.createFromOauth = function(oauthUser){
   if(!oauthUser){return Promise.reject('Validation Error');}
-  console.log(oauthUser);
   return this.findOne({ username: `${oauthUser.email}` })
     .then(user => {
       if(!user){ throw new Error('User not found'); }

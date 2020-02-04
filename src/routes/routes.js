@@ -32,11 +32,6 @@ router.post('/signin', basic, (req, res) => {
   res.send(req.token);
 });
 
-router.get('/test', bearer, (res, req) => {
-  req.send('stuffffff');
-});
-
-
 router.post('/roles', acl('superuser'), (req, res, next) => {
   let saved = [];
   Object.keys(capabilities).map(role => {
