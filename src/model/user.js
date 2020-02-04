@@ -15,9 +15,9 @@ const userSchema = new mongoose.Schema({
   username: {type: String, required:true, unique:true},
   password: {type: String, required: true},
   email: {type: String, required: true},
-  role: {type: String, default:'user', enum: ['admin','editor','user']},
+  role: {type: String, default:'user', enum: ['admin','user']},
   jobs: {type: Array},
-});
+}, {toObject: {virtuals: true, getters: true}, toJSON: {virtuals: true, getters: true}});
 
 userSchema.virtual('userRoles', {
   ref: 'roles',
@@ -28,14 +28,17 @@ userSchema.virtual('userRoles', {
 /**
  *  Prehook to populate roles
  */
-userSchema.pre('findOne', async function(){
-  try{
+userSchema.pre('save', join);
+userSchema.pre('find', join);
+
+function join(next) {
+  try {
     this.populate('userRoles');
+  } catch (error) {
+    console.error(error);
   }
-  catch(error){
-    console.error('find error', error);
-  }
-});
+  next();
+}
 
 /**
  * Schema hashes the user's password with salt(10) before saving to the database
