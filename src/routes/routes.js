@@ -27,12 +27,20 @@ router.post('/signup', (req, res) => {
     .catch(error => console.error(error));
 });
 
+router.get('/test', (req, res, next) => {
+  User.findOne({username: 'user'})
+    .then(results => {
+      console.log(results);
+      res.status(200).json(results);
+    });
+});
+
 router.post('/signin', basic, (req, res) => {
   res.cookie('auth', req.token);
   res.send(req.token);
 });
 
-router.post('/roles', acl('superuser'), (req, res, next) => {
+router.post('/roles', (req, res, next) => {
   let saved = [];
   Object.keys(capabilities).map(role => {
     let newRecord = new Role({type: role, capabilities: capabilities[role]});
