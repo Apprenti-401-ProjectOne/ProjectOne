@@ -27,14 +27,6 @@ router.post('/signup', (req, res) => {
     .catch(error => console.error(error));
 });
 
-router.get('/test', (req, res, next) => {
-  User.findOne({username: 'user'})
-    .then(results => {
-      console.log(results);
-      res.status(200).json(results);
-    });
-});
-
 router.post('/signin', basic, (req, res) => {
   res.cookie('auth', req.token);
   res.send(req.token);
