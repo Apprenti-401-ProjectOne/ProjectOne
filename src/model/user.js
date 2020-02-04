@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
   password: {type: String, required: true},
   email: {type: String, required: true},
   role: {type: String, default:'user', enum: ['admin','editor','user']},
-  jobs: {type: mongoose.Schema.Types.ObjectId, ref: 'jobs'},
+  jobs: {type: Array},
 });
 
 userSchema.virtual('userRoles', {

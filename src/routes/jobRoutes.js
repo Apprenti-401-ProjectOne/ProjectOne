@@ -47,11 +47,11 @@ function getOneJob(req, res, next) {
   let id = req.params.id;
   Jobs.findOne({_id: id})
     .populate('users')
-    .exec(async function (err, story) {
+    .exec(async function (err, job) {
       if (err) return console.error(err);
-      let user = await User.findOne({_id: story.postedBy});
-      story.postedBy = user
-      res.json(story);
+      let user = await User.findOne({_id: job.postedBy}, 'username');
+      job.postedBy = user;
+      res.json(job);
     });
 }
 
@@ -67,7 +67,8 @@ async function jobPost(req, res, next) {
   let token = req.headers.authorization.split(' ').pop();
   let parsedToken = jwt.verify(token,process.env.SECRET);
   let user = await User.findOne({ _id: parsedToken.id });
-  console.log(user);
+  user.jobs.push(req.body);
+  user.save();
   let jobs = new Jobs({
     name: req.body.name,
     description: req.body.description,
