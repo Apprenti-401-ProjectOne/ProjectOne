@@ -5,6 +5,7 @@ const router = express.Router();
 const Jobs = require('../model/job');
 const jwt = require('jsonwebtoken');
 const User = require('../model/user');
+const bearer = require('../authmiddleware/bearer');
 
 
 /**
@@ -15,8 +16,8 @@ router.post('/jobs', jobPost);
 router.get('/jobs/:id', getOneJob);
 router.put('/jobs/:id', jobUpdate);
 router.delete('/jobs/:id', jobDelete);
-router.put('/jobs/bid/:id', bidOnJob);
-router.put('/jobs/close/:id', closeJob);
+router.put('/jobs/bid/:id', bearer, bidOnJob);
+router.put('/jobs/close/:id', bearer, closeJob);
 
 /**
  * Place a bid on a job
@@ -26,7 +27,9 @@ router.put('/jobs/close/:id', closeJob);
 function bidOnJob(req, res){
   const id = req.params.id;
   const price = req.body.price;
-  Jobs.findByIdAndUpdate(id, {price: price})
+  let token = req.headers.authorization.split(' ').pop();
+  let parsedToken = jwt.verify(token, process.env.SECRET);
+  Jobs.findByIdAndUpdate(id, {price: price, currentBidder: parsedToken.username})
     .then(record => {
       res.send(record);
     })
@@ -41,10 +44,17 @@ function bidOnJob(req, res){
  * @param {*} res 
  */
 function closeJob(req, res){
+  let token = req.headers.authorization.split(' ').pop();
+  let parsedToken = jwt.verify(token, process.env.SECRET);
   const id = req.params.id;
-  Jobs.findByIdAndUpdate(id, {isOpen: false})
-    .then(result => res.send(result))
-    .catch(error => res.send(error));
+  Jobs.findById(id).then(job => {  
+    if(job.postedBy == parsedToken.id){      
+      Jobs.findByIdAndUpdate(id, {isOpen: false})
+        .then( _ => res.send('Job closed'))
+        .catch(err => res.send(err));
+    } else res.send('Unauthorized');
+  })
+    .catch(err => res.send(err));
 }
 
 
@@ -96,7 +106,7 @@ function getOneJob(req, res, next) {
  * @param {*} next
  */
 async function jobPost(req, res, next) {
-  console.log(req)
+  console.log(req);
   let token = req.headers.authorization.split(' ').pop();
   let parsedToken = jwt.verify(token,process.env.SECRET);
   let user = await User.findOne({ _id: parsedToken.id });
