@@ -44,8 +44,8 @@ router.post('/roles', (req, res, next) => {
 
 router.get('/users', acl('superuser'), bearer, (req, res, next) => {
   User.find({})
-    .then(results => res.json(results))
-})
+    .then(results => res.json(results));
+});
 
 router.post('/deleteUser', acl('superuser'), bearer, (req, res) => {
   User.destroyUser(req.body.userName)

@@ -50,13 +50,6 @@ describe('Auth Router', () => {
     });
   });
 
-  // it('/users returns all users', () => {
-  //   return mockRequest.get('/users')
-  //     .then(data => {
-  //       expect(data.body.count).toEqual(2);
-  //     });
-  // });
-
   it('Returns invalid login when wrong header', () => {
     return mockRequest.post('/signin')
       .auth({name: 5, password: 6})
@@ -64,6 +57,5 @@ describe('Auth Router', () => {
         expect(results.status).toEqual(500);
       });
   });
-
 
 });
