@@ -42,7 +42,7 @@ router.post('/roles', (req, res, next) => {
   res.send('Roles Created');
 });
 
-router.get('/users',bearer, (req, res, next) => {
+router.get('/users', bearer, acl('superuser'), (req, res, next) => {
   User.find({})
     .then(results => res.json(results));
 });
