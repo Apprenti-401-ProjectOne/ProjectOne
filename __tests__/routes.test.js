@@ -10,15 +10,11 @@ afterAll(supergoose.stopDB);
 
 //__________________ JOB ROUTES TESTING ______________________
 describe('Jobs route API testing', () => {
-xit('can post() a new job', () => {
-    let obj = { name: 'Gardening', price: 50 };
+  xit('Returns error 500 when sent invalid object', () => {
+    let obj = {username: "test"};
     return mockRequest.post('/jobs')
       .send(obj)
-      .then(results => {
-        Object.keys(obj).forEach(key => {
-          expect(results.body[key]).toEqual(obj[key]);
-        });
-      });
+      .expect(500)
   });
 
   it('Returns 0 when no jobs posted in database', () => {
@@ -80,6 +76,4 @@ describe('OAuth Routes', () => {
     return mockRequest.get('/ggoauth')
       .expect(200);
   });
-
-
 });
