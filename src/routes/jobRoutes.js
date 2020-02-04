@@ -3,6 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const Jobs = require('../model/job');
+const jwt = require('jsonwebtoken');
+const User = require('../model/user');
 // const join = require('../authmiddleware/join');
 
 /**
@@ -43,9 +45,14 @@ function getAllJobs(req, res, next) {
  */
 function getOneJob(req, res, next) {
   let id = req.params.id;
-  req.model.get(id)
-    .then(record => res.json(record))
-    .catch(next);
+  Jobs.findOne({_id: id})
+    .populate('users')
+    .exec(async function (err, story) {
+      if (err) return console.error(err);
+      let user = await User.findOne({_id: story.postedBy});
+      story.postedBy = user
+      res.json(story);
+    });
 }
 
 
@@ -56,9 +63,21 @@ function getOneJob(req, res, next) {
  * @param {*} res
  * @param {*} next
  */
-function jobPost(req, res, next) {
-  let jobs = new Jobs(req.body);
-  jobs.save(req.body)
+async function jobPost(req, res, next) {
+  let token = req.headers.authorization.split(' ').pop();
+  let parsedToken = jwt.verify(token,process.env.SECRET);
+  let user = await User.findOne({ _id: parsedToken.id });
+  console.log(user);
+  let jobs = new Jobs({
+    name: req.body.name,
+    description: req.body.description,
+    price: req.body.price,
+    jobType: req.body.jobType,
+    postedBy: user._id,
+  });
+
+  
+  jobs.save()
     .then(result => res.status(200).json(result))
     .catch(next);
 }
