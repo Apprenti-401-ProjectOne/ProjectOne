@@ -47,26 +47,18 @@ describe('Auth Router', () => {
             expect(token.id).toEqual(id);
           });
       });
-
-      it('Returns single user', () => {
-        return mockRequest.get('/user')
-          .set('Authorization', `Bearer ${resultsToken}`)
-          .then(results => {
-            expect(results.status).toEqual(200);
-          });
-      });
     });
   });
 
-  it('/users returns all users', () => {
-    return mockRequest.get('/users')
-      .then(data => {
-        expect(data.body.count).toEqual(2);
-      });
-  });
+  // it('/users returns all users', () => {
+  //   return mockRequest.get('/users')
+  //     .then(data => {
+  //       expect(data.body.count).toEqual(2);
+  //     });
+  // });
 
   it('Returns invalid login when wrong header', () => {
-    return mockRequest.post('/v1/signin')
+    return mockRequest.post('/signin')
       .auth({name: 5, password: 6})
       .then(results => {
         expect(results.status).toEqual(500);
