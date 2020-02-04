@@ -6,9 +6,13 @@ const supergoose = require('@code-fellows/supergoose');
 const mockRequest = supergoose(server);
 // const jwt = require('jsonwebtoken');
 
+//_________________ SIGN UP/SIGN IN ROUTES ___________________
+
+
+
 //__________________ JOB ROUTES TESTING ______________________
 describe('Jobs route API testing', () => {
-  it('can post() a new job', () => {
+  xit('can post() a new job', () => {
     let obj = { name: 'Gardening', price: 50, jobType: 'labor' };
     return mockRequest.post('/jobs')
       .send(obj)
@@ -20,7 +24,7 @@ describe('Jobs route API testing', () => {
   });
 
 
-  it('can get() a job', () => {
+  xit('can get() a job', () => {
     let obj =  { 
       name: 'Kitchen organizing', 
       price: 75, 
@@ -34,7 +38,7 @@ describe('Jobs route API testing', () => {
       });
   });
 
-  it('can get() ONE job', () => {
+  xit('can get() ONE job', () => {
     return mockRequest.get('/jobs')
       .send( {name: 'Walk my dogs', price: 20, jobType: 'Dog Walking'} )
       .then(data => {
@@ -44,7 +48,7 @@ describe('Jobs route API testing', () => {
 
   
 
-  it('can update() a job', () => {
+  xit('can update() a job', () => {
     let obj =  {name: 'Gardening', price: 50, jobType: 'labor' };
     let updateObj = {name: 'Weeding', price: 55, category: 'labor'};
     return mockRequest
@@ -60,7 +64,7 @@ describe('Jobs route API testing', () => {
       });
   });
   
-  it('can delete a job', () => {
+  xit('can delete a job', () => {
     const obj = { name: 'Gardening', price: 50, jobType: 'labor'  };
     return mockRequest.post('/jobs')
       .send(obj)
@@ -77,7 +81,7 @@ describe('Jobs route API testing', () => {
       });
   });
 
-  it('can get a list of jobs', () => {
+  xit('can get a list of jobs', () => {
     return mockRequest
       .get('/jobs')
       .send()
@@ -86,7 +90,7 @@ describe('Jobs route API testing', () => {
       });
   });
 
-  it('should return status 500', ()=>{
+  xit('should return status 500', ()=>{
     return mockRequest
       .post('/jobs')
       .send()
