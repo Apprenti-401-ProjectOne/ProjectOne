@@ -59,7 +59,7 @@ const sendWelcome = user => {
 
 
 const updateEmail = (username, job) => {
-  return `Hello, ${username}, you've been outbid on ${job}. The new highest bid is ${job.price}.`;
+  return `Hello, ${username}, you've been outbid on ${job}. The new highest bid is ${job.price}.`; git
 };
 
 const newJob = (username, job) => {

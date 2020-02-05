@@ -11,8 +11,6 @@ const notFound = require('./middleware/404.js');
 const jobrouter = require('./routes/jobRoutes.js');
 const logger = require('./middleware/logger');
 const timestamp = require('./middleware/timestamp');
-const sendEmail = require('./middleware/email.js');
-
 
 //chat feature
 // const http = require('http').createServer();
