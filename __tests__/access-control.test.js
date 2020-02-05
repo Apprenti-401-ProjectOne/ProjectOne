@@ -53,13 +53,23 @@
 
 // describe('access control middleware', () => {
 
+<<<<<<< HEAD
+//   // admin:password: YWRtaW46cGFzc3dvcmQ=
+//   // admin:foo: YWRtaW46Zm9v
+//   xit('should not allow a user to hit a route without the proper privelages', async () => {
+=======
 //   it('should not allow a user to hit a route without the proper privelages', async (done) => {
+>>>>>>> 2802fc0b6ec4a142aa300818f2750244db604761
 
 //     return mockRequest.post('/signin')
 //       .auth(users.user.username, users.user.password)
 //       .then((results) => {
+<<<<<<< HEAD
+//         // console.log(results);
+=======
         
 //         done();
+>>>>>>> 2802fc0b6ec4a142aa300818f2750244db604761
 //       });
 
 //   });

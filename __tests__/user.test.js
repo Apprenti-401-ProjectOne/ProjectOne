@@ -122,13 +122,13 @@ describe('User Methods', () => {
         resultsToken = results.text;
         token = jwt.verify(results.text, process.env.SECRET);
         id = token.id;
-        const deleteUser = await User.destroyUser(token.username)
+        const deleteUser = await User.destroyUser(token.username);
         expect(deleteUser).toBeDefined();
       });
   });
 
   it('Returns user from database if found from OAuth', async () => {
-    let oauthUser = await User.createFromOauth({username: 'trevor', password: 'password', email: 'email'})
+    let oauthUser = await User.createFromOauth({username: 'trevor', password: 'password', email: 'email'});
     expect(oauthUser).toBeDefined();
   });
 

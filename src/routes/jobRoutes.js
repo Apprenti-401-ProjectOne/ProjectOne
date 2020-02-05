@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const router = express.Router();
+const jobRouter = express.Router();
 const Jobs = require('../model/job');
 const jwt = require('jsonwebtoken');
 const User = require('../model/user');
@@ -11,31 +11,13 @@ const bearer = require('../authmiddleware/bearer');
 /**
  *  Routes
  */
-router.get('/jobs', getAllJobs);
-router.post('/jobs', jobPost);
-router.get('/jobs/:id', getOneJob);
-router.put('/jobs/:id', jobUpdate);
-router.delete('/jobs/:id', jobDelete);
-router.put('/jobs/bid/:id', bearer, bidOnJob);
-router.put('/jobs/close/:id', bearer, closeJob);
-
-/** 
- * grabs token out of authorization headers
- * @returns token
-*/
-function token(req, res){
-  let token = req.headers.authorization.split(' ').pop();
-  return token;
-}
-
-/** 
- * parses token to get user info
- * @returns parsed token
-*/
-function parsedToken(){
-  let parsedToken = jwt.verify(token(), process.env.SECRET);
-  return parsedToken;
-}
+jobRouter.get('/jobs', getAllJobs);
+jobRouter.post('/jobs', jobPost);
+jobRouter.get('/jobs/:id', getOneJob);
+jobRouter.put('/jobs/:id', jobUpdate);
+jobRouter.delete('/jobs/:id', jobDelete);
+jobRouter.put('/jobs/bid/:id', bearer, bidOnJob);
+jobRouter.put('/jobs/close/:id', bearer, closeJob);
 
 /**
  * Place a bid on a job
@@ -153,6 +135,7 @@ async function jobPost(req, res, next) {
  * @param {*} next
  */
 function jobUpdate(req, res, next) {
+
   let id = req.params.id;
   Jobs.findByIdAndUpdate(id, req.body, {new: true})
     .then(result => res.status(200).json(result))
@@ -176,6 +159,6 @@ function jobDelete(req, res, next) {
 
 /** 
  * contains routes and routeHandler functions for all job routes
- * @module jobsRouter
+ * @module jobsjobRouter
 */
-module.exports = router;
+module.exports = {jobRouter, jobDelete, jobUpdate, jobPost, getOneJob, getAllJobs, closeJob, bidOnJob};
