@@ -48,7 +48,7 @@ const sendWelcome = user => {
     from: process.env.EMAIL,
     to: user.email,
     subject: 'Welcome to CañU!',
-    text: welcome(user.username),
+    text: welcome(user),
   };
 
   transport.sendMail(mailOptions, (error) => {
