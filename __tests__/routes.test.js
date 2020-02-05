@@ -80,11 +80,6 @@ describe('OAuth Routes', () => {
 
 describe('Roles Route', () => {
 
-  const capabilities = {
-    admin: ['create','read','update','delete', 'superuser'],
-    user: ['read'],
-  };
-
   it('Roles Route functioning', () => {
     return mockRequest.post('/roles')
       .expect(200)
@@ -93,5 +88,4 @@ describe('Roles Route', () => {
       });
   });
 
-
-})
+});

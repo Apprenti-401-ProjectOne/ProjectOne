@@ -47,11 +47,6 @@ router.get('/users', bearer, acl('superuser'), (req, res, next) => {
     .then(results => res.json(results));
 });
 
-router.put('/bid', bearer, (req, res) => {
-
-});
-
-
 router.post('/deleteUser', acl('superuser'), bearer, (req, res) => {
   User.destroyUser(req.body.userName)
     .then(result => {
@@ -59,7 +54,5 @@ router.post('/deleteUser', acl('superuser'), bearer, (req, res) => {
     })
     .catch(error => console.log(error));
 });
-
-
 
 module.exports = router;
