@@ -30,7 +30,7 @@ afterAll(supergoose.stopDB);
 describe('Jobs route API testing', () => {
 
   let token = User.generateToken(users.admin)
-  it('Returns error 500 when sent invalid object', () => {
+  xit('Returns error 500 when sent invalid object', () => {
     console.log(token)
     const req = {
       headers: {
