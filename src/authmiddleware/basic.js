@@ -23,7 +23,7 @@ module.exports = (req, res, next) => {
   
   /**
    * takes in a string and pulls out the username and password before sending it through the User.authenticateBasic function
-   * @param  str 
+   * @param {String} str 
    * @return promise
    */
   function _authBasic(str) {
@@ -51,14 +51,11 @@ module.exports = (req, res, next) => {
       _authError();
     }
 
-  /**
+    /**
    * sends invalid user id/password through next 
    */
-  function _authError() {
-    next('Invalid User ID/Password');
+    function _authError() {
+      next('Invalid User ID/Password');
+    }
   }
 }; 
-
-
-
-

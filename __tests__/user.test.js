@@ -58,4 +58,20 @@ describe('Auth Router', () => {
       });
   });
 
+  it('Returns error without proper admin authorization', () => {
+    return mockRequest.get('/users')
+      .expect(500)
+      .then(result => {
+        expect(result.text).toBeDefined();
+      });
+  });
+
+  it('Returns error without proper admin authorization for deleting user', () => {
+    return mockRequest.post('/deleteUser')
+      .expect(500)
+      .then(result => {
+        expect(result.body).toBeDefined();
+      });
+  });
+
 });
