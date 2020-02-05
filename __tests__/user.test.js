@@ -4,7 +4,7 @@
 process.env.SECRET='secret';
 
 const jwt = require('jsonwebtoken');
-
+const User = require('../src/model/user')
 const server = require('../src/app').server;
 const supergoose = require('./supergoose');
 
@@ -38,7 +38,6 @@ describe('Auth Router', () => {
             expect(token.id).toEqual(id);
           });
       });
-
       it('Can authenticate user on signin', () => {
         return mockRequest.post('/signin')
           .auth(users[userType].username, users[userType].password)
@@ -73,5 +72,22 @@ describe('Auth Router', () => {
         expect(result.body).toBeDefined();
       });
   });
-
 });
+
+
+describe('JWT Token', () => {
+  let token;
+  
+  const userObj = {
+    username: 'Trevor',
+    password: 'Testing token',
+    email: 'testing@test.com'
+  };
+  
+  it('Should generate token', () => {
+    token = new User().generateToken(userObj);
+    expect(token).toBeDefined();
+  });
+});
+
+

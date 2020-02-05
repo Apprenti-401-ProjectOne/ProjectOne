@@ -10,10 +10,9 @@ afterAll(supergoose.stopDB);
 
 //__________________ JOB ROUTES TESTING ______________________
 describe('Jobs route API testing', () => {
-  xit('Returns error 500 when sent invalid object', () => {
+  it('Returns error 500 when sent invalid object', () => {
     let obj = {username: 'test'};
     return mockRequest.post('/jobs')
-      .send(obj)
       .expect(500);
   });
 
@@ -78,7 +77,7 @@ describe('OAuth Routes', () => {
   });
 });
 
-describe('Roles Route', () => {
+describe('General Routing', () => {
 
   it('Roles Route functioning', () => {
     return mockRequest.post('/roles')
@@ -87,5 +86,5 @@ describe('Roles Route', () => {
         expect(result.text).toBe('Roles Created');
       });
   });
-
 });
+
