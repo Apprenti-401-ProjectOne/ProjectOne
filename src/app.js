@@ -11,21 +11,17 @@ const notFound = require('./middleware/404.js');
 const jobrouter = require('./routes/jobRoutes.js');
 const logger = require('./middleware/logger');
 const timestamp = require('./middleware/timestamp');
-// const sendEmail = require('./middleware/email.js');
+const sendEmail = require('./middleware/email.js');
+
+sendEmail.sendWelcome({ email: 'djvloedman@gmail.com', name: 'David' });
 
 //chat feature
 const http = require('http').createServer();
 const io = require('socket.io')(http);
 const port = 3001;
 
-// io.on('connection', (socket) => {
-//   socket.emit('Hello', 'Welcome to the Chat Server');
-//   console.log('There is a new connection');
-// });
-
 //chat rooms
 const chatRooms = ['Job Chat Rm 1', 'Job Chat Rm 2'];
-
 
 //chat namespace
 io

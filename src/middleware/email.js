@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 
 // Define our nodemailer transporter to connect to our service
 const transport = nodemailer.createTransport({
-  service: 'Gmail',
+  service: 'gmail',
   auth: {
     user: process.env.EMAIL,
     pass: process.env.PASSWORD,
@@ -21,8 +21,8 @@ const sendUpdate = (user, job) => {
     text: updateEmail(user.username, job.name),
   };
 
-  transport.sendMail(mailOptions, (error) => {
-    if (error) return console.log('An email error has occurred');
+  transport.sendMail(mailOptions, (info, error) => {
+    if (error) return console.log(error);
     return console.log('Email sent!');
   });
 };
@@ -36,21 +36,21 @@ const sendNewJob = (user, job) => {
   };
 
   transport.sendMail(mailOptions, (error) => {
-    if (error) return console.log('An email error has occurred');
+    if (error) return console.log(error);
     return console.log('Email sent!');
   });
 };
 
-const sendWelcome = (user, job) => {
+const sendWelcome = user => {
   const mailOptions = {
     from: process.env.EMAIL,
     to: user.email,
     subject: 'Welcome to CañU!',
-    text: welcome(user.username, job.name),
+    text: welcome(user.username),
   };
 
   transport.sendMail(mailOptions, (error) => {
-    if (error) return console.log('An email error has occurred');
+    if (error) return console.log(error);
     return console.log('Email sent!');
   });
 };
