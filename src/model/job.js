@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose');
 const email = require('../middleware/email.js');
+const user = require('./user');
 
 const jobSchema = mongoose.Schema({
   name: { type: String, required: true },
@@ -13,8 +14,11 @@ const jobSchema = mongoose.Schema({
   isOpen: { type: Boolean, default: true },
 });
 
-jobSchema.post('findByIdAndUpdate', function (doc) {
-  email.sendUpdate(doc.name);
+jobSchema.post('save', function(job){
+  user.findById(job.postedBy)
+    .then(user => {
+      email.sendNewJob(user, job);
+    }).catch(err => console.log(err));
 });
 
 

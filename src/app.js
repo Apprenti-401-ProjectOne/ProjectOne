@@ -13,7 +13,7 @@ const logger = require('./middleware/logger');
 const timestamp = require('./middleware/timestamp');
 const sendEmail = require('./middleware/email.js');
 
-sendEmail.sendWelcome({ email: 'djvloedman@gmail.com', name: 'David' });
+
 
 //chat feature
 // const http = require('http').createServer();
