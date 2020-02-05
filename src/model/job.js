@@ -14,14 +14,13 @@ const jobSchema = mongoose.Schema({
   isOpen: { type: Boolean, default: true },
 });
 
-jobSchema.post('save', function(job){
+jobSchema.post('save', function (job) {
   user.findById(job.postedBy)
     .then(user => {
-      
+
       email.sendNewJob(user, job.name);
     }).catch(err => console.log(err));
 });
-
 
 /** 
  * Jobs model

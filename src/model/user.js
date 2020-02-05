@@ -5,19 +5,20 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('./role');
+const email = require('../middleware/email.js');
 
 const capabilities = {
-  admin: ['create','read','update','delete', 'superuser'],
+  admin: ['create', 'read', 'update', 'delete', 'superuser'],
   user: ['read'],
 };
 
 const userSchema = new mongoose.Schema({
-  username: {type: String, required:true, unique:true},
-  password: {type: String, required: true},
-  email: {type: String, required: true},
-  role: {type: String, default:'user', enum: ['admin','user']},
-  jobs: {type: Array},
-}, {toObject: {virtuals: true, getters: true}, toJSON: {virtuals: true, getters: true}});
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  email: { type: String, required: true },
+  role: { type: String, default: 'user', enum: ['admin', 'user'] },
+  jobs: { type: Array },
+}, { toObject: { virtuals: true, getters: true }, toJSON: { virtuals: true, getters: true } });
 
 userSchema.virtual('userRoles', {
   ref: 'roles',
@@ -47,9 +48,9 @@ function join(next) {
 /**
  * Schema hashes the user's password with salt(10) before saving to the database
  */
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function (next) {
   const user = this;
-  bcrypt.hash(user.password, 10, function(err,hash) {
+  bcrypt.hash(user.password, 10, function (err, hash) {
     if (err) {
       return next(err);
     }
@@ -62,7 +63,7 @@ userSchema.pre('save', function(next) {
  * Generates and signs token with associated user information
  * @returns Signed token that expires in 15 minutes
  */
-userSchema.methods.generateToken = function() {
+userSchema.methods.generateToken = function () {
 
   let token = {
     id: this._id,
@@ -71,7 +72,7 @@ userSchema.methods.generateToken = function() {
     capabilities: capabilities[this.role],
   };
 
-  return jwt.sign(token, process.env.SECRET, {expiresIn: '15min'});
+  return jwt.sign(token, process.env.SECRET, { expiresIn: '15min' });
 };
 
 
@@ -80,7 +81,7 @@ userSchema.methods.generateToken = function() {
  * @param {*} auth
  * @returns a user that has the matching username and password
  */
-userSchema.statics.authenticateBasic = function(auth) {
+userSchema.statics.authenticateBasic = function (auth) {
   let query = { username: auth.username };
   return this.findOne(query)
     .then(user => user && user.comparePassword(auth.password))
@@ -94,7 +95,7 @@ userSchema.statics.authenticateBasic = function(auth) {
  * @param {*} token
  * @returns the user with the id parsed from the authenticated token
  */
-userSchema.statics.authenticateToken = function(token) {
+userSchema.statics.authenticateToken = function (token) {
   try {
     let parsedTokenObject = jwt.verify(token, process.env.SECRET);
     let query = { _id: parsedTokenObject.id };
@@ -109,11 +110,11 @@ userSchema.statics.authenticateToken = function(token) {
  * @param oauthUser
  * @returns user
 */
-userSchema.statics.createFromOauth = function(oauthUser){
-  if(!oauthUser){return Promise.reject('Validation Error');}
+userSchema.statics.createFromOauth = function (oauthUser) {
+  if (!oauthUser) { return Promise.reject('Validation Error'); }
   return this.findOne({ username: `${oauthUser.email}` })
     .then(user => {
-      if(!user){ throw new Error('User not found'); }
+      if (!user) { throw new Error('User not found'); }
       console.log('Welcome Back', user.username);
       return user;
     })
@@ -122,7 +123,7 @@ userSchema.statics.createFromOauth = function(oauthUser){
       let username = oauthUser.email;
       let password = 'oauthpassword';
       let email = oauthUser.email;
-      return this.create({username, password, email});
+      return this.create({ username, password, email });
     });
 };
 
@@ -131,7 +132,7 @@ userSchema.statics.createFromOauth = function(oauthUser){
  * @param {*} password
  * @returns this user
  */
-userSchema.methods.comparePassword = function(password) {
+userSchema.methods.comparePassword = function (password) {
   return bcrypt
     .compare(password, this.password)
     .then(valid => (valid ? this : null));
@@ -142,13 +143,17 @@ userSchema.methods.comparePassword = function(password) {
  * @param {*} username
  * @returns the deleted user
  */
-userSchema.statics.destroyUser = function(username){
-  return this.findOneAndDelete({username: username})
+userSchema.statics.destroyUser = function (username) {
+  return this.findOneAndDelete({ username: username })
     .then(result => {
-      if(!result) return 'No User';
+      if (!result) return 'No User';
       return result;
-    }).catch(err => console.log(err));    
+    }).catch(err => console.log(err));
 };
+
+userSchema.post('save', function (user) {
+  email.sendWelcome(user);
+});
 
 /** 
  * User model
