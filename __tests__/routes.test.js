@@ -10,7 +10,7 @@ afterAll(supergoose.stopDB);
 
 //__________________ JOB ROUTES TESTING ______________________
 describe('Jobs route API testing', () => {
-  xit('Returns error 500 when sent invalid object', () => {
+  it('Returns error 500 when sent invalid object', () => {
     let obj = {username: 'test'};
     return mockRequest.post('/jobs')
       .send(obj)
@@ -31,7 +31,7 @@ describe('Jobs route API testing', () => {
   });
   
 
-  xit('can update() a job', () => {
+  it('can update() a job', () => {
     let obj =  {name: 'Gardening', price: 50, jobType: 'labor' };
     let updateObj = {name: 'Weeding', price: 55, category: 'labor'};
     return mockRequest
@@ -47,7 +47,7 @@ describe('Jobs route API testing', () => {
       });
   });
   
-  xit('can delete a job', () => {
+  it('can delete a job', () => {
     const obj = { name: 'Gardening', price: 50, jobType: 'labor'  };
     return mockRequest.post('/jobs')
       .send(obj)
