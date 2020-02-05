@@ -1,5 +1,9 @@
 'use strict';
 
+/** 
+ * error handler for server error 500 errors
+ * @module errorHandler
+*/
 module.exports = (err, req, res, next) => {
   let error = { error: err };
   res.statusCode = 500;

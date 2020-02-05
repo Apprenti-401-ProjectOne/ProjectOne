@@ -28,7 +28,10 @@ app.use(authRouter);
 app.use(notFound);
 app.use(errorHandler);
 
-
+/** 
+ * exports server module with start method
+ * @module server
+*/
 module.exports = {
   server: app,
   start: (port) => app.listen(port, () => console.log(`Listening on ${port}`)),

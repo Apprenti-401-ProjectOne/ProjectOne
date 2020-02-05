@@ -1,9 +1,7 @@
+'use strict';
+
 const router = require('express').Router();
-
 const bearer = require('../authmiddleware/bearer');
-
-
-
 const basic = require('../authmiddleware/basic');
 const User = require('../model/user');
 const Role = require('../model/role');
@@ -47,11 +45,6 @@ router.get('/users', bearer, acl('superuser'), (req, res, next) => {
     .then(results => res.json(results));
 });
 
-router.put('/bid', bearer, (req, res) => {
-
-});
-
-
 router.post('/deleteUser', acl('superuser'), bearer, (req, res) => {
   User.destroyUser(req.body.userName)
     .then(result => {
@@ -60,6 +53,8 @@ router.post('/deleteUser', acl('superuser'), bearer, (req, res) => {
     .catch(error => console.log(error));
 });
 
-
-
+/** 
+ * contains routes for sign in/up, as well as admin specific routes
+ * @module routes
+*/
 module.exports = router;
