@@ -12,6 +12,9 @@ const jobSchema = mongoose.Schema({
   isOpen: { type: Boolean, default: true},  
 });
 
+
+
+
 /** 
  * Jobs model
  * @module Jobs
