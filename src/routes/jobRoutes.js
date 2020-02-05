@@ -19,6 +19,16 @@ router.delete('/jobs/:id', jobDelete);
 router.put('/jobs/bid/:id', bearer, bidOnJob);
 router.put('/jobs/close/:id', bearer, closeJob);
 
+function token(req, res){
+  let token = req.headers.authorization.split(' ').pop();
+  return token;
+}
+
+function parsedToken(){
+  let parsedToken = jwt.verify(token(), process.env.SECRET);
+  return parsedToken;
+}
+
 /**
  * Place a bid on a job
  * @param {*} req 
@@ -27,9 +37,9 @@ router.put('/jobs/close/:id', bearer, closeJob);
 function bidOnJob(req, res){
   const id = req.params.id;
   const price = req.body.price;
-  let token = req.headers.authorization.split(' ').pop();
-  let parsedToken = jwt.verify(token, process.env.SECRET);
-  Jobs.findByIdAndUpdate(id, {price: price, currentBidder: parsedToken.username})
+  // let token = req.headers.authorization.split(' ').pop();
+  // let parsedToken = jwt.verify(token, process.env.SECRET);
+  Jobs.findByIdAndUpdate(id, {price: price, currentBidder: parsedToken().username})
     .then(record => {
       res.send(record);
     })
@@ -44,11 +54,11 @@ function bidOnJob(req, res){
  * @param {*} res 
  */
 function closeJob(req, res){
-  let token = req.headers.authorization.split(' ').pop();
-  let parsedToken = jwt.verify(token, process.env.SECRET);
+  // let token = req.headers.authorization.split(' ').pop();
+  // let parsedToken = jwt.verify(token, process.env.SECRET);
   const id = req.params.id;
   Jobs.findById(id).then(job => {  
-    if(job.postedBy == parsedToken.id){      
+    if(job.postedBy == parsedToken().id){      
       Jobs.findByIdAndUpdate(id, {isOpen: false})
         .then( _ => res.send('Job closed'))
         .catch(err => res.send(err));
