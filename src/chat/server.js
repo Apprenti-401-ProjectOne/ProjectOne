@@ -2,8 +2,8 @@
 
 const io = require('socket.io-client');
 
-let socket = io.connect('http://localhost:3001');
+let chat = io.connect('http://localhost:3001/chat');
 
-socket.on('welcome', (data) => {
-  console.log('Recieved: ', data);
+chat.on('welcome', (message) => {
+  console.log('Recieved: ', message);
 });
