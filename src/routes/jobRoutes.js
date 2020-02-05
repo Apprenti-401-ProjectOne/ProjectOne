@@ -19,11 +19,19 @@ router.delete('/jobs/:id', jobDelete);
 router.put('/jobs/bid/:id', bearer, bidOnJob);
 router.put('/jobs/close/:id', bearer, closeJob);
 
+/** 
+ * grabs token out of authorization headers
+ * @returns token
+*/
 function token(req, res){
   let token = req.headers.authorization.split(' ').pop();
   return token;
 }
 
+/** 
+ * parses token to get user info
+ * @returns parsed token
+*/
 function parsedToken(){
   let parsedToken = jwt.verify(token(), process.env.SECRET);
   return parsedToken;
