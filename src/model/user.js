@@ -62,7 +62,7 @@ userSchema.pre('save', function(next) {
  * Generates and signs token with associated user information
  * @returns Signed token that expires in 15 minutes
  */
-userSchema.methods.generateToken = function(type) {
+userSchema.methods.generateToken = function() {
 
   let token = {
     id: this._id,

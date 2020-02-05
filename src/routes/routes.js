@@ -12,7 +12,7 @@ const capabilities = {
   user: ['read'],
 };
 
-router.post('/signup', (req, res) => {
+router.post('/signup', (req, res, next) => {
   let user = new User(req.body);
   user.save()
     .then(results => {
@@ -42,7 +42,8 @@ router.post('/roles', (req, res, next) => {
 
 router.get('/users', bearer, acl('superuser'), (req, res, next) => {
   User.find({})
-    .then(results => res.json(results));
+    .then(results => res.json(results))
+    .catch(error => console.error(error));
 });
 
 router.post('/deleteUser', acl('superuser'), bearer, (req, res) => {
