@@ -50,7 +50,7 @@ module.exports = (req, res, next) => {
     } else {
       _authError();
     }
-
+  }
   /**
    * sends invalid user id/password through next 
    */
@@ -58,7 +58,3 @@ module.exports = (req, res, next) => {
     next('Invalid User ID/Password');
   }
 }; 
-
-
-
-
