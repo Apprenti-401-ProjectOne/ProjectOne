@@ -7,8 +7,10 @@ const User = require('../model/user');
  * @module bearerAuth
 */
 module.exports = (req, res, next) => {
+  
   if(!req.headers.authorization){
     next('Invalid Login');
+
     return;
   }
 

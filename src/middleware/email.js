@@ -3,7 +3,7 @@
 require('dotenv').config();
 const nodemailer = require('nodemailer');
 
-// Define our nodemailer transporter to connect to our service
+
 const transport = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -11,64 +11,56 @@ const transport = nodemailer.createTransport({
     pass: process.env.EMAIL_PASSWORD,
   },
 });
-// Define a mailOptions variable, containing information that your receiver should know about it.s
-
-const sendUpdate = (user, job) => {
-  const mailOptions = {
-    from: process.env.EMAIL,
-    to: user.email,
-    subject: 'A message from CañU',
-    text: updateEmail(user.username, job.name),
-  };
-
-  transport.sendMail(mailOptions, (info, error) => {
-    if (error) return console.log(error);
-    return console.log('Email sent!');
-  });
-};
 
 const sendNewJob = (user, job) => {
-  const mailOptions = {
-    from: process.env.EMAIL,
-    to: user.email,
-    subject: 'Your CañU job has posted.',
-    text: newJob(user.username, job),
-  };
-
-  console.log(mailOptions.text);
-
-  transport.sendMail(mailOptions, (error) => {
-    if (error) return console.log(error);
-    return console.log('Email sent!');
-  });
+  const mailOptions = jobOptions(user, job); 
+  sendEmail(mailOptions); 
 };
-
+/**
+ * Sends a welcome email when a user signs up
+ * @param {*} user 
+ */
 const sendWelcome = user => {
-  const mailOptions = {
-    from: process.env.EMAIL,
-    to: user.email,
-    subject: 'Welcome to CañU!',
-    text: welcome(user),
-  };
+  const mailOptions = welcomeOptions(user);
+  sendEmail(mailOptions);
+};
 
-  transport.sendMail(mailOptions, (error) => {
+const sendEmail = (mailOptions) => {
+  transport.sendMail(mailOptions, error => {
     if (error) return console.log(error);
-    return console.log('Email sent!');
+    return 'Email sent!';
   });
 };
 
-
-const updateEmail = (username, job) => {
-  return `Hello, ${username}, you've been outbid on ${job}. The new highest bid is ${job.price}.`; git
-};
-
-const newJob = (username, job) => {
+const newJobTemplate = (username, job) => {
   return `Hello, ${username}, this is confirmation of your job: ${job}.`;
 };
 
-const welcome = username => {
+const welcomeTemplate = username => {
   return `Welcome to CañU, ${username}!`;
 };
 
-module.exports = { sendUpdate, sendNewJob, sendWelcome };
+function jobOptions(user, job) {
+  return {
+    from: process.env.EMAIL,
+    to: user.email,
+    subject: 'Your CañU job has been posted.',
+    text: newJobTemplate(user.username, job),
+  };
+}
+
+function welcomeOptions(user) {
+  return {
+    from: process.env.EMAIL,
+    to: user.email,
+    subject: 'Welcome to CañU!',
+    text: welcomeTemplate(user),
+  };
+}
+
+module.exports = { sendNewJob, sendWelcome, newJobTemplate, welcomeTemplate, welcomeOptions, jobOptions, sendEmail};
+
+
+
+
 

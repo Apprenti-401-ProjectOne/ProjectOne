@@ -27,6 +27,7 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/signin', basic, (req, res) => {
   res.cookie('auth', req.token);
+  res.status(200);
   res.send(req.token);
 });
 
