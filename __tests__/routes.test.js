@@ -13,7 +13,6 @@ describe('Jobs route API testing', () => {
   it('Returns error 500 when sent invalid object', () => {
     let obj = {username: 'test'};
     return mockRequest.post('/jobs')
-      .send(obj)
       .expect(500);
   });
 
@@ -78,7 +77,7 @@ describe('OAuth Routes', () => {
   });
 });
 
-describe('Roles Route', () => {
+describe('General Routing', () => {
 
   it('Roles Route functioning', () => {
     return mockRequest.post('/roles')
@@ -87,5 +86,5 @@ describe('Roles Route', () => {
         expect(result.text).toBe('Roles Created');
       });
   });
-
 });
+

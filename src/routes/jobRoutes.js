@@ -116,10 +116,10 @@ function getOneJob(req, res, next) {
  * @param {*} next
  */
 async function jobPost(req, res, next) {
-  console.log(req);
   let token = req.headers.authorization.split(' ').pop();
   let parsedToken = jwt.verify(token,process.env.SECRET);
-  let user = await User.findOne({ _id: parsedToken().id });
+  let user = await User.findOne({ _id: parsedToken.id });
+
   user.jobs.push(req.body);
   user.save();
   let jobs = new Jobs({

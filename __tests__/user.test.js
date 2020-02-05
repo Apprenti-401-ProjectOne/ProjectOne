@@ -4,7 +4,7 @@
 process.env.SECRET='secret';
 
 const jwt = require('jsonwebtoken');
-
+const User = require('../src/model/user')
 const server = require('../src/app').server;
 const supergoose = require('./supergoose');
 
@@ -38,7 +38,6 @@ describe('Auth Router', () => {
             expect(token.id).toEqual(id);
           });
       });
-
       it('Can authenticate user on signin', () => {
         return mockRequest.post('/signin')
           .auth(users[userType].username, users[userType].password)
@@ -73,5 +72,56 @@ describe('Auth Router', () => {
         expect(result.body).toBeDefined();
       });
   });
+});
+
+
+describe('User Methods', () => {
+  
+  let id;
+  let token;
+  let resultsToken;
+  
+  const userObj = {
+    username: 'Trevor',
+    password: 'Testing token',
+    email: 'testing@test.com'
+  };
+
+  const userObjTwo = {
+    username: 'Trevor5000',
+    password: 'Testing token',
+    email: 'testing@test.com'
+  };
+  
+  it('Generates Token', () => {
+    token = new User().generateToken(userObj);
+    expect(token).toBeDefined();
+  });
+
+  it('Authenticates Token', () => {
+    return mockRequest.post('/signup')
+      .send(userObjTwo)
+      .expect(200)
+      .then(async results => {
+        let authenticate = await User.authenticateToken(results.text);
+        expect(authenticate[0].username).toBe('Trevor5000');
+      });
+  });
+
+
+  it('Can destroyUser from database', () => {
+    return mockRequest.post('/signup')
+      .send(userObj)
+      .expect(200)
+      .then(async results => {
+        resultsToken = results.text;
+        token = jwt.verify(results.text, process.env.SECRET);
+        id = token.id;
+        const deleteUser = await User.destroyUser(token.username)
+        expect(deleteUser).toBeDefined();
+      });
+  });
 
 });
+
+
