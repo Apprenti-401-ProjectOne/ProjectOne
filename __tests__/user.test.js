@@ -86,14 +86,30 @@ describe('User Methods', () => {
     password: 'Testing token',
     email: 'testing@test.com'
   };
+
+  const userObjTwo = {
+    username: 'Trevor5000',
+    password: 'Testing token',
+    email: 'testing@test.com'
+  };
   
-  it('Should generate token', () => {
+  it('Generates Token', () => {
     token = new User().generateToken(userObj);
     expect(token).toBeDefined();
   });
 
+  it('Authenticates Token', () => {
+    return mockRequest.post('/signup')
+      .send(userObjTwo)
+      .expect(200)
+      .then(async results => {
+        let authenticate = await User.authenticateToken(results.text);
+        expect(authenticate[0].username).toBe('Trevor5000');
+      });
+  });
 
-  it('Can deleteUser from database', () => {
+
+  it('Can destroyUser from database', () => {
     return mockRequest.post('/signup')
       .send(userObj)
       .expect(200)
