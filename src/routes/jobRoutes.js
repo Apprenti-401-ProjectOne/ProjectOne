@@ -39,7 +39,7 @@ function bidOnJob(req, res){
   const price = req.body.price;
   let token = req.headers.authorization.split(' ').pop();
   let parsedToken = jwt.verify(token, process.env.SECRET);
-  Jobs.findByIdAndUpdate(id, {price: price, currentBidder: parsedToken().username})
+  Jobs.findByIdAndUpdate(id, {price: price, currentBidder: parsedToken.username})
     .then(record => {
       res.send(record);
     })
@@ -58,7 +58,7 @@ function closeJob(req, res){
   let parsedToken = jwt.verify(token, process.env.SECRET);
   const id = req.params.id;
   Jobs.findById(id).then(job => {  
-    if(job.postedBy == parsedToken().id){      
+    if(job.postedBy == parsedToken.id){      
       Jobs.findByIdAndUpdate(id, {isOpen: false})
         .then( _ => res.send('Job closed'))
         .catch(err => res.send(err));
