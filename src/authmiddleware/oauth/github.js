@@ -4,6 +4,10 @@ require('dotenv').config();
 const superagent = require('superagent');
 const User = require('../../model/user');
 
+/** 
+ * authorizes a user through github oauth
+ * @module githubOauth
+*/
 module.exports = function authorize(req){
   let code = req.query.code;
   console.log('1. CODE: ', code);

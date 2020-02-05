@@ -1,5 +1,9 @@
 'use strict';
 
+/** 
+ * handler for 404 route not found errors
+ * @module routeNotFoundHandler
+*/
 module.exports = (req, res, next) => {
   let error = { error: 'Resource Not Found' };
   res.statusCode = 404;

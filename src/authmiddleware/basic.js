@@ -2,6 +2,10 @@
 
 const User = require('../model/user');
 
+/** 
+ * authenticates a user using basic authentication
+ * @module basicAuth
+*/
 module.exports = (req, res, next) => {
 
   try {
@@ -16,8 +20,9 @@ module.exports = (req, res, next) => {
   } catch (e) {
     next(e);
   }
+  
   /**
-   * 
+   * takes in a string and pulls out the username and password before sending it through the User.authenticateBasic function
    * @param  str 
    * @return promise
    */
@@ -32,8 +37,9 @@ module.exports = (req, res, next) => {
       .then(user => _authenticate(user))
       .catch(next);
   }
+
   /**
-   * 
+   * takes in a user and assigns it the req.user and assigns req.token to a generated token
    * @param {*} user 
    */
   function _authenticate(user) {
@@ -44,7 +50,10 @@ module.exports = (req, res, next) => {
     } else {
       _authError();
     }
-  }
+
+  /**
+   * sends invalid user id/password through next 
+   */
   function _authError() {
     next('Invalid User ID/Password');
   }

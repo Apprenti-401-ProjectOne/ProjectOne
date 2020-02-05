@@ -22,4 +22,8 @@ authRouter.get('/ggoauth', (req, res, next) => {
     .catch(next);
 });
 
+/** 
+ * contains Oauth routes
+ * @module authRouter
+*/
 module.exports = authRouter;

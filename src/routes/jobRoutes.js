@@ -156,4 +156,8 @@ function jobDelete(req, res, next) {
     .catch(next);
 }
 
+/** 
+ * contains routes and routeHandler functions for all job routes
+ * @module jobsRouter
+*/
 module.exports = router;

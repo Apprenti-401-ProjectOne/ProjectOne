@@ -4,6 +4,10 @@ require('dotenv').config();
 const superagent = require('superagent');
 const User = require('../../model/user');
 
+/** 
+ * authorizes a user through google oauth
+ * @module googleOauth
+*/
 module.exports = function authorize(req){
   let code = req.query.code;
   console.log('1. CODE: ', code);
