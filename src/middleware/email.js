@@ -11,8 +11,12 @@ const transport = nodemailer.createTransport({
     pass: process.env.EMAIL_PASSWORD,
   },
 });
-// Define a mailOptions variable, containing information that your receiver should know about it.s
 
+/**
+ * sends an email to a user when a job has been updated
+ * @param {*} user
+ * @param {*} job
+ */
 const sendUpdate = (user, job) => {
   const mailOptions = {
     from: process.env.EMAIL,
@@ -27,6 +31,11 @@ const sendUpdate = (user, job) => {
   });
 };
 
+/**
+ * sends an email to a user when they have successfully posted a job
+ * @param {*} user
+ * @param {*} job
+ */
 const sendNewJob = (user, job) => {
   const mailOptions = {
     from: process.env.EMAIL,
@@ -43,6 +52,10 @@ const sendNewJob = (user, job) => {
   });
 };
 
+/**
+ * sends an email to a user when they have successfully signed up
+ * @param {*} user
+ */
 const sendWelcome = user => {
   const mailOptions = {
     from: process.env.EMAIL,
@@ -59,7 +72,7 @@ const sendWelcome = user => {
 
 
 const updateEmail = (username, job) => {
-  return `Hello, ${username}, you've been outbid on ${job}. The new highest bid is ${job.price}.`; git
+  return `Hello, ${username}, you've been outbid on ${job}. The new highest bid is ${job.price}.`;
 };
 
 const newJob = (username, job) => {
@@ -70,5 +83,9 @@ const welcome = username => {
   return `Welcome to CañU, ${username}!`;
 };
 
+/** 
+ * module containing automated email functionality
+ * @module emailModule
+*/
 module.exports = { sendUpdate, sendNewJob, sendWelcome };
 
