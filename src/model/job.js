@@ -25,4 +25,7 @@ jobSchema.post('save', function (job) {
  * Jobs model
  * @module Jobs
 */
-module.exports = mongoose.model('jobs', jobSchema);
+function getModel(){
+  return mongoose.model('jobs', jobSchema);
+}
+module.exports = getModel;
