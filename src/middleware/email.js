@@ -8,7 +8,7 @@ const transport = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL,
-    pass: process.env.PASSWORD,
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 // Define a mailOptions variable, containing information that your receiver should know about it.s
