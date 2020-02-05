@@ -1,6 +1,7 @@
 'use strict';
 
 /** 
+ * checks if user has required permissions to access route
  * @param capability
  * @module access-control
 */

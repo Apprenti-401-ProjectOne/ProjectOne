@@ -31,6 +31,10 @@ userSchema.virtual('userRoles', {
 userSchema.pre('save', join);
 userSchema.pre('find', join);
 
+/**
+ * Joins virtuals in DB
+ * @param {*} next
+ */
 function join(next) {
   try {
     this.populate('userRoles');
@@ -70,8 +74,11 @@ userSchema.methods.generateToken = function(type) {
   return jwt.sign(token, process.env.SECRET, {expiresIn: '15min'});
 };
 
+
 /**
  * Authenticates and compares signing in user password to database password
+ * @param {*} auth
+ * @returns a user that has the matching username and password
  */
 userSchema.statics.authenticateBasic = function(auth) {
   let query = { username: auth.username };
@@ -82,6 +89,11 @@ userSchema.statics.authenticateBasic = function(auth) {
     });
 };
 
+/**
+ *  Authenticates a token and returns the user
+ * @param {*} token
+ * @returns the user with the id parsed from the authenticated token
+ */
 userSchema.statics.authenticateToken = function(token) {
   try {
     let parsedTokenObject = jwt.verify(token, process.env.SECRET);
@@ -114,12 +126,22 @@ userSchema.statics.createFromOauth = function(oauthUser){
     });
 };
 
+/**
+ * compares an inputted password with a users hashed password
+ * @param {*} password
+ * @returns this user
+ */
 userSchema.methods.comparePassword = function(password) {
   return bcrypt
     .compare(password, this.password)
     .then(valid => (valid ? this : null));
 };
 
+/**
+ * finds a user by their usernames and deletes them from the DB
+ * @param {*} username
+ * @returns the deleted user
+ */
 userSchema.statics.destroyUser = function(username){
   return this.findOneAndDelete({username: username})
     .then(result => {
@@ -128,8 +150,8 @@ userSchema.statics.destroyUser = function(username){
     }).catch(err => console.log(err));    
 };
 
-
-
-
-
+/** 
+ * User model
+ * @module User
+*/
 module.exports = mongoose.model('users', userSchema);

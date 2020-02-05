@@ -11,10 +11,10 @@ afterAll(supergoose.stopDB);
 //__________________ JOB ROUTES TESTING ______________________
 describe('Jobs route API testing', () => {
   xit('Returns error 500 when sent invalid object', () => {
-    let obj = {username: "test"};
+    let obj = {username: 'test'};
     return mockRequest.post('/jobs')
       .send(obj)
-      .expect(500)
+      .expect(500);
   });
 
   it('Returns 0 when no jobs posted in database', () => {
