@@ -19,6 +19,16 @@ router.delete('/jobs/:id', jobDelete);
 router.put('/jobs/bid/:id', bearer, bidOnJob);
 router.put('/jobs/close/:id', bearer, closeJob);
 
+function token(req, res){
+  let token = req.headers.authorization.split(' ').pop();
+  return token;
+}
+
+function parsedToken(){
+  let parsedToken = jwt.verify(token, process.env.SECRET);
+  return parsedToken;
+}
+
 /**
  * Place a bid on a job
  * @param {*} req 
@@ -27,8 +37,8 @@ router.put('/jobs/close/:id', bearer, closeJob);
 function bidOnJob(req, res){
   const id = req.params.id;
   const price = req.body.price;
-  let token = req.headers.authorization.split(' ').pop();
-  let parsedToken = jwt.verify(token, process.env.SECRET);
+  // let token = req.headers.authorization.split(' ').pop();
+  // let parsedToken = jwt.verify(token, process.env.SECRET);
   Jobs.findByIdAndUpdate(id, {price: price, currentBidder: parsedToken.username})
     .then(record => {
       res.send(record);
