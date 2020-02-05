@@ -90,7 +90,13 @@ describe('User Methods', () => {
   const userObjTwo = {
     username: 'Trevor5000',
     password: 'Testing token',
-    email: 'testing@test.com'
+    email: 'testing@test.com',
+  };
+
+  const userObjThree = {
+    username: 'Trevor1000',
+    password: 'Testing token',
+    email: 'testing@test.com',
   };
   
   it('Generates Token', () => {
@@ -108,7 +114,6 @@ describe('User Methods', () => {
       });
   });
 
-
   it('Can destroyUser from database', () => {
     return mockRequest.post('/signup')
       .send(userObj)
@@ -120,6 +125,11 @@ describe('User Methods', () => {
         const deleteUser = await User.destroyUser(token.username)
         expect(deleteUser).toBeDefined();
       });
+  });
+
+  it('Returns user from database if found from OAuth', async () => {
+    let oauthUser = await User.createFromOauth({username: 'trevor', password: 'password', email: 'email'})
+    expect(oauthUser).toBeDefined();
   });
 
 });

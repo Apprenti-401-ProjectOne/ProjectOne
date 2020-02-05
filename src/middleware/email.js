@@ -12,6 +12,7 @@ const transport = nodemailer.createTransport({
   },
 });
 
+
 const sendNewJob = (user, job) => {
   const mailOptions = jobOptions(user, job); 
   sendEmail(mailOptions); 
@@ -25,12 +26,14 @@ const sendWelcome = user => {
   sendEmail(mailOptions);
 };
 
+
 const sendEmail = (mailOptions) => {
   transport.sendMail(mailOptions, error => {
     if (error) return console.log(error);
     return 'Email sent!';
   });
 };
+
 
 const newJobTemplate = (username, job) => {
   return `Hello, ${username}, this is confirmation of your job: ${job}.`;
@@ -49,8 +52,10 @@ function jobOptions(user, job) {
   };
 }
 
+
 function welcomeOptions(user) {
   return {
+
     from: process.env.EMAIL,
     to: user.email,
     subject: 'Welcome to CañU!',
@@ -59,7 +64,6 @@ function welcomeOptions(user) {
 }
 
 module.exports = { sendNewJob, sendWelcome, newJobTemplate, welcomeTemplate, welcomeOptions, jobOptions, sendEmail};
-
 
 
 
