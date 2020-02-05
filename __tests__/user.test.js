@@ -75,8 +75,11 @@ describe('Auth Router', () => {
 });
 
 
-describe('JWT Token', () => {
+describe('User Methods', () => {
+  
+  let id;
   let token;
+  let resultsToken;
   
   const userObj = {
     username: 'Trevor',
@@ -88,6 +91,21 @@ describe('JWT Token', () => {
     token = new User().generateToken(userObj);
     expect(token).toBeDefined();
   });
+
+
+  it('Can deleteUser from database', () => {
+    return mockRequest.post('/signup')
+      .send(userObj)
+      .expect(200)
+      .then(async results => {
+        resultsToken = results.text;
+        token = jwt.verify(results.text, process.env.SECRET);
+        id = token.id;
+        const deleteUser = await User.destroyUser(token.username)
+        expect(deleteUser).toBeDefined();
+      });
+  });
+
 });
 
 
