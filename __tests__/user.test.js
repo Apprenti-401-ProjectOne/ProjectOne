@@ -122,6 +122,11 @@ describe('User Methods', () => {
       });
   });
 
+  it('Returns user from database if found from OAuth', async () => {
+    let oauthUser = await User.createFromOauth({username: 'trevor', password: 'password', email: 'email'})
+    expect(oauthUser).toBeDefined();
+  });
+
 });
 
 
