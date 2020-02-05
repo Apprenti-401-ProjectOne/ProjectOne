@@ -90,7 +90,13 @@ describe('User Methods', () => {
   const userObjTwo = {
     username: 'Trevor5000',
     password: 'Testing token',
-    email: 'testing@test.com'
+    email: 'testing@test.com',
+  };
+
+  const userObjThree = {
+    username: 'Trevor1000',
+    password: 'Testing token',
+    email: 'testing@test.com',
   };
   
   it('Generates Token', () => {
@@ -107,7 +113,6 @@ describe('User Methods', () => {
         expect(authenticate[0].username).toBe('Trevor5000');
       });
   });
-
 
   it('Can destroyUser from database', () => {
     return mockRequest.post('/signup')
