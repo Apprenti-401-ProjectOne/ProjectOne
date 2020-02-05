@@ -4,7 +4,7 @@
 process.env.SECRET='secret';
 
 const jwt = require('jsonwebtoken');
-const User = require('../src/model/user')
+const User = require('../src/model/user');
 const server = require('../src/app').server;
 const supergoose = require('./supergoose');
 
