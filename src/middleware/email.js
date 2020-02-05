@@ -32,8 +32,10 @@ const sendNewJob = (user, job) => {
     from: process.env.EMAIL,
     to: user.email,
     subject: 'Your CañU job has posted.',
-    text: newJob(user.username, job.name),
+    text: newJob(user.username, job),
   };
+
+  console.log(mailOptions.text);
 
   transport.sendMail(mailOptions, (error) => {
     if (error) return console.log(error);
@@ -61,7 +63,7 @@ const updateEmail = (username, job) => {
 };
 
 const newJob = (username, job) => {
-  return `Hello, ${username}, this is confirmation of your job: ${job.name}.`;
+  return `Hello, ${username}, this is confirmation of your job: ${job}.`;
 };
 
 const welcome = username => {
