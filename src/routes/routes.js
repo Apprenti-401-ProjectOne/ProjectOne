@@ -22,7 +22,7 @@ router.post('/signup', (req, res, next) => {
       res.cookie('auth', req.token);
       res.send(req.token);
     })
-    .catch(error => console.error(error));
+    .catch(error => next(error));
 });
 
 router.post('/signin', basic, (req, res) => {
@@ -44,15 +44,15 @@ router.post('/roles', (req, res, next) => {
 router.get('/users', bearer, acl('superuser'), (req, res, next) => {
   User.find({})
     .then(results => res.json(results))
-    .catch(error => console.error(error));
+    .catch(error => next(error));
 });
 
-router.post('/deleteUser', bearer, acl('superuser'), (req, res) => {
+router.post('/deleteUser', bearer, acl('superuser'), (req, res, next) => {
   User.destroyUser(req.body.userName)
     .then(result => {
       res.send(result);
     })
-    .catch(error => console.log(error));
+    .catch(error => next(error));
 });
 
 /** 

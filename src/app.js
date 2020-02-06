@@ -1,5 +1,6 @@
 'use strict';
 
+// Application Dependencies
 require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
@@ -22,12 +23,18 @@ app.use(morgan('dev'));
 
 app.use('/docs', express.static('docs'));
 app.use(express.static('public'));
+
+// Routing
 app.use(jobRouter);
 app.use(authRouter);
 app.use(router);
 app.use(authRouter);
+
+// Swagger Documentation
 app.use('/api-docs', swaggerUi.serve);
 app.get('/api-docs', swaggerUi.setup(swaggerDocument));
+
+// Error Handlers
 app.use(notFound);
 app.use(errorHandler);
 

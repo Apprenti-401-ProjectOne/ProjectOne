@@ -72,7 +72,7 @@ userSchema.methods.generateToken = function() {
     capabilities: capabilities[this.role],
   };
 
-  return jwt.sign(token, process.env.SECRET, { expiresIn: '15min' });
+  return jwt.sign(token, process.env.SECRET, { expiresIn: '25min' });
 };
 
 
@@ -86,7 +86,7 @@ userSchema.statics.authenticateBasic = function (auth) {
   return this.findOne(query)
     .then(user => user && user.comparePassword(auth.password))
     .catch(error => {
-      console.log(error);
+      console.error(error);
     });
 };
 
