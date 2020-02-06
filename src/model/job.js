@@ -17,7 +17,7 @@ const jobSchema = mongoose.Schema({
 jobSchema.post('save', function (job) {
   user.findById(job.postedBy)
     .then(user => {      
-      email.sendNewJob(user, job.name);
+      email.sendNewJob(user.username, job.name);
     }).catch(err => console.log(err));
 });
 
@@ -25,7 +25,5 @@ jobSchema.post('save', function (job) {
  * Jobs model
  * @module Jobs
 */
-function getModel(){
-  return mongoose.model('jobs', jobSchema);
-}
-module.exports = getModel;
+
+module.exports =  mongoose.model('jobs', jobSchema);
