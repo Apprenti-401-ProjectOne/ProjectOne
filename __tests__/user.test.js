@@ -16,7 +16,11 @@ let users = {
 };
 
 beforeAll(supergoose.startDB);
-afterAll(supergoose.stopDB);
+
+afterAll(done => {
+  supergoose.stopDB;
+  done();
+});
 
 describe('Auth Router', () => {
 

@@ -19,7 +19,10 @@ beforeAll(async (done) => {
   done();
 });
 
-afterAll(supergoose.stopDB);
+afterAll(done => {
+  supergoose.stopDB;
+  done();
+});
 
 describe('Auth Middleware', () => {
 
