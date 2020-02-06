@@ -74,17 +74,9 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Object containing username and password",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        ],
+        "security": {
+          "basic_auth": []
+        },
         "responses": {
           "500": {
             "description": "Invalid Username/Password"
