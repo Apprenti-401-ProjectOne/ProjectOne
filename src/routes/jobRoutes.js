@@ -75,7 +75,7 @@ function getAllJobs(req, res, next) {
       };
       res.status(200).json(output);
     })
-    .catch(next);
+    .catch(err => next(err));
 }
 
 
@@ -95,7 +95,8 @@ function getOneJob(req, res, next) {
       let user = await User.findOne({_id: job.postedBy}, 'username');
       job.postedBy = user;
       res.json(job);
-    });
+    })
+    .catch(err => next(err));
 }
 
 
@@ -123,7 +124,7 @@ async function jobPost(req, res, next) {
   
   jobs.save()
     .then(result => res.status(200).json(result))
-    .catch(next);
+    .catch(err => next(err));
 }
 
 
@@ -137,7 +138,7 @@ function jobUpdate(req, res, next) {
   let id = req.params.id;
   Jobs.findByIdAndUpdate(id, req.body, {new: true})
     .then(result => res.status(200).json(result))
-    .catch(next);
+    .catch(err => next(err));
 }
 
 
@@ -151,7 +152,7 @@ function jobDelete(req, res, next) {
   let id = req.params.id;
   Jobs.findByIdAndDelete(id)
     .then(result => res.status(200).json(result))
-    .catch(next);
+    .catch(err => next(err));
 }
 
 /** 
