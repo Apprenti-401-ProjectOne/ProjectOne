@@ -3,6 +3,7 @@
 require('dotenv').config();
 const superagent = require('superagent');
 const User = require('../../model/user');
+const email = require('../../middleware/email');
 
 /** 
  * authorizes a user through github oauth
@@ -50,7 +51,9 @@ module.exports = function authorize(req){
       return User.createFromOauth(oauthUser);
     })
     .then(createdUser => {
-      console.log('5. GENERATING TOKEN..', createdUser);
+      console.log('5. SENDING EMAIL');
+      email.sendWelcome(createdUser);
+      console.log('6. GENERATING TOKEN..', createdUser);
       return createdUser.generateToken();
     })
     .catch(error => console.error(error));
