@@ -74,17 +74,9 @@
           "application/xml",
           "application/json"
         ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Object containing username and password",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        ],
+        "security": {
+          "basic_auth": []
+        },
         "responses": {
           "500": {
             "description": "Invalid Username/Password"
@@ -216,8 +208,8 @@
         "tags": [
           "user"
         ],
-        "summary": "Find job by ID",
-        "description": "Returns a single job",
+        "summary": "Find a job",
+        "description": "Returns a single job using the job ID",
         "operationId": "getPetById",
         "produces": [
           "application/xml",
@@ -252,8 +244,8 @@
         "tags": [
           "user"
         ],
-        "summary": "Update pet by ID",
-        "description": "Updates a single job",
+        "summary": "Update a job",
+        "description": "Updates a single job using the job ID",
         "operationId": "updateJobById",
         "produces": [
           "application/json"
@@ -392,22 +384,34 @@
     }
   },
   "securityDefinitions": {
-    "petstore_auth": {
+    "google_Oauth": {
       "type": "oauth2",
-      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
-      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+      "flow": "authorization code",
       "scopes": {
-        "write:pets": "modify pets in your account",
-        "read:pets": "read your pets"
+        "read:openid": "required: indicates that the application intends to use OIDC to verify the user's identity",
+        "read:profile": "get user google profile",
+        "read:email": "get user email address"
       }
     },
-    "api_key": {
+    "github_Oauth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://github.com/login/oauth/authorize",
+      "flow": "authorization code",
+      "scopes": {
+        "read:user": "gets user profile information from gitub"
+      }
+    },
+    "bearer_auth": {
       "type": "apiKey",
-      "name": "api_key",
-      "in": "header"
+      "name": "Authorization",
+      "in": "header",
+      "scheme": "bearer",
+      "bearerFormat": "JWT" 
     },
     "basic_auth": {
-      "type": "basic"
+      "type": "basic",
+      "scheme": "basic"
     }
   },
   "definitions": {
