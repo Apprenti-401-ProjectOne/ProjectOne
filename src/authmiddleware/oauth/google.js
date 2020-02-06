@@ -6,6 +6,7 @@ const User = require('../../model/user');
 
 /** 
  * authorizes a user through google oauth
+ * @param {Object} req - Express request object
  * @module googleOauth
 */
 module.exports = function authorize(req){

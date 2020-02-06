@@ -2,7 +2,7 @@
 
 /** 
  * checks if user has required permissions to access route
- * @param capability
+ * @param {string} capability read, write, update, delete, superuser
  * @module access-control
 */
 module.exports = (capability) => {
