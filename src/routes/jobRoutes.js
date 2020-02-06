@@ -21,8 +21,8 @@ jobRouter.put('/jobs/close/:id', bearer, closeJob);
 
 /**
  * Place a bid on a job
- * @param {*} req 
- * @param {*} res 
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
  */
 function bidOnJob(req, res){
   const id = req.params.id;
@@ -40,8 +40,8 @@ function bidOnJob(req, res){
 
 /**
  *  Close a job from bidding
- * @param {*} req 
- * @param {*} res 
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
  */
 function closeJob(req, res){
   let token = req.headers.authorization.split(' ').pop();
@@ -59,11 +59,10 @@ function closeJob(req, res){
 
 
 /**
- * 
- * @function handleGetAll
- * @param {*} req
- * @param {*} res
- * @param {*} next
+ * gets all jobs from database
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  */
 function getAllJobs(req, res, next) {
   Jobs.find({})
@@ -81,9 +80,9 @@ function getAllJobs(req, res, next) {
 /**
  * handles and records one request
  * @function handleGetOne
- * @param {*} req
- * @param {*} res
- * @param {*} next
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  */
 function getOneJob(req, res, next) {
   let id = req.params.id;
@@ -101,9 +100,9 @@ function getOneJob(req, res, next) {
 /**
  * handles route that creates a record
  * @function handlePost
- * @param {*} req
- * @param {*} res
- * @param {*} next
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  */
 async function jobPost(req, res, next) {
   let token = req.headers.authorization.split(' ').pop();
@@ -129,10 +128,9 @@ async function jobPost(req, res, next) {
 
 /**
  * handles route for updating record
- * @function handlePut
- * @param {*} req
- * @param {*} res
- * @param {*} next
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  */
 function jobUpdate(req, res, next) {
 
@@ -145,10 +143,9 @@ function jobUpdate(req, res, next) {
 
 /**
  * handles route that deletes a record
- * @function handleGetAll
- * @param {*} req
- * @param {*} res
- * @param {*} next
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  */
 function jobDelete(req, res, next) {
   let id = req.params.id;
@@ -159,6 +156,6 @@ function jobDelete(req, res, next) {
 
 /** 
  * contains routes and routeHandler functions for all job routes
- * @module jobsjobRouter
+ * @module jobsRouter
 */
 module.exports = {jobRouter, jobDelete, jobUpdate, jobPost, getOneJob, getAllJobs, closeJob, bidOnJob};

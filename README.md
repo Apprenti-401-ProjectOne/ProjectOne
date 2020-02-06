@@ -25,10 +25,10 @@ for a set amount of time without having to login again
 * Have users be able to create, update, delete and accept bids for a job
 * Have users be able to bid on other users jobs
 * Have a superuser role that can have privledges over all jobs
+* Have users be notified of activity through email on their jobs and jobs they have bid.
 
 #### Stretch
 
-* Have users be notified of activity through email or sms on their jobs and jobs they have bid.
 * Implement graphql 
 * Inter-user messaging
 
