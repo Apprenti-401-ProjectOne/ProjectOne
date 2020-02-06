@@ -12,34 +12,41 @@ const transport = nodemailer.createTransport({
   },
 });
 
-
-const sendNewJob = (user, job) => {
-  const mailOptions = jobOptions(user, job); 
-  sendEmail(mailOptions); 
+const transpoOpt =  { service: 'gmail',
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.EMAIL_PASSWORD,
+  },
 };
+
+function sendNewJob(user, job){  
+  const mailOptions = jobOptions(user, job);   
+  const transporter = nodemailer.createTransport(transpoOpt);
+  transporter.sendMail(mailOptions, error => {
+    if (error) return console.log(error);
+    return 'Email sent!';
+  });
+}
+
+
 /**
  * Sends a welcome email when a user signs up
  * @param {*} user 
  */
-const sendWelcome = user => {
+function sendWelcome(user){
+  console.log('sending welcome!');
   const mailOptions = welcomeOptions(user);
-  sendEmail(mailOptions);
-};
-
-
-const sendEmail = (mailOptions) => {
   transport.sendMail(mailOptions, error => {
     if (error) return console.log(error);
     return 'Email sent!';
   });
-};
+}
 
-
-const newJobTemplate = (username, job) => {
+function newJobTemplate(username, job){
   return `Hello, ${username}, this is confirmation of your job: ${job}.`;
 };
 
-const welcomeTemplate = username => {
+function welcomeTemplate(username){
   return `Welcome to CañU, ${username}!`;
 };
 
@@ -55,7 +62,6 @@ function jobOptions(user, job) {
 
 function welcomeOptions(user) {
   return {
-
     from: process.env.EMAIL,
     to: user.email,
     subject: 'Welcome to CañU!',
@@ -63,7 +69,7 @@ function welcomeOptions(user) {
   };
 }
 
-module.exports = { sendNewJob, sendWelcome, newJobTemplate, welcomeTemplate, welcomeOptions, jobOptions, sendEmail};
+module.exports = { sendNewJob, sendWelcome, newJobTemplate, welcomeTemplate, welcomeOptions, jobOptions};
 
 
 

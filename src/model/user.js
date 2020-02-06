@@ -151,10 +151,6 @@ userSchema.statics.destroyUser = function (username) {
     }).catch(err => console.log(err));
 };
 
-userSchema.post('save', function (user) {
-  email.sendWelcome(user);
-});
-
 /** 
  * User model
  * @module User

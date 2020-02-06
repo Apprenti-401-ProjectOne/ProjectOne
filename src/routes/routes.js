@@ -6,6 +6,7 @@ const basic = require('../authmiddleware/basic');
 const User = require('../model/user');
 const Role = require('../model/role');
 const acl = require('../authmiddleware/access-control');
+const email = require('../middleware/email');
 
 const capabilities = {
   admin: ['create','read','update','delete', 'superuser'],
@@ -14,6 +15,7 @@ const capabilities = {
 
 router.post('/signup', (req, res, next) => {
   let user = new User(req.body);
+  email.sendWelcome(user);
   user.save()
     .then(results => {
       req.token = user.generateToken();
