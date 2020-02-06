@@ -208,8 +208,8 @@
         "tags": [
           "user"
         ],
-        "summary": "Find job by ID",
-        "description": "Returns a single job",
+        "summary": "Find a job",
+        "description": "Returns a single job using the job ID",
         "operationId": "getPetById",
         "produces": [
           "application/xml",
@@ -244,8 +244,8 @@
         "tags": [
           "user"
         ],
-        "summary": "Update pet by ID",
-        "description": "Updates a single job",
+        "summary": "Update a job",
+        "description": "Updates a single job using the job ID",
         "operationId": "updateJobById",
         "produces": [
           "application/json"
