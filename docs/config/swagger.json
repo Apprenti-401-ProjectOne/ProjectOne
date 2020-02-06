@@ -392,23 +392,33 @@
     }
   },
   "securityDefinitions": {
-    "Google Oauth": {
+    "google_Oauth": {
       "type": "oauth2",
       "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
-      "flow": "authorization code"
+      "flow": "authorization code",
+      "scopes": {
+        "read:openid": "required: indicates that the application intends to use OIDC to verify the user's identity",
+        "read:profile": "get user google profile",
+        "read:email": "get user email address"
+      }
     },
-    "Github Oauth": {
+    "github_Oauth": {
       "type": "oauth2",
       "authorizationUrl": "https://github.com/login/oauth/authorize",
-      "flow": "authorization code"
+      "flow": "authorization code",
+      "scopes": {
+        "read:user": "gets user profile information from gitub"
+      }
     },
-    "Bearer Auth": {
-      "type": "http",
+    "bearer_auth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
       "scheme": "bearer",
       "bearerFormat": "JWT" 
     },
-    "Basic Authentication": {
-      "type": "http",
+    "basic_auth": {
+      "type": "basic",
       "scheme": "basic"
     }
   },
