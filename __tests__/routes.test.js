@@ -29,19 +29,27 @@ afterAll(supergoose.stopDB);
 //__________________ JOB ROUTES TESTING ______________________
 describe('Jobs route API testing', () => {
 
-  xit('Returns error 500 when sent invalid object', () => {
+  xit('Returns error 500 when sent invalid object', async () => {
+
+    let foundUser = await User.find({});
+    let token = User().generateToken(foundUser);
     const req = {
+      body: {
+        name: 'Testing',
+        description: 'Test Job',
+        price: 30,
+        jobType: 'Testing my jobs out',
+        postedBy: foundUser._id,
+      },
       headers: {
-        authorization: `Bearer`,
+        authorization: `Bearer ${token}`,
       },
     };
 
     let res = {};
     let next = jest.fn();
 
-    // let obj = {username: 'test'};
-    return job.jobPost(req, res, next)
-      .then(result => console.log(result));
+    let postedJob = await job.jobPost(req, res, next);
   });
 
   it('Returns 0 when no jobs posted in database', () => {
@@ -60,7 +68,6 @@ describe('Jobs route API testing', () => {
       });
   });
   
-
   it('can update() a job', async () => {
     let jobs = await Job.find({});
     expect(jobs[0].id).toBeDefined();
@@ -90,7 +97,7 @@ describe('Jobs route API testing', () => {
     let res = {};
     let next = jest.fn();
 
-    let deleted = await job.jobDelete(req, res, next)
+    let deleted = await job.jobDelete(req, res, next);
     expect(deleted).not.toBeDefined();
   });
 });
