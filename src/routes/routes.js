@@ -47,7 +47,7 @@ router.get('/users', bearer, acl('superuser'), (req, res, next) => {
     .catch(error => console.error(error));
 });
 
-router.post('/deleteUser', acl('superuser'), bearer, (req, res) => {
+router.post('/deleteUser', bearer, acl('superuser'), (req, res) => {
   User.destroyUser(req.body.userName)
     .then(result => {
       res.send(result);
