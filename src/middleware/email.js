@@ -92,6 +92,7 @@ function welcomeOptions(user) {
 }
 
 /** 
+ * Functions to facilitate auto generated emails when users signup, create jobs, or jobs are updated
  * @module autoEmail
 */
 module.exports = { sendNewJob, sendWelcome, newJobTemplate, welcomeTemplate, welcomeOptions, jobOptions, sendEmail};

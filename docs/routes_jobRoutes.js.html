@@ -49,8 +49,8 @@ jobRouter.put('/jobs/close/:id', bearer, closeJob);
 
 /**
  * Place a bid on a job
- * @param {*} req 
- * @param {*} res 
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
  */
 function bidOnJob(req, res){
   const id = req.params.id;
@@ -68,8 +68,8 @@ function bidOnJob(req, res){
 
 /**
  *  Close a job from bidding
- * @param {*} req 
- * @param {*} res 
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
  */
 function closeJob(req, res){
   let token = req.headers.authorization.split(' ').pop();
@@ -87,11 +87,10 @@ function closeJob(req, res){
 
 
 /**
- * 
- * @function handleGetAll
- * @param {*} req
- * @param {*} res
- * @param {*} next
+ * gets all jobs from database
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  */
 function getAllJobs(req, res, next) {
   Jobs.find({})
@@ -109,9 +108,9 @@ function getAllJobs(req, res, next) {
 /**
  * handles and records one request
  * @function handleGetOne
- * @param {*} req
- * @param {*} res
- * @param {*} next
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  */
 function getOneJob(req, res, next) {
   let id = req.params.id;
@@ -129,9 +128,9 @@ function getOneJob(req, res, next) {
 /**
  * handles route that creates a record
  * @function handlePost
- * @param {*} req
- * @param {*} res
- * @param {*} next
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  */
 async function jobPost(req, res, next) {
   let token = req.headers.authorization.split(' ').pop();
@@ -157,10 +156,9 @@ async function jobPost(req, res, next) {
 
 /**
  * handles route for updating record
- * @function handlePut
- * @param {*} req
- * @param {*} res
- * @param {*} next
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  */
 function jobUpdate(req, res, next) {
 
@@ -173,10 +171,9 @@ function jobUpdate(req, res, next) {
 
 /**
  * handles route that deletes a record
- * @function handleGetAll
- * @param {*} req
- * @param {*} res
- * @param {*} next
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  */
 function jobDelete(req, res, next) {
   let id = req.params.id;
@@ -187,7 +184,7 @@ function jobDelete(req, res, next) {
 
 /** 
  * contains routes and routeHandler functions for all job routes
- * @module jobsjobRouter
+ * @module jobsRouter
 */
 module.exports = {jobRouter, jobDelete, jobUpdate, jobPost, getOneJob, getAllJobs, closeJob, bidOnJob};</code></pre>
         </article>
@@ -199,13 +196,13 @@ module.exports = {jobRouter, jobDelete, jobUpdate, jobPost, getOneJob, getAllJob
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-access-control.html">access-control</a></li><li><a href="module-authRouter.html">authRouter</a></li><li><a href="module-basicAuth.html">basicAuth</a></li><li><a href="module-bearerAuth.html">bearerAuth</a></li><li><a href="module-errorHandler.html">errorHandler</a></li><li><a href="module-githubOauth.html">githubOauth</a></li><li><a href="module-googleOauth.html">googleOauth</a></li><li><a href="module-Jobs.html">Jobs</a></li><li><a href="module-jobsjobRouter.html">jobsjobRouter</a></li><li><a href="module-logger.html">logger</a></li><li><a href="module-Roles.html">Roles</a></li><li><a href="module-routeNotFoundHandler.html">routeNotFoundHandler</a></li><li><a href="module-routes.html">routes</a></li><li><a href="module-server.html">server</a></li><li><a href="module-timestamp.html">timestamp</a></li><li><a href="module-User.html">User</a></li></ul><h3>Global</h3><ul><li><a href="global.html#bidOnJob">bidOnJob</a></li><li><a href="global.html#closeJob">closeJob</a></li><li><a href="global.html#handleGetAll">handleGetAll</a></li><li><a href="global.html#handleGetOne">handleGetOne</a></li><li><a href="global.html#handlePost">handlePost</a></li><li><a href="global.html#handlePut">handlePut</a></li><li><a href="global.html#join">join</a></li><li><a href="global.html#sendWelcome">sendWelcome</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-access-control.html">access-control</a></li><li><a href="module-authRouter.html">authRouter</a></li><li><a href="module-autoEmail.html">autoEmail</a></li><li><a href="module-basicAuth.html">basicAuth</a></li><li><a href="module-bearerAuth.html">bearerAuth</a></li><li><a href="module-errorHandler.html">errorHandler</a></li><li><a href="module-githubOauth.html">githubOauth</a></li><li><a href="module-googleOauth.html">googleOauth</a></li><li><a href="module-Jobs.html">Jobs</a></li><li><a href="module-jobsRouter.html">jobsRouter</a></li><li><a href="module-logger.html">logger</a></li><li><a href="module-Roles.html">Roles</a></li><li><a href="module-routeNotFoundHandler.html">routeNotFoundHandler</a></li><li><a href="module-routes.html">routes</a></li><li><a href="module-server.html">server</a></li><li><a href="module-timestamp.html">timestamp</a></li><li><a href="module-User.html">User</a></li></ul><h3>Global</h3><ul><li><a href="global.html#bidOnJob">bidOnJob</a></li><li><a href="global.html#closeJob">closeJob</a></li><li><a href="global.html#getAllJobs">getAllJobs</a></li><li><a href="global.html#handleGetOne">handleGetOne</a></li><li><a href="global.html#handlePost">handlePost</a></li><li><a href="global.html#jobDelete">jobDelete</a></li><li><a href="global.html#jobOptions">jobOptions</a></li><li><a href="global.html#jobUpdate">jobUpdate</a></li><li><a href="global.html#join">join</a></li><li><a href="global.html#newJobTemplate">newJobTemplate</a></li><li><a href="global.html#sendEmail">sendEmail</a></li><li><a href="global.html#sendNewJob">sendNewJob</a></li><li><a href="global.html#sendWelcome">sendWelcome</a></li><li><a href="global.html#welcomeOptions">welcomeOptions</a></li><li><a href="global.html#welcomeTemplate">welcomeTemplate</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Wed Feb 05 2020 16:27:36 GMT-0800 (Pacific Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Thu Feb 06 2020 08:21:39 GMT-0800 (Pacific Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

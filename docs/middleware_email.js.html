@@ -40,21 +40,29 @@ const transport = nodemailer.createTransport({
   },
 });
 
-
+/**
+ * Sends an email on creation of a new job
+ * @param {object} user user object 
+ * @param {job} job user object
+ */
 const sendNewJob = (user, job) => {
   const mailOptions = jobOptions(user, job); 
   sendEmail(mailOptions); 
 };
 /**
  * Sends a welcome email when a user signs up
- * @param {*} user 
+ * @param {object} user  object with user info
  */
 const sendWelcome = user => {
   const mailOptions = welcomeOptions(user);
   sendEmail(mailOptions);
 };
 
-
+/**
+ * send an email with specific options
+ * @param {function} mailOptions returns an object with mail options
+ * @returns 'Email sent!'
+ */
 const sendEmail = (mailOptions) => {
   transport.sendMail(mailOptions, error => {
     if (error) return console.log(error);
@@ -62,15 +70,31 @@ const sendEmail = (mailOptions) => {
   });
 };
 
-
+/**
+ * Template for new job email
+ * @param {string} username username string
+ * @param {object} job job object
+ * @returns String confirming job
+ */
 const newJobTemplate = (username, job) => {
   return `Hello, ${username}, this is confirmation of your job: ${job}.`;
 };
 
+/**
+ * Template for user creation welcome email
+ * @param {string} username username string
+ * @returns String welcoming user
+ */
 const welcomeTemplate = username => {
   return `Welcome to CañU, ${username}!`;
 };
 
+/**
+ * Template for job email headers
+ * @param {object} user user info object
+ * @param {object} job job info object
+ * @returns template with from, to, subject, and text
+ */
 function jobOptions(user, job) {
   return {
     from: process.env.EMAIL,
@@ -80,7 +104,11 @@ function jobOptions(user, job) {
   };
 }
 
-
+/**
+ * Template for welcome emaul headers
+ * @param {object} user user info object
+ * @returns template with from, to, subject, and text
+ */
 function welcomeOptions(user) {
   return {
 
@@ -91,6 +119,9 @@ function welcomeOptions(user) {
   };
 }
 
+/** 
+ * @module autoEmail
+*/
 module.exports = { sendNewJob, sendWelcome, newJobTemplate, welcomeTemplate, welcomeOptions, jobOptions, sendEmail};
 
 
@@ -106,13 +137,13 @@ module.exports = { sendNewJob, sendWelcome, newJobTemplate, welcomeTemplate, wel
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-access-control.html">access-control</a></li><li><a href="module-authRouter.html">authRouter</a></li><li><a href="module-basicAuth.html">basicAuth</a></li><li><a href="module-bearerAuth.html">bearerAuth</a></li><li><a href="module-errorHandler.html">errorHandler</a></li><li><a href="module-githubOauth.html">githubOauth</a></li><li><a href="module-googleOauth.html">googleOauth</a></li><li><a href="module-Jobs.html">Jobs</a></li><li><a href="module-jobsjobRouter.html">jobsjobRouter</a></li><li><a href="module-logger.html">logger</a></li><li><a href="module-Roles.html">Roles</a></li><li><a href="module-routeNotFoundHandler.html">routeNotFoundHandler</a></li><li><a href="module-routes.html">routes</a></li><li><a href="module-server.html">server</a></li><li><a href="module-timestamp.html">timestamp</a></li><li><a href="module-User.html">User</a></li></ul><h3>Global</h3><ul><li><a href="global.html#bidOnJob">bidOnJob</a></li><li><a href="global.html#closeJob">closeJob</a></li><li><a href="global.html#handleGetAll">handleGetAll</a></li><li><a href="global.html#handleGetOne">handleGetOne</a></li><li><a href="global.html#handlePost">handlePost</a></li><li><a href="global.html#handlePut">handlePut</a></li><li><a href="global.html#join">join</a></li><li><a href="global.html#sendWelcome">sendWelcome</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-access-control.html">access-control</a></li><li><a href="module-authRouter.html">authRouter</a></li><li><a href="module-autoEmail.html">autoEmail</a></li><li><a href="module-basicAuth.html">basicAuth</a></li><li><a href="module-bearerAuth.html">bearerAuth</a></li><li><a href="module-errorHandler.html">errorHandler</a></li><li><a href="module-githubOauth.html">githubOauth</a></li><li><a href="module-googleOauth.html">googleOauth</a></li><li><a href="module-Jobs.html">Jobs</a></li><li><a href="module-jobsRouter.html">jobsRouter</a></li><li><a href="module-logger.html">logger</a></li><li><a href="module-Roles.html">Roles</a></li><li><a href="module-routeNotFoundHandler.html">routeNotFoundHandler</a></li><li><a href="module-routes.html">routes</a></li><li><a href="module-server.html">server</a></li><li><a href="module-timestamp.html">timestamp</a></li><li><a href="module-User.html">User</a></li></ul><h3>Global</h3><ul><li><a href="global.html#bidOnJob">bidOnJob</a></li><li><a href="global.html#closeJob">closeJob</a></li><li><a href="global.html#getAllJobs">getAllJobs</a></li><li><a href="global.html#handleGetOne">handleGetOne</a></li><li><a href="global.html#handlePost">handlePost</a></li><li><a href="global.html#jobDelete">jobDelete</a></li><li><a href="global.html#jobOptions">jobOptions</a></li><li><a href="global.html#jobUpdate">jobUpdate</a></li><li><a href="global.html#join">join</a></li><li><a href="global.html#newJobTemplate">newJobTemplate</a></li><li><a href="global.html#sendEmail">sendEmail</a></li><li><a href="global.html#sendNewJob">sendNewJob</a></li><li><a href="global.html#sendWelcome">sendWelcome</a></li><li><a href="global.html#welcomeOptions">welcomeOptions</a></li><li><a href="global.html#welcomeTemplate">welcomeTemplate</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Wed Feb 05 2020 16:27:36 GMT-0800 (Pacific Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Thu Feb 06 2020 08:21:39 GMT-0800 (Pacific Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
