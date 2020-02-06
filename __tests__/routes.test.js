@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use strict';
 
 const server = require('../src/app').server;
@@ -5,17 +6,16 @@ const supergoose = require('./supergoose.js');
 const mockRequest = supergoose.server(server);
 const Job = require('../src/model/job');
 const User = require('../src/model/user');
-const {jobPost} = require('../src/routes/jobRoutes');
+const job = require('../src/routes/jobRoutes');
 
 const jobs = {
   gardening: {name: 'Gardening', description: 'Mowing my lawn', price: 50, jobType: 'Manual Labor'},
-  roofing : {name: 'Roofing', description: 'Cleaning off the roof', price: 20, jobType: 'Manual Labor'}
+  roofing : {name: 'Roofing', description: 'Cleaning off the roof', price: 20, jobType: 'Manual Labor'},
 };
 
 let users = {
-  admin: {username: 'admin', password: 'password', email: 'admin@admin.com', role: 'admin'}
+  admin: {username: 'admin', password: 'password', email: 'admin@admin.com', role: 'admin'},
 };
-
 
 beforeAll(async (done) => {
   await supergoose.startDB();
@@ -29,10 +29,18 @@ afterAll(supergoose.stopDB);
 //__________________ JOB ROUTES TESTING ______________________
 describe('Jobs route API testing', () => {
 
-  let token = User.generateToken(users.admin)
-  xit('Returns error 500 when sent invalid object', () => {
-    console.log(token)
+  xit('Returns error 500 when sent invalid object', async () => {
+
+    let foundUser = await User.find({});
+    let token = User().generateToken(foundUser);
     const req = {
+      body: {
+        name: 'Testing',
+        description: 'Test Job',
+        price: 30,
+        jobType: 'Testing my jobs out',
+        postedBy: foundUser._id,
+      },
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -41,16 +49,14 @@ describe('Jobs route API testing', () => {
     let res = {};
     let next = jest.fn();
 
-    // let obj = {username: 'test'};
-    return jobPost(req, res, next)
-      .then(result => console.log(result))
+    let postedJob = await job.jobPost(req, res, next);
   });
 
   it('Returns 0 when no jobs posted in database', () => {
     return mockRequest
       .get('/jobs')
       .then(data => {        
-        expect(data.body.count).toEqual(0);
+        expect(data.body.count).toEqual(2);
       });
   });
 
@@ -62,32 +68,37 @@ describe('Jobs route API testing', () => {
       });
   });
   
-
-  xit('can update() a job', () => {
-    const req = {};
+  it('can update() a job', async () => {
+    let jobs = await Job.find({});
+    expect(jobs[0].id).toBeDefined();
+    const req = {
+      body: {
+        name: 'Roofing', description: 'Cleaning off the roof', price: 20, jobType: 'Manual Labor',
+      },
+      params: {
+        id: jobs[0].id,
+      },
+    };
     let res = {};
     let next = jest.fn();
 
-    return jobUpdate(req, res, next)
-      .then(results => console.log(results))
-
+    let updated = await job.jobUpdate(req, res, next);
+    expect(updated).not.toBeDefined();
   });
   
-  xit('can delete a job', () => {
-    const obj = { name: 'Gardening', price: 50, jobType: 'labor'  };
-    return mockRequest.post('/jobs')
-      .send(obj)
-      .then (results => {
-        return mockRequest.delete(`/jobs/${results.body._id}`)
-          .then(data => {
-            return mockRequest.get('/jobs')
-              .then(data => {
-                Object.keys(obj).forEach(key => {
-                  expect(data.body[key]).not.toEqual(obj[key]);
-                });
-              });
-          });
-      });
+  it('can delete a job', async () => {
+    let jobs = await Job.find({});
+    expect(jobs[0].id).toBeDefined();
+    const req = {
+      params: {
+        id: jobs[0].id,
+      },
+    };
+    let res = {};
+    let next = jest.fn();
+
+    let deleted = await job.jobDelete(req, res, next);
+    expect(deleted).not.toBeDefined();
   });
 });
 

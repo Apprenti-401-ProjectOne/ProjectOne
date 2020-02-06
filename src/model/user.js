@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('./role');
-const email = require('../middleware/email.js');
+
 
 const capabilities = {
   admin: ['create', 'read', 'update', 'delete', 'superuser'],
@@ -72,7 +72,7 @@ userSchema.methods.generateToken = function() {
     capabilities: capabilities[this.role],
   };
 
-  return jwt.sign(token, process.env.SECRET, { expiresIn: '15min' });
+  return jwt.sign(token, process.env.SECRET, { expiresIn: '25min' });
 };
 
 
@@ -86,7 +86,7 @@ userSchema.statics.authenticateBasic = function (auth) {
   return this.findOne(query)
     .then(user => user && user.comparePassword(auth.password))
     .catch(error => {
-      console.log(error);
+      console.error(error);
     });
 };
 
@@ -151,9 +151,6 @@ userSchema.statics.destroyUser = function (username) {
     }).catch(err => console.log(err));
 };
 
-userSchema.post('save', function (user) {
-  email.sendWelcome(user);
-});
 
 /** 
  * User model

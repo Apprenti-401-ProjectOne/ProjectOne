@@ -84,7 +84,7 @@ describe('User Methods', () => {
   const userObj = {
     username: 'Trevor',
     password: 'Testing token',
-    email: 'testing@test.com'
+    email: 'testing@test.com',
   };
 
   const userObjTwo = {
@@ -131,7 +131,6 @@ describe('User Methods', () => {
     let oauthUser = await User.createFromOauth({username: 'trevor', password: 'password', email: 'email'});
     expect(oauthUser).toBeDefined();
   });
-
 });
 
 

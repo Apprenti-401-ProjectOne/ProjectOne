@@ -16,7 +16,7 @@ describe('Testing the notification mailer', ()=>{
       from: 'canuproject@gmail.com',
       to: 'david',
       subject: 'Welcome to CañU!',
-      text: 'Welcome to CañU, [object Object]!',
+      text: 'Welcome to CañU, David!',
     };
     const  result = mailer.welcomeOptions({username: 'David', email: 'david'});
     Object.keys(obj).forEach(key => {      
@@ -29,7 +29,7 @@ describe('Testing the notification mailer', ()=>{
       from: 'canuproject@gmail.com',
       to: 'david',
       subject: 'Your CañU job has been posted.',
-      text: 'Hello, David, this is confirmation of your job: [object Object].',
+      text: 'Hello, David, this is confirmation of your job: david.',
     };
     const result = mailer.jobOptions({
       username: 'David',

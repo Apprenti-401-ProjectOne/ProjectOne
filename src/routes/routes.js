@@ -6,7 +6,7 @@ const basic = require('../authmiddleware/basic');
 const User = require('../model/user');
 const Role = require('../model/role');
 const acl = require('../authmiddleware/access-control');
-
+const email = require('../middleware/email');
 const capabilities = {
   admin: ['create','read','update','delete', 'superuser'],
   user: ['read'],
@@ -14,6 +14,7 @@ const capabilities = {
 
 router.post('/signup', (req, res, next) => {
   let user = new User(req.body);
+  email.sendWelcome(user);
   user.save()
     .then(results => {
       req.token = user.generateToken();
@@ -22,7 +23,7 @@ router.post('/signup', (req, res, next) => {
       res.cookie('auth', req.token);
       res.send(req.token);
     })
-    .catch(error => console.error(error));
+    .catch(error => next(error));
 });
 
 router.post('/signin', basic, (req, res) => {
@@ -44,15 +45,15 @@ router.post('/roles', (req, res, next) => {
 router.get('/users', bearer, acl('superuser'), (req, res, next) => {
   User.find({})
     .then(results => res.json(results))
-    .catch(error => console.error(error));
+    .catch(error => next(error));
 });
 
-router.post('/deleteUser', acl('superuser'), bearer, (req, res) => {
+router.post('/deleteUser', bearer, acl('superuser'), (req, res, next) => {
   User.destroyUser(req.body.userName)
     .then(result => {
       res.send(result);
     })
-    .catch(error => console.log(error));
+    .catch(error => next(error));
 });
 
 /** 

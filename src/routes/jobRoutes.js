@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../model/user');
 const bearer = require('../authmiddleware/bearer');
 
-
 /**
  *  Routes
  */
@@ -15,7 +14,7 @@ jobRouter.get('/jobs', getAllJobs);
 jobRouter.post('/jobs', jobPost);
 jobRouter.get('/jobs/:id', getOneJob);
 jobRouter.put('/jobs/:id', jobUpdate);
-jobRouter.delete('/jobs/:id', jobDelete);
+jobRouter.delete('/jobs/:id', bearer, jobDelete);
 jobRouter.put('/jobs/bid/:id', bearer, bidOnJob);
 jobRouter.put('/jobs/close/:id', bearer, closeJob);
 
@@ -29,7 +28,10 @@ function bidOnJob(req, res){
   const price = req.body.price;
   let token = req.headers.authorization.split(' ').pop();
   let parsedToken = jwt.verify(token, process.env.SECRET);
-  Jobs.findByIdAndUpdate(id, {price: price, currentBidder: parsedToken.username})
+  Jobs.findByIdAndUpdate(id, {
+    price: price,
+    currentBidder: parsedToken.username,
+  })
     .then(record => {
       res.send(record);
     })
@@ -73,7 +75,7 @@ function getAllJobs(req, res, next) {
       };
       res.status(200).json(output);
     })
-    .catch(next);
+    .catch(err => next(err));
 }
 
 
@@ -93,7 +95,8 @@ function getOneJob(req, res, next) {
       let user = await User.findOne({_id: job.postedBy}, 'username');
       job.postedBy = user;
       res.json(job);
-    });
+    })
+    .catch(err => next(err));
 }
 
 
@@ -118,11 +121,10 @@ async function jobPost(req, res, next) {
     jobType: req.body.jobType,
     postedBy: user._id,
   });
-
   
   jobs.save()
     .then(result => res.status(200).json(result))
-    .catch(next);
+    .catch(err => next(err));
 }
 
 
@@ -133,11 +135,10 @@ async function jobPost(req, res, next) {
  * @param {Function} next - Express next middleware function
  */
 function jobUpdate(req, res, next) {
-
   let id = req.params.id;
   Jobs.findByIdAndUpdate(id, req.body, {new: true})
     .then(result => res.status(200).json(result))
-    .catch(next);
+    .catch(err => next(err));
 }
 
 
@@ -151,7 +152,7 @@ function jobDelete(req, res, next) {
   let id = req.params.id;
   Jobs.findByIdAndDelete(id)
     .then(result => res.status(200).json(result))
-    .catch(next);
+    .catch(err => next(err));
 }
 
 /** 
