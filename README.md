@@ -47,7 +47,7 @@ for a set amount of time without having to login again
 ### Diagrams
 
 #### Data flow
-![](./projectDocs/jobApp.svg)
+![](./readmeDocs/jobApp.svg)
 
 #### Domain 
-![](./projectDocs/domain.jpg)
+![](./readmeDocs/domain.jpg)
