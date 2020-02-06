@@ -3,6 +3,7 @@
 require('dotenv').config();
 const superagent = require('superagent');
 const User = require('../../model/user');
+const email = require('../../middleware/email');
 
 /** 
  * authorizes a user through google oauth
