@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: authmiddleware/oauth/github.js</title>
+    <title>JSDoc: Module: jobsjobRouter</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,73 +17,132 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: authmiddleware/oauth/github.js</h1>
+    <h1 class="page-title">Module: jobsjobRouter</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>'use strict';
+        
+            
+        
+    
+</header>
 
-require('dotenv').config();
-const superagent = require('superagent');
-const User = require('../../model/user');
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">contains routes and routeHandler functions for all job routes</div>
+        
 
-/** 
- * authorizes a user through github oauth
- * @module githubOauth
-*/
-module.exports = function authorize(req){
-  let code = req.query.code;
-  console.log('1. CODE: ', code);
+        
+            
 
-  return superagent.post(process.env.GH_TOKEN_SERVER)
-    .send({
-      code: code,
-      client_id: process.env.GH_CLIENT_ID,
-      client_secret: process.env.GH_CLIENT_SECRET,
-      redirect_uri: process.env.GH_REDIRECT,
-      grant_type:'authorization_code',
-    })
-    .then(response => {
-      let accessToken = response.body.access_token;
-      console.log('2. ACCESS TOKEN: ', accessToken);
-      return accessToken;
-    })
-    .then(token => {
-      return superagent
-        .get(process.env.GH_API_SERVER)
-        .set('Authorization', `Bearer ${token}`)
-        .set('User-Agent', '')
-        .then(response => {
-          let user = response.body;
-          user.access_token = token;
-          return superagent
-            .get('https://api.github.com/user/emails')
-            .set('Authorization', `Bearer ${token}`)
-            .set('User-Agent', '')
-            .then(response => {
-              user.email = response.body[0].email;
-              console.log('3. GITHUBUSER', user);
-              return user;
-            });
-        });
-    })
-    .then(oauthUser => {
-      console.log('4. CREATE ACCOUNT FROM OAUTH');
-      return User.createFromOauth(oauthUser);
-    })
-    .then(createdUser => {
-      console.log('5. GENERATING TOKEN..', createdUser);
-      return createdUser.generateToken();
-    })
-    .catch(error => console.error(error));
-};</code></pre>
-        </article>
-    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="routes_jobRoutes.js.html">routes/jobRoutes.js</a>, <a href="routes_jobRoutes.js.html#line160">line 160</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

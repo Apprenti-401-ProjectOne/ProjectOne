@@ -29,7 +29,7 @@
             <pre class="prettyprint source linenums"><code>'use strict';
 
 const express = require('express');
-const router = express.Router();
+const jobRouter = express.Router();
 const Jobs = require('../model/job');
 const jwt = require('jsonwebtoken');
 const User = require('../model/user');
@@ -39,31 +39,13 @@ const bearer = require('../authmiddleware/bearer');
 /**
  *  Routes
  */
-router.get('/jobs', getAllJobs);
-router.post('/jobs', jobPost);
-router.get('/jobs/:id', getOneJob);
-router.put('/jobs/:id', jobUpdate);
-router.delete('/jobs/:id', jobDelete);
-router.put('/jobs/bid/:id', bearer, bidOnJob);
-router.put('/jobs/close/:id', bearer, closeJob);
-
-/** 
- * grabs token out of authorization headers
- * @returns token
-*/
-function token(req, res){
-  let token = req.headers.authorization.split(' ').pop();
-  return token;
-}
-
-/** 
- * parses token to get user info
- * @returns parsed token
-*/
-function parsedToken(){
-  let parsedToken = jwt.verify(token(), process.env.SECRET);
-  return parsedToken;
-}
+jobRouter.get('/jobs', getAllJobs);
+jobRouter.post('/jobs', jobPost);
+jobRouter.get('/jobs/:id', getOneJob);
+jobRouter.put('/jobs/:id', jobUpdate);
+jobRouter.delete('/jobs/:id', jobDelete);
+jobRouter.put('/jobs/bid/:id', bearer, bidOnJob);
+jobRouter.put('/jobs/close/:id', bearer, closeJob);
 
 /**
  * Place a bid on a job
@@ -181,6 +163,7 @@ async function jobPost(req, res, next) {
  * @param {*} next
  */
 function jobUpdate(req, res, next) {
+
   let id = req.params.id;
   Jobs.findByIdAndUpdate(id, req.body, {new: true})
     .then(result => res.status(200).json(result))
@@ -204,9 +187,9 @@ function jobDelete(req, res, next) {
 
 /** 
  * contains routes and routeHandler functions for all job routes
- * @module jobsRouter
+ * @module jobsjobRouter
 */
-module.exports = router;</code></pre>
+module.exports = {jobRouter, jobDelete, jobUpdate, jobPost, getOneJob, getAllJobs, closeJob, bidOnJob};</code></pre>
         </article>
     </section>
 
@@ -216,13 +199,13 @@ module.exports = router;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-access-control.html">access-control</a></li><li><a href="module-authRouter.html">authRouter</a></li><li><a href="module-basicAuth.html">basicAuth</a></li><li><a href="module-bearerAuth.html">bearerAuth</a></li><li><a href="module-emailModule.html">emailModule</a></li><li><a href="module-errorHandler.html">errorHandler</a></li><li><a href="module-githubOauth.html">githubOauth</a></li><li><a href="module-googleOauth.html">googleOauth</a></li><li><a href="module-Jobs.html">Jobs</a></li><li><a href="module-jobsRouter.html">jobsRouter</a></li><li><a href="module-logger.html">logger</a></li><li><a href="module-Roles.html">Roles</a></li><li><a href="module-routeNotFoundHandler.html">routeNotFoundHandler</a></li><li><a href="module-routes.html">routes</a></li><li><a href="module-server.html">server</a></li><li><a href="module-timestamp.html">timestamp</a></li><li><a href="module-User.html">User</a></li></ul><h3>Global</h3><ul><li><a href="global.html#bidOnJob">bidOnJob</a></li><li><a href="global.html#closeJob">closeJob</a></li><li><a href="global.html#handleGetAll">handleGetAll</a></li><li><a href="global.html#handleGetOne">handleGetOne</a></li><li><a href="global.html#handlePost">handlePost</a></li><li><a href="global.html#handlePut">handlePut</a></li><li><a href="global.html#join">join</a></li><li><a href="global.html#parsedToken">parsedToken</a></li><li><a href="global.html#sendNewJob">sendNewJob</a></li><li><a href="global.html#sendUpdate">sendUpdate</a></li><li><a href="global.html#sendWelcome">sendWelcome</a></li><li><a href="global.html#token">token</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-access-control.html">access-control</a></li><li><a href="module-authRouter.html">authRouter</a></li><li><a href="module-basicAuth.html">basicAuth</a></li><li><a href="module-bearerAuth.html">bearerAuth</a></li><li><a href="module-errorHandler.html">errorHandler</a></li><li><a href="module-githubOauth.html">githubOauth</a></li><li><a href="module-googleOauth.html">googleOauth</a></li><li><a href="module-Jobs.html">Jobs</a></li><li><a href="module-jobsjobRouter.html">jobsjobRouter</a></li><li><a href="module-logger.html">logger</a></li><li><a href="module-Roles.html">Roles</a></li><li><a href="module-routeNotFoundHandler.html">routeNotFoundHandler</a></li><li><a href="module-routes.html">routes</a></li><li><a href="module-server.html">server</a></li><li><a href="module-timestamp.html">timestamp</a></li><li><a href="module-User.html">User</a></li></ul><h3>Global</h3><ul><li><a href="global.html#bidOnJob">bidOnJob</a></li><li><a href="global.html#closeJob">closeJob</a></li><li><a href="global.html#handleGetAll">handleGetAll</a></li><li><a href="global.html#handleGetOne">handleGetOne</a></li><li><a href="global.html#handlePost">handlePost</a></li><li><a href="global.html#handlePut">handlePut</a></li><li><a href="global.html#join">join</a></li><li><a href="global.html#sendWelcome">sendWelcome</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Wed Feb 05 2020 15:03:37 GMT-0800 (Pacific Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Wed Feb 05 2020 15:34:55 GMT-0800 (Pacific Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

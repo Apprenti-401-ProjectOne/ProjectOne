@@ -29,7 +29,10 @@ function bidOnJob(req, res){
   const price = req.body.price;
   let token = req.headers.authorization.split(' ').pop();
   let parsedToken = jwt.verify(token, process.env.SECRET);
-  Jobs.findByIdAndUpdate(id, {price: price, currentBidder: parsedToken.username})
+  Jobs.findByIdAndUpdate(id, {
+    price: price,
+    currentBidder: parsedToken.username,
+  })
     .then(record => {
       res.send(record);
     })

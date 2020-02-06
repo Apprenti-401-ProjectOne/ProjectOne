@@ -59,7 +59,7 @@ function welcomeOptions(user) {
     from: process.env.EMAIL,
     to: user.email,
     subject: 'Welcome to CañU!',
-    text: welcomeTemplate(user),
+    text: welcomeTemplate(user.username),
   };
 }
 
