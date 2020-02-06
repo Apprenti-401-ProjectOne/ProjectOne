@@ -392,22 +392,24 @@
     }
   },
   "securityDefinitions": {
-    "petstore_auth": {
+    "Google Oauth": {
       "type": "oauth2",
-      "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
-      "flow": "implicit",
-      "scopes": {
-        "write:pets": "modify pets in your account",
-        "read:pets": "read your pets"
-      }
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/v2/auth",
+      "flow": "authorization code"
     },
-    "api_key": {
-      "type": "apiKey",
-      "name": "api_key",
-      "in": "header"
+    "Github Oauth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://github.com/login/oauth/authorize",
+      "flow": "authorization code"
     },
-    "basic_auth": {
-      "type": "basic"
+    "Bearer Auth": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT" 
+    },
+    "Basic Authentication": {
+      "type": "http",
+      "scheme": "basic"
     }
   },
   "definitions": {
