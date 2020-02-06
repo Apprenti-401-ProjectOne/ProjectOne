@@ -12,17 +12,12 @@ const transport = nodemailer.createTransport({
   },
 });
 
-const transpoOpt =  { service: 'gmail',
-  auth: {
-    user: process.env.EMAIL,
-    pass: process.env.EMAIL_PASSWORD,
-  },
-};
+
 
 function sendNewJob(user, job){  
   const mailOptions = jobOptions(user, job);   
-  const transporter = nodemailer.createTransport(transpoOpt);
-  transporter.sendMail(mailOptions, error => {
+  
+  transport.sendMail(mailOptions, error => {
     if (error) return console.log(error);
     return 'Email sent!';
   });
