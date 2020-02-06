@@ -154,6 +154,7 @@ function jobUpdate(req, res, next) {
  */
 function jobDelete(req, res, next) {
   let id = req.params.id;
+  console.log(id)
   Jobs.findByIdAndDelete(id)
     .then(result => res.status(200).json(result))
     .catch(next);
