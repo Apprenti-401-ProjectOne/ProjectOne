@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../model/user');
 const bearer = require('../authmiddleware/bearer');
 
-
 /**
  *  Routes
  */
@@ -121,7 +120,6 @@ async function jobPost(req, res, next) {
     jobType: req.body.jobType,
     postedBy: user._id,
   });
-
   
   jobs.save()
     .then(result => res.status(200).json(result))
@@ -136,7 +134,6 @@ async function jobPost(req, res, next) {
  * @param {Function} next - Express next middleware function
  */
 function jobUpdate(req, res, next) {
-
   let id = req.params.id;
   Jobs.findByIdAndUpdate(id, req.body, {new: true})
     .then(result => res.status(200).json(result))
@@ -152,7 +149,6 @@ function jobUpdate(req, res, next) {
  */
 function jobDelete(req, res, next) {
   let id = req.params.id;
-  console.log(id)
   Jobs.findByIdAndDelete(id)
     .then(result => res.status(200).json(result))
     .catch(next);
