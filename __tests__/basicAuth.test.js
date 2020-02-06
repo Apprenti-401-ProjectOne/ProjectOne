@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use strict';
 
 process.env.SECRET='test';
@@ -27,7 +28,6 @@ describe('Auth Middleware', () => {
 
   let errorObject = 'Invalid User ID/Password';
 
-
   it('fails a login for an admin with the incorrect basic credentials', () => {
     let req = {
       headers: {
@@ -42,6 +42,7 @@ describe('Auth Middleware', () => {
         expect(next).toHaveBeenCalledWith(errorObject);
       });
   });
+  
   it('logs in an admin with the right credentials', () => {
     let req = {
       headers: {

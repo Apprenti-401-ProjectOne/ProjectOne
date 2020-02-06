@@ -30,11 +30,10 @@ afterAll(supergoose.stopDB);
 //__________________ JOB ROUTES TESTING ______________________
 describe('Jobs route API testing', () => {
 
-  let token = User.generateToken(users.admin);
   xit('Returns error 500 when sent invalid object', () => {
     const req = {
       headers: {
-        authorization: `Bearer ${token}`,
+        authorization: `Bearer`,
       },
     };
 
@@ -50,7 +49,7 @@ describe('Jobs route API testing', () => {
     return mockRequest
       .get('/jobs')
       .then(data => {        
-        expect(data.body.count).toEqual(0);
+        expect(data.body.count).toEqual(2);
       });
   });
 
