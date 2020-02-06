@@ -72,12 +72,12 @@ function jobOptions(user, job) {
     from: process.env.EMAIL,
     to: user.email,
     subject: 'Your CañU job has been posted.',
-    text: newJobTemplate(user.username, job),
+    text: newJobTemplate(user.username, job.name),
   };
 }
 
 /**
- * Template for welcome emaul headers
+ * Template for welcome email headers
  * @param {object} user user info object
  * @returns template with from, to, subject, and text
  */

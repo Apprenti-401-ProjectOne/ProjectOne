@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 require('./role');
-const email = require('../middleware/email.js');
+
 
 const capabilities = {
   admin: ['create', 'read', 'update', 'delete', 'superuser'],
@@ -151,9 +151,6 @@ userSchema.statics.destroyUser = function (username) {
     }).catch(err => console.log(err));
 };
 
-userSchema.post('save', function (user) {
-  email.sendWelcome(user);
-});
 
 /** 
  * User model

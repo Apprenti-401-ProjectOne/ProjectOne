@@ -20,7 +20,7 @@ const jobSchema = mongoose.Schema({
 jobSchema.post('save', function (job) {
   user.findById(job.postedBy)
     .then(user => {      
-      email.sendNewJob(user.username, job.name);
+      email.sendNewJob(user, job);
     }).catch(err => console.log(err));
 });
 
