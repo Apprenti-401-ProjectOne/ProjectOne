@@ -17,7 +17,6 @@ let users = {
   admin: {username: 'admin', password: 'password', email: 'admin@admin.com', role: 'admin'},
 };
 
-
 beforeAll(async (done) => {
   await supergoose.startDB();
   const adminUser = await new User(users.admin).save();
@@ -72,21 +71,19 @@ describe('Jobs route API testing', () => {
 
   });
   
-  xit('can delete a job', () => {
-    const obj = { name: 'Gardening', price: 50, jobType: 'labor'  };
-    return mockRequest.post('/jobs')
-      .send(obj)
-      .then (results => {
-        return mockRequest.delete(`/jobs/${results.body._id}`)
-          .then(data => {
-            return mockRequest.get('/jobs')
-              .then(data => {
-                Object.keys(obj).forEach(key => {
-                  expect(data.body[key]).not.toEqual(obj[key]);
-                });
-              });
-          });
-      });
+  it('can delete a job', async () => {
+    let jobs = await Job.find({});
+    expect(jobs[0].id).toBeDefined();
+    const req = {
+      params: {
+        id: jobs[0].id,
+      },
+    };
+    let res = {};
+    let next = jest.fn();
+
+    let deleted = await job.jobDelete(req, res, next)
+    expect(deleted).not.toBeDefined();
   });
 });
 
