@@ -2,6 +2,9 @@
 
 /** 
  * handler for 404 route not found errors
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  * @module routeNotFoundHandler
 */
 module.exports = (req, res, next) => {

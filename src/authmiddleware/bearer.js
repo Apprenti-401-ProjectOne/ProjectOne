@@ -4,6 +4,9 @@ const User = require('../model/user');
 
 /** 
  * authenticates a user using bearer authorization
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  * @module bearerAuth
 */
 module.exports = (req, res, next) => {

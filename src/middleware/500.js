@@ -2,6 +2,9 @@
 
 /** 
  * error handler for server error 500 errors
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  * @module errorHandler
 */
 module.exports = (err, req, res, next) => {
