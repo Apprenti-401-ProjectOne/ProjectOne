@@ -24,7 +24,10 @@ beforeAll(async (done) => {
   const roofingJob = await new Job(jobs.roofing).save();
   done();
 });
-afterAll(supergoose.stopDB);
+afterAll(done => {
+  supergoose.stopDB;
+  done();
+});
 
 //__________________ JOB ROUTES TESTING ______________________
 describe('Jobs route API testing', () => {
