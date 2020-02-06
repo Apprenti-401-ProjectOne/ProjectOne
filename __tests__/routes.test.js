@@ -61,14 +61,22 @@ describe('Jobs route API testing', () => {
   });
   
 
-  xit('can update() a job', () => {
-    const req = {};
+  it('can update() a job', async () => {
+    let jobs = await Job.find({});
+    expect(jobs[0].id).toBeDefined();
+    const req = {
+      body: {
+        name: 'Roofing', description: 'Cleaning off the roof', price: 20, jobType: 'Manual Labor',
+      },
+      params: {
+        id: jobs[0].id,
+      },
+    };
     let res = {};
     let next = jest.fn();
 
-    return job.jobUpdate(req, res, next)
-      .then(results => console.log(results));
-
+    let updated = await job.jobUpdate(req, res, next);
+    expect(updated).not.toBeDefined();
   });
   
   it('can delete a job', async () => {
