@@ -131,7 +131,6 @@ describe('User Methods', () => {
     let oauthUser = await User.createFromOauth({username: 'trevor', password: 'password', email: 'email'});
     expect(oauthUser).toBeDefined();
   });
-
 });
 
 
