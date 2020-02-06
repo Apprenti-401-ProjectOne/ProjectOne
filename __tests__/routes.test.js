@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use strict';
 
 const server = require('../src/app').server;
@@ -5,15 +6,15 @@ const supergoose = require('./supergoose.js');
 const mockRequest = supergoose.server(server);
 const Job = require('../src/model/job');
 const User = require('../src/model/user');
-const {jobPost} = require('../src/routes/jobRoutes');
+const job = require('../src/routes/jobRoutes');
 
 const jobs = {
   gardening: {name: 'Gardening', description: 'Mowing my lawn', price: 50, jobType: 'Manual Labor'},
-  roofing : {name: 'Roofing', description: 'Cleaning off the roof', price: 20, jobType: 'Manual Labor'}
+  roofing : {name: 'Roofing', description: 'Cleaning off the roof', price: 20, jobType: 'Manual Labor'},
 };
 
 let users = {
-  admin: {username: 'admin', password: 'password', email: 'admin@admin.com', role: 'admin'}
+  admin: {username: 'admin', password: 'password', email: 'admin@admin.com', role: 'admin'},
 };
 
 
@@ -29,9 +30,8 @@ afterAll(supergoose.stopDB);
 //__________________ JOB ROUTES TESTING ______________________
 describe('Jobs route API testing', () => {
 
-  let token = User.generateToken(users.admin)
+  let token = User.generateToken(users.admin);
   xit('Returns error 500 when sent invalid object', () => {
-    console.log(token)
     const req = {
       headers: {
         authorization: `Bearer ${token}`,
@@ -42,8 +42,8 @@ describe('Jobs route API testing', () => {
     let next = jest.fn();
 
     // let obj = {username: 'test'};
-    return jobPost(req, res, next)
-      .then(result => console.log(result))
+    return job.jobPost(req, res, next)
+      .then(result => console.log(result));
   });
 
   it('Returns 0 when no jobs posted in database', () => {
@@ -68,8 +68,8 @@ describe('Jobs route API testing', () => {
     let res = {};
     let next = jest.fn();
 
-    return jobUpdate(req, res, next)
-      .then(results => console.log(results))
+    return job.jobUpdate(req, res, next)
+      .then(results => console.log(results));
 
   });
   
