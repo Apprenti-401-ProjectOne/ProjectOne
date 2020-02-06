@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../model/user');
 const bearer = require('../authmiddleware/bearer');
 
-
 /**
  *  Routes
  */
@@ -21,8 +20,8 @@ jobRouter.put('/jobs/close/:id', bearer, closeJob);
 
 /**
  * Place a bid on a job
- * @param {*} req 
- * @param {*} res 
+ * @param {Object} req 
+ * @param {Object} res 
  */
 function bidOnJob(req, res){
   const id = req.params.id;
@@ -43,8 +42,8 @@ function bidOnJob(req, res){
 
 /**
  *  Close a job from bidding
- * @param {*} req 
- * @param {*} res 
+ * @param {Object} req 
+ * @param {Object} res 
  */
 function closeJob(req, res){
   let token = req.headers.authorization.split(' ').pop();
@@ -63,7 +62,8 @@ function closeJob(req, res){
 
 /**
  * 
- * @function handleGetAll
+ * Retrieves all jobs from the database
+ * @function getAllJobs
  * @param {*} req
  * @param {*} res
  * @param {*} next
@@ -82,10 +82,10 @@ function getAllJobs(req, res, next) {
 
 
 /**
- * handles and records one request
- * @function handleGetOne
- * @param {*} req
- * @param {*} res
+ * Retrieves one job from the database
+ * @function getOneJob
+ * @param {Object} req
+ * @param {Object} res
  * @param {*} next
  */
 function getOneJob(req, res, next) {
@@ -102,10 +102,10 @@ function getOneJob(req, res, next) {
 
 
 /**
- * handles route that creates a record
- * @function handlePost
- * @param {*} req
- * @param {*} res
+ * Creates a new job in the database
+ * @function jobPost
+ * @param {Object} req
+ * @param {Object} res
  * @param {*} next
  */
 async function jobPost(req, res, next) {
@@ -131,14 +131,13 @@ async function jobPost(req, res, next) {
 
 
 /**
- * handles route for updating record
- * @function handlePut
- * @param {*} req
- * @param {*} res
+ * Updates job details in the database
+ * @function jobUpdate
+ * @param {Object} req
+ * @param {Object} res
  * @param {*} next
  */
 function jobUpdate(req, res, next) {
-
   let id = req.params.id;
   Jobs.findByIdAndUpdate(id, req.body, {new: true})
     .then(result => res.status(200).json(result))
@@ -147,15 +146,14 @@ function jobUpdate(req, res, next) {
 
 
 /**
- * handles route that deletes a record
- * @function handleGetAll
- * @param {*} req
- * @param {*} res
+ * Deletes job posting from database
+ * @function jobDelete
+ * @param {Object} req
+ * @param {Object} res
  * @param {*} next
  */
 function jobDelete(req, res, next) {
   let id = req.params.id;
-  console.log(id)
   Jobs.findByIdAndDelete(id)
     .then(result => res.status(200).json(result))
     .catch(next);
@@ -163,6 +161,6 @@ function jobDelete(req, res, next) {
 
 /** 
  * contains routes and routeHandler functions for all job routes
- * @module jobsjobRouter
+ * @module jobsRouter
 */
 module.exports = {jobRouter, jobDelete, jobUpdate, jobPost, getOneJob, getAllJobs, closeJob, bidOnJob};
