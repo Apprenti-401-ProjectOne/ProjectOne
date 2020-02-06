@@ -15,7 +15,7 @@ jobRouter.get('/jobs', getAllJobs);
 jobRouter.post('/jobs', jobPost);
 jobRouter.get('/jobs/:id', getOneJob);
 jobRouter.put('/jobs/:id', jobUpdate);
-jobRouter.delete('/jobs/:id', jobDelete);
+jobRouter.delete('/jobs/:id', bearer, jobDelete);
 jobRouter.put('/jobs/bid/:id', bearer, bidOnJob);
 jobRouter.put('/jobs/close/:id', bearer, closeJob);
 
@@ -155,6 +155,7 @@ function jobUpdate(req, res, next) {
  */
 function jobDelete(req, res, next) {
   let id = req.params.id;
+  console.log(id)
   Jobs.findByIdAndDelete(id)
     .then(result => res.status(200).json(result))
     .catch(next);

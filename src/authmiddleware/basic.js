@@ -7,7 +7,6 @@ const User = require('../model/user');
  * @module basicAuth
 */
 module.exports = (req, res, next) => {
-
   try {
     let [authType, authString] = req.headers.authorization.split(/\s+/);
     
@@ -19,6 +18,13 @@ module.exports = (req, res, next) => {
     }
   } catch (e) {
     next(e);
+  }
+
+  /**
+   * sends invalid user id/password through next 
+   */
+  function _authError() {
+    next('Invalid User ID/Password');
   }
   
   /**
@@ -49,13 +55,6 @@ module.exports = (req, res, next) => {
       next();
     } else {
       _authError();
-    }
-
-    /**
-   * sends invalid user id/password through next 
-   */
-    function _authError() {
-      next('Invalid User ID/Password');
     }
   }
 }; 
