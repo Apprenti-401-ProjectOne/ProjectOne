@@ -86,7 +86,7 @@ userSchema.statics.authenticateBasic = function (auth) {
   return this.findOne(query)
     .then(user => user && user.comparePassword(auth.password))
     .catch(error => {
-      console.log(error);
+      console.error(error);
     });
 };
 
