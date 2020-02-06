@@ -4,6 +4,9 @@ const User = require('../model/user');
 
 /** 
  * authenticates a user using basic authentication
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  * @module basicAuth
 */
 module.exports = (req, res, next) => {
@@ -29,7 +32,7 @@ module.exports = (req, res, next) => {
   
   /**
    * takes in a string and pulls out the username and password before sending it through the User.authenticateBasic function
-   * @param {String} str 
+   * @param {String} str auth header string with user data
    * @return promise
    */
   function _authBasic(str) {
@@ -46,7 +49,7 @@ module.exports = (req, res, next) => {
 
   /**
    * takes in a user and assigns it the req.user and assigns req.token to a generated token
-   * @param {*} user 
+   * @param {object} user object with user info
    */
   function _authenticate(user) {
     if (user) {

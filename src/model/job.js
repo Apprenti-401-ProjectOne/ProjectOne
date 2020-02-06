@@ -14,6 +14,9 @@ const jobSchema = mongoose.Schema({
   isOpen: { type: Boolean, default: true },
 });
 
+/** 
+ * Post hook to send an email to the job creator after the job is saved to the database
+*/
 jobSchema.post('save', function (job) {
   user.findById(job.postedBy)
     .then(user => {      

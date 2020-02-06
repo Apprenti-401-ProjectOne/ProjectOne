@@ -20,8 +20,8 @@ jobRouter.put('/jobs/close/:id', bearer, closeJob);
 
 /**
  * Place a bid on a job
- * @param {Object} req 
- * @param {Object} res 
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
  */
 function bidOnJob(req, res){
   const id = req.params.id;
@@ -42,8 +42,8 @@ function bidOnJob(req, res){
 
 /**
  *  Close a job from bidding
- * @param {Object} req 
- * @param {Object} res 
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
  */
 function closeJob(req, res){
   let token = req.headers.authorization.split(' ').pop();
@@ -61,12 +61,10 @@ function closeJob(req, res){
 
 
 /**
- * 
- * Retrieves all jobs from the database
- * @function getAllJobs
- * @param {*} req
- * @param {*} res
- * @param {*} next
+ * gets all jobs from database
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  */
 function getAllJobs(req, res, next) {
   Jobs.find({})
@@ -82,11 +80,11 @@ function getAllJobs(req, res, next) {
 
 
 /**
- * Retrieves one job from the database
- * @function getOneJob
- * @param {Object} req
- * @param {Object} res
- * @param {*} next
+ * handles and records one request
+ * @function handleGetOne
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  */
 function getOneJob(req, res, next) {
   let id = req.params.id;
@@ -102,11 +100,11 @@ function getOneJob(req, res, next) {
 
 
 /**
- * Creates a new job in the database
- * @function jobPost
- * @param {Object} req
- * @param {Object} res
- * @param {*} next
+ * handles route that creates a record
+ * @function handlePost
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  */
 async function jobPost(req, res, next) {
   let token = req.headers.authorization.split(' ').pop();
@@ -130,11 +128,10 @@ async function jobPost(req, res, next) {
 
 
 /**
- * Updates job details in the database
- * @function jobUpdate
- * @param {Object} req
- * @param {Object} res
- * @param {*} next
+ * handles route for updating record
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  */
 function jobUpdate(req, res, next) {
   let id = req.params.id;
@@ -145,11 +142,10 @@ function jobUpdate(req, res, next) {
 
 
 /**
- * Deletes job posting from database
- * @function jobDelete
- * @param {Object} req
- * @param {Object} res
- * @param {*} next
+ * handles route that deletes a record
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next middleware function
  */
 function jobDelete(req, res, next) {
   let id = req.params.id;

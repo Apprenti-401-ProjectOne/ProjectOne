@@ -164,7 +164,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Express request object</td>
         </tr>
 
     
@@ -187,7 +187,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Express response object</td>
         </tr>
 
     
@@ -324,7 +324,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Express request object</td>
         </tr>
 
     
@@ -347,7 +347,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Express response object</td>
         </tr>
 
     
@@ -432,7 +432,7 @@
 
 
 <div class="description">
-    Retrieves all jobs from the database
+    gets all jobs from database
 </div>
 
 
@@ -474,7 +474,7 @@
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">Object</span>
 
 
             
@@ -484,7 +484,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Express request object</td>
         </tr>
 
     
@@ -497,7 +497,7 @@
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">Object</span>
 
 
             
@@ -507,7 +507,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Express response object</td>
         </tr>
 
     
@@ -520,7 +520,7 @@
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">function</span>
 
 
             
@@ -530,7 +530,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Express next middleware function</td>
         </tr>
 
     
@@ -571,7 +571,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_jobRoutes.js.html">routes/jobRoutes.js</a>, <a href="routes_jobRoutes.js.html#line63">line 63</a>
+        <a href="routes_jobRoutes.js.html">routes/jobRoutes.js</a>, <a href="routes_jobRoutes.js.html#line69">line 69</a>
     </li></ul></dd>
     
 
@@ -607,7 +607,7 @@
     
 
     
-    <h4 class="name" id="getOneJob"><span class="type-signature"></span>getOneJob<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="handleGetOne"><span class="type-signature"></span>handleGetOne<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
     
 
     
@@ -615,7 +615,7 @@
 
 
 <div class="description">
-    Retrieves one job from the database
+    handles and records one request
 </div>
 
 
@@ -667,7 +667,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Express request object</td>
         </tr>
 
     
@@ -690,7 +690,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Express response object</td>
         </tr>
 
     
@@ -703,7 +703,7 @@
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">function</span>
 
 
             
@@ -713,7 +713,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Express next middleware function</td>
         </tr>
 
     
@@ -754,7 +754,190 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_jobRoutes.js.html">routes/jobRoutes.js</a>, <a href="routes_jobRoutes.js.html#line84">line 84</a>
+        <a href="routes_jobRoutes.js.html">routes/jobRoutes.js</a>, <a href="routes_jobRoutes.js.html#line82">line 82</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="handlePost"><span class="type-signature"></span>handlePost<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    handles route that creates a record
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express request object</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express response object</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Express next middleware function</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="routes_jobRoutes.js.html">routes/jobRoutes.js</a>, <a href="routes_jobRoutes.js.html#line102">line 102</a>
     </li></ul></dd>
     
 
@@ -798,7 +981,7 @@
 
 
 <div class="description">
-    Deletes job posting from database
+    handles route that deletes a record
 </div>
 
 
@@ -850,7 +1033,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Express request object</td>
         </tr>
 
     
@@ -873,7 +1056,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Express response object</td>
         </tr>
 
     
@@ -886,7 +1069,7 @@
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">function</span>
 
 
             
@@ -896,7 +1079,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Express next middleware function</td>
         </tr>
 
     
@@ -937,7 +1120,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_jobRoutes.js.html">routes/jobRoutes.js</a>, <a href="routes_jobRoutes.js.html#line147">line 147</a>
+        <a href="routes_jobRoutes.js.html">routes/jobRoutes.js</a>, <a href="routes_jobRoutes.js.html#line150">line 150</a>
     </li></ul></dd>
     
 
@@ -973,7 +1156,7 @@
     
 
     
-    <h4 class="name" id="jobPost"><span class="type-signature"></span>jobPost<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="jobOptions"><span class="type-signature"></span>jobOptions<span class="signature">(user, job)</span><span class="type-signature"></span></h4>
     
 
     
@@ -981,7 +1164,7 @@
 
 
 <div class="description">
-    Creates a new job in the database
+    Template for job email headers
 </div>
 
 
@@ -1017,13 +1200,13 @@
 
         <tr>
             
-                <td class="name"><code>req</code></td>
+                <td class="name"><code>user</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">object</span>
 
 
             
@@ -1033,20 +1216,20 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">user info object</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>res</code></td>
+                <td class="name"><code>job</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">object</span>
 
 
             
@@ -1056,30 +1239,7 @@
 
             
 
-            <td class="description last"></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>next</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">*</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
+            <td class="description last">job info object</td>
         </tr>
 
     
@@ -1120,7 +1280,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_jobRoutes.js.html">routes/jobRoutes.js</a>, <a href="routes_jobRoutes.js.html#line104">line 104</a>
+        <a href="middleware_email.js.html">middleware/email.js</a>, <a href="middleware_email.js.html#line70">line 70</a>
     </li></ul></dd>
     
 
@@ -1145,6 +1305,16 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    template with from, to, subject, and text
+</div>
+
+
+
+    
 
 
 
@@ -1164,7 +1334,7 @@
 
 
 <div class="description">
-    Updates job details in the database
+    handles route for updating record
 </div>
 
 
@@ -1216,7 +1386,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Express request object</td>
         </tr>
 
     
@@ -1239,7 +1409,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Express response object</td>
         </tr>
 
     
@@ -1252,7 +1422,7 @@
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">function</span>
 
 
             
@@ -1262,7 +1432,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Express next middleware function</td>
         </tr>
 
     
@@ -1303,7 +1473,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="routes_jobRoutes.js.html">routes/jobRoutes.js</a>, <a href="routes_jobRoutes.js.html#line132">line 132</a>
+        <a href="routes_jobRoutes.js.html">routes/jobRoutes.js</a>, <a href="routes_jobRoutes.js.html#line136">line 136</a>
     </li></ul></dd>
     
 
@@ -1389,7 +1559,7 @@
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">function</span>
 
 
             
@@ -1399,7 +1569,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">Express next middleware function</td>
         </tr>
 
     
@@ -1441,6 +1611,483 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="model_user.js.html">model/user.js</a>, <a href="model_user.js.html#line39">line 39</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="newJobTemplate"><span class="type-signature"></span>newJobTemplate<span class="signature">(username, job)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Template for new job email
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>username</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">username string</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>job</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">job object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="middleware_email.js.html">middleware/email.js</a>, <a href="middleware_email.js.html#line51">line 51</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    String confirming job
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="sendEmail"><span class="type-signature"></span>sendEmail<span class="signature">(mailOptions)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    send an email with specific options
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>mailOptions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">returns an object with mail options</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="middleware_email.js.html">middleware/email.js</a>, <a href="middleware_email.js.html#line38">line 38</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    'Email sent!'
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="sendNewJob"><span class="type-signature"></span>sendNewJob<span class="signature">(user, job)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sends an email on creation of a new job
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">user object</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>job</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">job</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">user object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="middleware_email.js.html">middleware/email.js</a>, <a href="middleware_email.js.html#line20">line 20</a>
     </li></ul></dd>
     
 
@@ -1526,7 +2173,7 @@
             <td class="type">
             
                 
-<span class="param-type">*</span>
+<span class="param-type">object</span>
 
 
             
@@ -1536,7 +2183,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">object with user info</td>
         </tr>
 
     
@@ -1577,7 +2224,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="middleware_email.js.html">middleware/email.js</a>, <a href="middleware_email.js.html#line24">line 24</a>
+        <a href="middleware_email.js.html">middleware/email.js</a>, <a href="middleware_email.js.html#line28">line 28</a>
     </li></ul></dd>
     
 
@@ -1608,6 +2255,300 @@
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="welcomeOptions"><span class="type-signature"></span>welcomeOptions<span class="signature">(user)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Template for welcome emaul headers
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">user info object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="middleware_email.js.html">middleware/email.js</a>, <a href="middleware_email.js.html#line84">line 84</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    template with from, to, subject, and text
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="welcomeTemplate"><span class="type-signature"></span>welcomeTemplate<span class="signature">(username)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Template for user creation welcome email
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>username</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">username string</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="middleware_email.js.html">middleware/email.js</a>, <a href="middleware_email.js.html#line60">line 60</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    String welcoming user
+</div>
+
+
+
+    
+
+
+
+
+
+        
     
 
     
@@ -1623,13 +2564,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-access-control.html">access-control</a></li><li><a href="module-authRouter.html">authRouter</a></li><li><a href="module-basicAuth.html">basicAuth</a></li><li><a href="module-bearerAuth.html">bearerAuth</a></li><li><a href="module-errorHandler.html">errorHandler</a></li><li><a href="module-githubOauth.html">githubOauth</a></li><li><a href="module-googleOauth.html">googleOauth</a></li><li><a href="module-Jobs.html">Jobs</a></li><li><a href="module-jobsRouter.html">jobsRouter</a></li><li><a href="module-logger.html">logger</a></li><li><a href="module-Roles.html">Roles</a></li><li><a href="module-routeNotFoundHandler.html">routeNotFoundHandler</a></li><li><a href="module-routes.html">routes</a></li><li><a href="module-server.html">server</a></li><li><a href="module-timestamp.html">timestamp</a></li><li><a href="module-User.html">User</a></li></ul><h3>Global</h3><ul><li><a href="global.html#bidOnJob">bidOnJob</a></li><li><a href="global.html#closeJob">closeJob</a></li><li><a href="global.html#getAllJobs">getAllJobs</a></li><li><a href="global.html#getOneJob">getOneJob</a></li><li><a href="global.html#jobDelete">jobDelete</a></li><li><a href="global.html#jobPost">jobPost</a></li><li><a href="global.html#jobUpdate">jobUpdate</a></li><li><a href="global.html#join">join</a></li><li><a href="global.html#sendWelcome">sendWelcome</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-access-control.html">access-control</a></li><li><a href="module-authRouter.html">authRouter</a></li><li><a href="module-autoEmail.html">autoEmail</a></li><li><a href="module-basicAuth.html">basicAuth</a></li><li><a href="module-bearerAuth.html">bearerAuth</a></li><li><a href="module-errorHandler.html">errorHandler</a></li><li><a href="module-githubOauth.html">githubOauth</a></li><li><a href="module-googleOauth.html">googleOauth</a></li><li><a href="module-Jobs.html">Jobs</a></li><li><a href="module-jobsRouter.html">jobsRouter</a></li><li><a href="module-logger.html">logger</a></li><li><a href="module-Roles.html">Roles</a></li><li><a href="module-routeNotFoundHandler.html">routeNotFoundHandler</a></li><li><a href="module-routes.html">routes</a></li><li><a href="module-server.html">server</a></li><li><a href="module-timestamp.html">timestamp</a></li><li><a href="module-User.html">User</a></li></ul><h3>Global</h3><ul><li><a href="global.html#bidOnJob">bidOnJob</a></li><li><a href="global.html#closeJob">closeJob</a></li><li><a href="global.html#getAllJobs">getAllJobs</a></li><li><a href="global.html#handleGetOne">handleGetOne</a></li><li><a href="global.html#handlePost">handlePost</a></li><li><a href="global.html#jobDelete">jobDelete</a></li><li><a href="global.html#jobOptions">jobOptions</a></li><li><a href="global.html#jobUpdate">jobUpdate</a></li><li><a href="global.html#join">join</a></li><li><a href="global.html#newJobTemplate">newJobTemplate</a></li><li><a href="global.html#sendEmail">sendEmail</a></li><li><a href="global.html#sendNewJob">sendNewJob</a></li><li><a href="global.html#sendWelcome">sendWelcome</a></li><li><a href="global.html#welcomeOptions">welcomeOptions</a></li><li><a href="global.html#welcomeTemplate">welcomeTemplate</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Thu Feb 06 2020 09:00:22 GMT-0800 (Pacific Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Thu Feb 06 2020 09:01:53 GMT-0800 (Pacific Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

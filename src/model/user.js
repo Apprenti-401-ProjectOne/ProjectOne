@@ -34,7 +34,7 @@ userSchema.pre('find', join);
 
 /**
  * Joins virtuals in DB
- * @param {*} next
+ * @param {Function} next - Express next middleware function
  */
 function join(next) {
   try {
@@ -78,7 +78,7 @@ userSchema.methods.generateToken = function() {
 
 /**
  * Authenticates and compares signing in user password to database password
- * @param {*} auth
+ * @param {object} auth object with user inputted username and password
  * @returns a user that has the matching username and password
  */
 userSchema.statics.authenticateBasic = function (auth) {
@@ -92,7 +92,7 @@ userSchema.statics.authenticateBasic = function (auth) {
 
 /**
  *  Authenticates a token and returns the user
- * @param {*} token
+ * @param {string} token token string
  * @returns the user with the id parsed from the authenticated token
  */
 userSchema.statics.authenticateToken = function (token) {
@@ -107,7 +107,7 @@ userSchema.statics.authenticateToken = function (token) {
 
 /** 
  * takes Oauth user info and checks for existing user, if none exists creates a new one
- * @param oauthUser
+ * @param {object} oauthUser object with user info from oauth
  * @returns user
 */
 userSchema.statics.createFromOauth = function (oauthUser) {
@@ -129,7 +129,7 @@ userSchema.statics.createFromOauth = function (oauthUser) {
 
 /**
  * compares an inputted password with a users hashed password
- * @param {*} password
+ * @param {string} password password string
  * @returns this user
  */
 userSchema.methods.comparePassword = function (password) {
@@ -140,7 +140,7 @@ userSchema.methods.comparePassword = function (password) {
 
 /**
  * finds a user by their usernames and deletes them from the DB
- * @param {*} username
+ * @param {string} username username string
  * @returns the deleted user
  */
 userSchema.statics.destroyUser = function (username) {
