@@ -34,7 +34,7 @@ for a set amount of time without having to login again
 
 ### Deployment
 
-* [Heroku](https://git.heroku.com/kan-u.git)
+* [Heroku](https://can-u.herokuapp.com/)
 
 ### Trello Board
 
@@ -42,7 +42,8 @@ for a set amount of time without having to login again
 
 ### Requirements
 
-* [User Stores](./projectDocs/requirements.md)
+* [User Stories](https://github.com/Apprenti-401-ProjectOne/ProjectOne/blob/dev/readmeDocs/requirements.md)
+* [Group Agreement](https://github.com/Apprenti-401-ProjectOne/ProjectOne/blob/dev/readmeDocs/groupAgreement.md)
 
 ### Diagrams
 
