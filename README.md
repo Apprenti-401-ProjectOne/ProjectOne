@@ -35,7 +35,7 @@ for a set amount of time without having to login again
 ### Documentation
 
 * [JSDoc](./docs/index.html)
-* [Swagger](./docs/config/swagger.json)
+* [Swagger](https://can-u.herokuapp.com/api-docs)
 
 ### Deployment
 
