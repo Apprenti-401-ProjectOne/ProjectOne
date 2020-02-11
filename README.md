@@ -41,6 +41,17 @@ for a set amount of time without having to login again
 
 * [Heroku](https://can-u.herokuapp.com/)
 
+### Setup 
+
+* npm start
+
+#### End points
+
+* /roles - POST - to configure roles in local mongoDB
+* /signup - POST - user, password and email within the body of the request
+* /signin - POST - use basic auth with correct password user combination returns token for auth in other routes
+* /users - GET - requires bearer token of superuser, returns all users in DB
+* /deleteUser - POST - requires bearer token of superuser, deletes a user by username
 ### Trello Board
 
 * [Trello](https://trello.com/b/dom2QnVY/projectone)
