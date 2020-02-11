@@ -72,7 +72,7 @@ userSchema.methods.generateToken = function() {
     capabilities: capabilities[this.role],
   };
 
-  return jwt.sign(token, process.env.SECRET, { expiresIn: '25min' });
+  return jwt.sign(token, process.env.SECRET, { expiresIn: '4h' });
 };
 
 
