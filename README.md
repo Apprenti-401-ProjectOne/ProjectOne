@@ -32,6 +32,11 @@ for a set amount of time without having to login again
 * Implement graphql 
 * Inter-user messaging
 
+### Documentation
+
+* [JSDoc](./docs/index.html)
+* [Swagger](./docs/config/swagger.json)
+
 ### Deployment
 
 * [Heroku](https://can-u.herokuapp.com/)
