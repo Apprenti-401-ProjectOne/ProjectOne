@@ -95,8 +95,8 @@ function getOneJob(req, res, next) {
       let user = await User.findOne({_id: job.postedBy}, 'username');
       job.postedBy = user;
       res.json(job);
-    })
-    .catch(err => next(err));
+    });
+    
 }
 
 
