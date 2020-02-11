@@ -52,6 +52,17 @@ for a set amount of time without having to login again
 * /signin - POST - use basic auth with correct password user combination returns token for auth in other routes
 * /users - GET - requires bearer token of superuser, returns all users in DB
 * /deleteUser - POST - requires bearer token of superuser, deletes a user by username
+
+Job Routes all require a token of user or higher with the exception of /jobs GET
+
+* /jobs - GET - Returns a list of all jobs within the database
+* /jobs - POST - Creates a new job in the database. Within the body field fields for the job are: name, description, price and jobType
+* /jobs/:id - GET - When given a job ID returns that job
+* /jobs/:id - PUT - When given a job, allows the record to be updated
+* /jobs/:id - DELETE - When given a job ID that record can be deleted
+* /jobs/bid/:id - PUT - When given a job ID and a price within the request body, that record/job will have an updated price
+* /jobs/close/:id - PUT - When accessed with the token of the user that created the job and given an id this will close the job 
+
 ### Trello Board
 
 * [Trello](https://trello.com/b/dom2QnVY/projectone)
