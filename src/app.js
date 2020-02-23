@@ -4,6 +4,7 @@
 require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 const app = express();
 const router = require('./routes/routes');
 const authRouter = require('./routes/authroutes');
@@ -16,6 +17,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../docs/config/swagger.json');
 
 //Middleware 
+app.use(cors);
 app.use(logger);
 app.use(timestamp);
 app.use(express.json());
