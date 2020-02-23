@@ -2,6 +2,7 @@
 
 // Application Dependencies
 require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
@@ -16,6 +17,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../docs/config/swagger.json');
 
 //Middleware 
+app.use(cors);
 app.use(logger);
 app.use(timestamp);
 app.use(express.json());
