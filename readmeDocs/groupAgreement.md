@@ -1,7 +1,6 @@
 # Group Name: Can U
 
 **Group Members**
-- Lindsay Peltier -https://github.com/LindsayPeltier
 - Travis Skyles - https://github.com/tskyles
 - Natalie Alway - https://github.com/natalielyn
 - David Vloedman - https://github.com/david-vloedman
