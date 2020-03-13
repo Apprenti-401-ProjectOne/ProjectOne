@@ -17,7 +17,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../docs/config/swagger.json');
 
 //Middleware 
-app.use(cors);
+// app.use(cors);
 app.use(logger);
 app.use(timestamp);
 app.use(express.json());
@@ -40,11 +40,15 @@ app.get('/api-docs', swaggerUi.setup(swaggerDocument));
 app.use(notFound);
 app.use(errorHandler);
 
+app.get('/test', (req, res) => {
+  res.send('Suceess');
+});
+
 /** 
  * exports server module with start method
  * @module server
 */
 module.exports = {
   server: app,
-  start: (port) => app.listen(port, () => console.log(`Listening on ${port}`)),
+  start: (port) => app.listen(3000, () => console.log(`Listening on 3000`)),
 };
