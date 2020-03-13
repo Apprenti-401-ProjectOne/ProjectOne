@@ -17,7 +17,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../docs/config/swagger.json');
 
 //Middleware 
-app.use(cors);
+
 app.use(logger);
 app.use(timestamp);
 app.use(express.json());
@@ -39,6 +39,7 @@ app.get('/api-docs', swaggerUi.setup(swaggerDocument));
 // Error Handlers
 app.use(notFound);
 app.use(errorHandler);
+app.use(cors);
 
 /** 
  * exports server module with start method
