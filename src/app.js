@@ -17,11 +17,11 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../docs/config/swagger.json');
 
 //Middleware 
-// app.use(cors);
 app.use(logger);
 app.use(timestamp);
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(cors);
 
 app.use('/docs', express.static('docs'));
 app.use(express.static('public'));
