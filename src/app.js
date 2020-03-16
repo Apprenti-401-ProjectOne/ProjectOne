@@ -21,7 +21,7 @@ app.use(logger);
 app.use(timestamp);
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(cors);
+app.use(cors());
 
 app.use('/docs', express.static('docs'));
 app.use(express.static('public'));
@@ -41,7 +41,7 @@ app.use(notFound);
 app.use(errorHandler);
 
 app.get('/test', (req, res) => {
-  res.send('Suceess');
+  res.json('Suceess');
 });
 
 /** 
@@ -50,5 +50,5 @@ app.get('/test', (req, res) => {
 */
 module.exports = {
   server: app,
-  start: (port) => app.listen(3000, () => console.log(`Listening on 3000`)),
+  start: (port) => app.listen(port, () => console.log(`Listening on ${port}`)),
 };
