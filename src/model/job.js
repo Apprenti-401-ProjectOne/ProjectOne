@@ -11,6 +11,7 @@ const jobSchema = mongoose.Schema({
   currentBidder: { type: String, default: '' },
   jobType: { type: String },
   postedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'users' },
+  postedUser: {type: String},
   isOpen: { type: Boolean, default: true },
 });
 

@@ -114,12 +114,14 @@ async function jobPost(req, res, next) {
 
   user.jobs.push(req.body);
   user.save();
+  console.log(user);
   let jobs = new Jobs({
     name: req.body.name,
     description: req.body.description,
     price: req.body.price,
     jobType: req.body.jobType,
     postedBy: user._id,
+    postedUser: user.username,
   });
   
   jobs.save()
