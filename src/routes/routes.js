@@ -9,7 +9,7 @@ const acl = require('../authmiddleware/access-control');
 const email = require('../middleware/email');
 const capabilities = {
   admin: ['create','read','update','delete', 'superuser'],
-  user: ['read'],
+  user: ['create', 'read', 'update', 'delete'],
 };
 
 router.post('/signup', (req, res, next) => {
